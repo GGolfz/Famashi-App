@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  static String routeName = '/';
+class MedicineAddScreen extends StatelessWidget {
+  static String routeName = '/medicine-add';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Home Screen"),
+        child: Text("Medicine Add Screen"),
       ),
     );
   }
