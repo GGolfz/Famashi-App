@@ -1,3 +1,5 @@
+import 'package:famashi/widget/layout/appbar.dart';
+import 'package:famashi/widget/layout/drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,6 +10,8 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Text("Home Screen"),
       ),
+      appBar: FamashiAppbar(title: 'Home'),
+      drawer: FamashiDrawer(),
     );
   }
 }

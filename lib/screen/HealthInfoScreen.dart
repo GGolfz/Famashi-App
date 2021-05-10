@@ -1,3 +1,5 @@
+import 'package:famashi/widget/layout/appbar.dart';
+import 'package:famashi/widget/layout/drawer.dart';
 import 'package:flutter/material.dart';
 
 class HealthInfoScreen extends StatelessWidget {
@@ -8,6 +10,8 @@ class HealthInfoScreen extends StatelessWidget {
       body: Center(
         child: Text("Health Info Screen"),
       ),
+      appBar: FamashiAppbar(title: 'Home'),
+      drawer: FamashiDrawer(),
     );
   }
 }
