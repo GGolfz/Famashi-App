@@ -2,13 +2,13 @@ import 'package:famashi/widget/layout/appbar.dart';
 import 'package:famashi/widget/layout/drawer.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  static String routeName = '/';
+class HealthInfoScreen extends StatelessWidget {
+  static String routeName = '/healthinfo';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Home Screen"),
+        child: Text("Health Info Screen"),
       ),
       appBar: FamashiAppbar(title: 'Home'),
       drawer: FamashiDrawer(),
