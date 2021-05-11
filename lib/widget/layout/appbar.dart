@@ -33,7 +33,7 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: kNeutralWhite,
       foregroundColor: kNeutralBlack,
       backwardsCompatibility: false,
-      actions: this.trailing != null ? this.trailing : [],
+      actions: trailing != null ? trailing : [],
       elevation: 0,
     );
   }

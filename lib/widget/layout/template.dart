@@ -9,12 +9,14 @@ class TemplateLayout extends StatelessWidget {
   final child;
   final hasAction;
   final action;
+  final trailing;
   TemplateLayout(
       {this.isHome = true,
       this.title = '',
       this.child,
       this.hasAction = false,
-      this.action});
+      this.action,
+      this.trailing});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +24,7 @@ class TemplateLayout extends StatelessWidget {
       appBar: FamashiAppbar(
         title: title,
         isHome: isHome,
+        trailing: trailing,
       ),
       drawer: FamashiDrawer(),
       floatingActionButton: hasAction
