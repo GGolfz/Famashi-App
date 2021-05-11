@@ -1,3 +1,4 @@
+import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/widget/utils/icon/Coolicons.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
@@ -23,6 +24,10 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(Icons.chevron_left)),
       title: Container(child: Text(title)),
+      backgroundColor: kNeutralWhite,
+      foregroundColor: kNeutralBlack,
+      backwardsCompatibility: false,
+      elevation: 0,
     );
   }
 }

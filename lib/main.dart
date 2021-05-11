@@ -1,3 +1,4 @@
+import 'package:famashi/config/theme.dart';
 import 'package:famashi/screen/AuthScreen.dart';
 import 'package:famashi/screen/HealthInfoScreen.dart';
 import 'package:famashi/screen/HomeScreen.dart';
@@ -21,9 +22,7 @@ class FamashiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Famashi',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: famashiTheme,
       home: isAuth ? AuthScreen() : HomeScreen(),
       routes: {
         HealthInfoScreen.routeName: (ctx) => HealthInfoScreen(),
