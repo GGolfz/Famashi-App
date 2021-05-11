@@ -85,6 +85,12 @@ flutter:
           weight: 500
         - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
+    - family: Iconly
+      fonts:
+        - asset: assets/fonts/Iconly-light.ttf
+    - family: CoolIcons
+      fonts:
+        - asset: assets/fonts/Coolicons.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
