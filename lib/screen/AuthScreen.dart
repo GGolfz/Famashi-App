@@ -1,3 +1,4 @@
+import 'package:famashi/widget/auth/authLayout.dart';
 import 'package:flutter/material.dart';
 
 enum AuthType { Register, SignIn }
@@ -12,18 +13,28 @@ class _AuthScreenState extends State<AuthScreen> {
   var authType;
   @override
   void initState() {
-    authType = AuthType.Register;
+    authType = AuthType.SignIn;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final kBackgroundImage = Image.asset('assets/images/authenticate-bg.png');
     return Scaffold(
-      body: Center(
-        child: authType == AuthType.Register
-            ? Text("Register Screen")
-            : Text("Sign In Screen"),
-      ),
-    );
+        body: Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          child: kBackgroundImage,
+        ),
+        AuthLayout(
+            authType: authType,
+            changeType: (type) {
+              setState(() {
+                authType = type;
+              });
+            })
+      ],
+    ));
   }
 }

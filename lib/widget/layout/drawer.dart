@@ -43,7 +43,7 @@ class FamashiDrawer extends StatelessWidget {
                       kSizedBoxHorizontalS,
                       Text(
                         "Kaewket Saelee",
-                        style: kBody01Medium.copyWith(color: kAccentColor04),
+                        style: kBody03Medium.copyWith(color: kAccentColor04),
                       )
                     ],
                   )),
@@ -63,7 +63,7 @@ class FamashiDrawer extends StatelessWidget {
                             ),
                             title: Text(
                               item["name"].toString(),
-                              style: kBody02Medium.copyWith(color: kNeutral02),
+                              style: kBody04Medium.copyWith(color: kNeutral02),
                             ),
                             horizontalTitleGap: 0,
                             onTap: () {
@@ -76,7 +76,7 @@ class FamashiDrawer extends StatelessWidget {
                   leading: Icon(Iconly.logout, color: kPrimaryColor02),
                   title: Text(
                     "Log Out",
-                    style: kBody02Medium.copyWith(color: kNeutral02),
+                    style: kBody03Medium.copyWith(color: kNeutral02),
                   ),
                   horizontalTitleGap: 0,
                   onTap: () {})
