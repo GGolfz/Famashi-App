@@ -19,6 +19,11 @@ class AuthenticateProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> register(String email, String password) async {
+    _token = "Simple Token";
+    notifyListeners();
+  }
+
   Future<void> logout() async {
     _token = null;
     notifyListeners();

@@ -8,12 +8,14 @@ import 'package:niku/widget/textField.dart';
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
+  final String name;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool? isPassword;
   CustomTextField(
       {required this.controller,
       required this.hintText,
+      required this.name,
       this.prefixIcon,
       this.suffixIcon,
       this.isPassword = false});
@@ -34,7 +36,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
         .hintStyle(kBody04Medium.copyWith(color: kNeutral03))
         .textStyle(kBody04Medium.copyWith(color: kNeutral02))
         .floatingLabelBehavior(FloatingLabelBehavior.always)
-        .focusColor(kAccentColor03);
+        .focusColor(kAccentColor03)
+        .errorBorder(OutlineInputBorder(
+            borderSide: BorderSide(color: kNeutral06),
+            borderRadius: kBorderRadiusS))
+        .validator((value) {
+      if (value == '') {
+        return '${widget.name} is required';
+      }
+    });
     if (widget.prefixIcon != null) {
       baseTextField = baseTextField.prefixIcon(Icon(
         widget.prefixIcon,

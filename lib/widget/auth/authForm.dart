@@ -1,6 +1,7 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/screen/AuthScreen.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
@@ -10,6 +11,7 @@ import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/button.dart';
 import 'package:niku/widget/text.dart';
+import 'package:provider/provider.dart';
 
 class AuthForm extends StatelessWidget {
   final AuthType authType;
@@ -21,6 +23,8 @@ class AuthForm extends StatelessWidget {
   String? _getTitle() {
     return {AuthType.Register: "Sign Up", AuthType.SignIn: "Log In"}[authType];
   }
+
+  final _formKey = GlobalKey<FormState>();
 
   Widget _getChangeType() {
     var data = {
@@ -49,53 +53,72 @@ class AuthForm extends StatelessWidget {
     ]).mainCenter();
   }
 
+  Future<void> _submitForm(BuildContext context) async {
+    print("TEST");
+    if (_formKey.currentState!.validate()) {
+      if (authType == AuthType.Register) {
+        // await Provider.of<AuthenticateProvider>(context, listen: false)
+        //     .register();
+      } else if (authType == AuthType.SignIn) {}
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: kBorderRadiusS,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: kSizeM),
-        child: Column(
-          children: [
-            kSizedBoxVerticalM,
-            NikuText(_getTitle().toString()).style(kBody01Semibold),
-            kSizedBoxVerticalS,
-            CustomTextField(
-              controller: _email,
-              hintText: 'email',
-              prefixIcon: Iconly.message,
-            ),
-            kSizedBoxVerticalS,
-            CustomTextField(
-              controller: _password,
-              hintText: 'password',
-              prefixIcon: Iconly.lock,
-              isPassword: true,
-            ),
-            if (authType == AuthType.Register) ...[
-              kSizedBoxVerticalS,
-              CustomTextField(
-                controller: _confirmPassword,
-                hintText: 'confirm password',
-                prefixIcon: Iconly.lock,
-                isPassword: true,
-              ),
-            ],
-            if (authType == AuthType.SignIn) ...[
-              kSizedBoxVerticalS,
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                NikuText("Forget password?").style(kBody05).color(kNeutral03)
-              ])
-            ],
-            kSizedBoxVerticalM,
-            PrimaryButton(
-              text: _getTitle()!,
-              onPressed: () {},
-            ),
-            kSizedBoxVerticalS,
-            _getChangeType(),
-          ],
-        ),
+        child: SingleChildScrollView(
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    kSizedBoxVerticalM,
+                    NikuText(_getTitle().toString()).style(kBody01Semibold),
+                    kSizedBoxVerticalS,
+                    CustomTextField(
+                      controller: _email,
+                      hintText: 'email',
+                      name: 'Email',
+                      prefixIcon: Iconly.message,
+                    ),
+                    kSizedBoxVerticalS,
+                    CustomTextField(
+                      controller: _password,
+                      hintText: 'password',
+                      name: 'Password',
+                      prefixIcon: Iconly.lock,
+                      isPassword: true,
+                    ),
+                    if (authType == AuthType.Register) ...[
+                      kSizedBoxVerticalS,
+                      CustomTextField(
+                        controller: _confirmPassword,
+                        name: 'Confirm password',
+                        hintText: 'confirm password',
+                        prefixIcon: Iconly.lock,
+                        isPassword: true,
+                      ),
+                    ],
+                    if (authType == AuthType.SignIn) ...[
+                      kSizedBoxVerticalS,
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        NikuText("Forget password?")
+                            .style(kBody05)
+                            .color(kNeutral03)
+                      ])
+                    ],
+                    kSizedBoxVerticalM,
+                    PrimaryButton(
+                      text: _getTitle()!,
+                      onPressed: () => _submitForm(context),
+                    ),
+                    kSizedBoxVerticalS,
+                    _getChangeType(),
+                    kSizedBoxVerticalXS,
+                  ],
+                ))),
         width: double.infinity,
         color: kNeutralWhite,
       ),

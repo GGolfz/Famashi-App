@@ -29,7 +29,11 @@ class PrimaryButton extends StatelessWidget {
   Widget _buildContent(BuildContext context) {
     return InkWell(
       borderRadius: kBorderRadiusM,
-      onTap: isDisabled || isLoading ? null : () => onPressed,
+      onTap: () {
+        if (!isLoading && !isDisabled) {
+          onPressed();
+        }
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: kSizeXS * 1.25,
