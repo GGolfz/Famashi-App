@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 const kFontSizeXXL = 36.0;
-const kFontSizeXL = 18.0;
-const kFontSizeL = 16.0;
-const kFontSizeM = 14.0;
-const kFontSizeS = 12.0;
-const kFontSizeXS = 10.0;
+const kFontSizeXL = 22.0;
+const kFontSizeL = 20.0;
+const kFontSizeM = 18.0;
+const kFontSizeS = 16.0;
+const kFontSizeXS = 12.0;
 
 const kLineHeightL = 40.0;
 const kLineHeightM = 35.0;
@@ -24,7 +24,7 @@ const kSizeS = 16.0;
 const kSizeM = 32.0;
 const kSizeL = 64.0;
 const kSizeXL = 128.0;
-const kSizeXXL = 256.0;
+const kSizeXXL = 216.0;
 
 const kBorderRadiusXXS = const BorderRadius.all(Radius.circular(kSizeXXS));
 const kBorderRadiusXS = const BorderRadius.all(Radius.circular(kSizeXS));

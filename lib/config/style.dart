@@ -8,7 +8,8 @@ const kRalewayFont = 'Raleway';
 const kHeading = TextStyle(
     fontSize: kFontSizeXXL,
     fontFamily: kRalewayFont,
-    color: kPrimaryColor01);
+    color: kPrimaryColor01,
+    fontWeight: kFontWeightSemiBold);
 
 const kTitle = TextStyle(
     fontSize: kFontSizeXXL,

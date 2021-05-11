@@ -18,7 +18,6 @@ ThemeData _buildMainTheme() {
     ),
     primaryIconTheme: baseTheme.iconTheme.copyWith(color: Colors.white),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(),
-    ),
+        border: OutlineInputBorder(), focusColor: kAccentColor04),
   );
 }
