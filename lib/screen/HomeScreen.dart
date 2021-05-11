@@ -1,3 +1,4 @@
+import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,10 @@ class HomeScreen extends StatelessWidget {
         child: Center(
           child: Text("Home Screen"),
         ),
-        title: 'Home');
+        title: 'Home',
+        hasAction: true,
+        action: () {
+          Navigator.of(context).pushNamed(MedicineAddScreen.routeName);
+        });
   }
 }
