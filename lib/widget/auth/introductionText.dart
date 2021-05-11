@@ -9,11 +9,11 @@ class IntroductionText extends StatelessWidget {
   final AuthType? authType;
   IntroductionText({@required this.authType});
   final textList = <AuthType, Map<String, String>>{
-    AuthType.Register: {
+    AuthType.SignIn: {
       "headline": "Welcome!",
       "body": "Please login to continue\nusing an application.",
     },
-    AuthType.SignIn: {
+    AuthType.Register: {
       "headline": "Let get started !",
       "body": "Create new account.",
     }

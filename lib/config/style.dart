@@ -83,6 +83,12 @@ const kBody04 = TextStyle(
     fontWeight: kFontWeightRegular,
     color: kNeutralBlack);
 
+const kBody05SemiBold = TextStyle(
+    fontSize: kFontSizeXS,
+    fontFamily: kMontserratFont,
+    fontWeight: kFontWeightSemiBold,
+    color: kNeutralBlack);
+
 const kBody05Medium = TextStyle(
     fontSize: kFontSizeXS,
     fontFamily: kMontserratFont,
