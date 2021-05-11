@@ -106,7 +106,7 @@ class AuthForm extends StatelessWidget {
                           hintText: 'confirm password',
                           prefixIcon: Iconly.lock,
                           isPassword: true,
-                          compare: _password.text),
+                          compare: _password),
                     ],
                     if (authType == AuthType.SignIn) ...[
                       kSizedBoxVerticalS,

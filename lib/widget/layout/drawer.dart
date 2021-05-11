@@ -1,9 +1,11 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/widget/utils/customDiver.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FamashiDrawer extends StatelessWidget {
   final drawerData = <Map<String, dynamic>>[
@@ -79,7 +81,10 @@ class FamashiDrawer extends StatelessWidget {
                     style: kBody03Medium.copyWith(color: kNeutral02),
                   ),
                   horizontalTitleGap: 0,
-                  onTap: () {})
+                  onTap: () async {
+                    Provider.of<AuthenticateProvider>(context, listen: false)
+                        .logout();
+                  })
             ])));
   }
 }

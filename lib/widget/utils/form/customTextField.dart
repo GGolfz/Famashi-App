@@ -12,7 +12,7 @@ class CustomTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool? isPassword;
-  final String? compare;
+  final TextEditingController? compare;
   CustomTextField(
       {required this.controller,
       required this.hintText,
@@ -58,7 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       }
       if (widget.isPassword! &&
           widget.compare != null &&
-          value != widget.compare) {
+          value != widget.compare!.text) {
         return 'Confirm password must same as password';
       }
     });
