@@ -1,5 +1,3 @@
-import 'package:famashi/widget/layout/appbar.dart';
-import 'package:famashi/widget/layout/drawer.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:flutter/material.dart';
 
