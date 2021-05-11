@@ -10,7 +10,7 @@ class AuthLayout extends StatelessWidget {
   AuthLayout({required this.authType, required this.changeType});
   Widget getSpace() {
     return authType == AuthType.SignIn
-        ? kSizedBoxVerticalS
+        ? kSizedBoxVerticalL
         : kSizedBoxVerticalM;
   }
 

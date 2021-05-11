@@ -2,6 +2,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/screen/AuthScreen.dart';
+import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
@@ -86,10 +87,11 @@ class AuthForm extends StatelessWidget {
                 NikuText("Forget password?").style(kBody05).color(kNeutral03)
               ])
             ],
-            kSizedBoxVerticalS,
-            NikuButton.elevated(
-              NikuText("Login"),
-            ).onPressed(() {}),
+            kSizedBoxVerticalM,
+            PrimaryButton(
+              text: _getTitle()!,
+              onPressed: () {},
+            ),
             kSizedBoxVerticalS,
             _getChangeType(),
           ],
