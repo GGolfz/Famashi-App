@@ -1,4 +1,6 @@
 import 'package:famashi/config/constant.dart';
+import 'package:famashi/widget/utils/icon/Coolicons.dart';
+import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 
 class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,7 +18,7 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: isHome
           ? IconButton(
               onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: Icon(Icons.settings))
+              icon: Icon(CoolIcons.menu_alt_05))
           : IconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(Icons.chevron_left)),
