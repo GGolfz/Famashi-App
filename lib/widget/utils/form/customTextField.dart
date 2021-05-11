@@ -12,13 +12,15 @@ class CustomTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool? isPassword;
+  final String? compare;
   CustomTextField(
       {required this.controller,
       required this.hintText,
       required this.name,
       this.prefixIcon,
       this.suffixIcon,
-      this.isPassword = false});
+      this.isPassword = false,
+      this.compare});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -40,9 +42,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
         .errorBorder(OutlineInputBorder(
             borderSide: BorderSide(color: kNeutral06),
             borderRadius: kBorderRadiusS))
+        .focusedErrorBorder(OutlineInputBorder(
+            borderSide: BorderSide(color: kNeutral06),
+            borderRadius: kBorderRadiusS))
         .validator((value) {
       if (value == '') {
         return '${widget.name} is required';
+      }
+      if (widget.name == 'Email') {
+        if (!RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value!)) {
+          return 'Email is invalid';
+        }
+      }
+      if (widget.isPassword! &&
+          widget.compare != null &&
+          value != widget.compare) {
+        return 'Confirm password must same as password';
       }
     });
     if (widget.prefixIcon != null) {

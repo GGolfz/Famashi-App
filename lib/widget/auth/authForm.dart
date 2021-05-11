@@ -54,12 +54,19 @@ class AuthForm extends StatelessWidget {
   }
 
   Future<void> _submitForm(BuildContext context) async {
-    print("TEST");
     if (_formKey.currentState!.validate()) {
+      String email = _email.text;
+      String password = _password.text;
       if (authType == AuthType.Register) {
-        // await Provider.of<AuthenticateProvider>(context, listen: false)
-        //     .register();
-      } else if (authType == AuthType.SignIn) {}
+        String confirmPassword = _confirmPassword.text;
+        if (password == confirmPassword) {
+          await Provider.of<AuthenticateProvider>(context, listen: false)
+              .register(email, password);
+        }
+      } else if (authType == AuthType.SignIn) {
+        await Provider.of<AuthenticateProvider>(context, listen: false)
+            .login(email, password);
+      }
     }
   }
 
@@ -94,12 +101,12 @@ class AuthForm extends StatelessWidget {
                     if (authType == AuthType.Register) ...[
                       kSizedBoxVerticalS,
                       CustomTextField(
-                        controller: _confirmPassword,
-                        name: 'Confirm password',
-                        hintText: 'confirm password',
-                        prefixIcon: Iconly.lock,
-                        isPassword: true,
-                      ),
+                          controller: _confirmPassword,
+                          name: 'Confirm password',
+                          hintText: 'confirm password',
+                          prefixIcon: Iconly.lock,
+                          isPassword: true,
+                          compare: _password.text),
                     ],
                     if (authType == AuthType.SignIn) ...[
                       kSizedBoxVerticalS,
@@ -116,7 +123,7 @@ class AuthForm extends StatelessWidget {
                     ),
                     kSizedBoxVerticalS,
                     _getChangeType(),
-                    kSizedBoxVerticalXS,
+                    kSizedBoxVerticalS,
                   ],
                 ))),
         width: double.infinity,
