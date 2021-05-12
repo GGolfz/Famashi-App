@@ -5,6 +5,7 @@ import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/widget/utils/customDiver.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class FamashiDrawer extends StatelessWidget {
@@ -43,10 +44,9 @@ class FamashiDrawer extends StatelessWidget {
                                 fit: BoxFit.contain,
                               ))),
                       kSizedBoxHorizontalS,
-                      Text(
-                        "Kaewket Saelee",
-                        style: kBody03Medium.copyWith(color: kAccentColor04),
-                      )
+                      NikuText("Kaewket Saelee")
+                          .style(kBody03Medium)
+                          .color(kAccentColor04)
                     ],
                   )),
               kSizedBoxVerticalS,
@@ -63,10 +63,9 @@ class FamashiDrawer extends StatelessWidget {
                               item["icon"],
                               color: kPrimaryColor02,
                             ),
-                            title: Text(
+                            title: NikuText(
                               item["name"].toString(),
-                              style: kBody04Medium.copyWith(color: kNeutral02),
-                            ),
+                            ).style(kBody04Medium).color(kNeutral02),
                             horizontalTitleGap: 0,
                             onTap: () {
                               Navigator.of(context)
@@ -76,10 +75,9 @@ class FamashiDrawer extends StatelessWidget {
                       itemCount: drawerData.length)),
               ListTile(
                   leading: Icon(Iconly.logout, color: kPrimaryColor02),
-                  title: Text(
-                    "Log Out",
-                    style: kBody03Medium.copyWith(color: kNeutral02),
-                  ),
+                  title: NikuText("Log Out")
+                      .style(kBody03Medium)
+                      .color(kNeutral02),
                   horizontalTitleGap: 0,
                   onTap: () async {
                     Provider.of<AuthenticateProvider>(context, listen: false)
