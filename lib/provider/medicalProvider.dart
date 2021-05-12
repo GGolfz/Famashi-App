@@ -92,8 +92,8 @@ class MedicalInfo {
 
 class MedicalProvider with ChangeNotifier {
   String? token;
-  MedicalInfo? medicalInfo = MedicalInfo.base;
-  MedicalProvider({required token, required medicalInfo});
+  MedicalInfo? medicalInfo;
+  MedicalProvider({required this.token, required this.medicalInfo});
 
   Future<void> fetchMeidcalInfo() async {
     try {

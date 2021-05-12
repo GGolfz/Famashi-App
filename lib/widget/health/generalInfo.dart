@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 class GeneralInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Provider.of<MedicalProvider>(context, listen: false).fetchMeidcalInfo();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeS),
       child: Consumer<MedicalProvider>(

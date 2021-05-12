@@ -30,14 +30,16 @@ class FamashiApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (ctx) => AuthenticateProvider()),
           ChangeNotifierProxyProvider<AuthenticateProvider, UserProvider>(
-              create: (ctx) => UserProvider(token: null, user: null),
+              create: (ctx) => UserProvider(token: null, user: User.base),
               update: (ctx, auth, prev) =>
                   UserProvider(token: auth.token, user: prev?.user)),
           ChangeNotifierProxyProvider<AuthenticateProvider, MedicalProvider>(
               create: (ctx) =>
                   MedicalProvider(token: null, medicalInfo: MedicalInfo.base),
-              update: (ctx, auth, prev) => MedicalProvider(
-                  token: auth.token, medicalInfo: prev?.medicalInfo))
+              update: (ctx, auth, prev) {
+                return MedicalProvider(
+                    token: auth.token, medicalInfo: prev?.medicalInfo);
+              })
         ],
         child: MaterialApp(
           title: 'Famashi',
