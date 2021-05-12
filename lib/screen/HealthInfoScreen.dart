@@ -1,7 +1,9 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/widget/health/generalInfo.dart';
 import 'package:famashi/widget/health/tabList.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/utils/customDiver.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
@@ -30,9 +32,7 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
           child: NikuText("Allergies"),
         );
       case TabType.General:
-        return Center(
-          child: NikuText("General Info"),
-        );
+        return GeneralInfo();
       case TabType.Medication:
         return Center(
           child: NikuText("Medication Info"),
@@ -43,22 +43,30 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return TemplateLayout(
-        child: Container(
-            padding: EdgeInsets.all(kSizeS),
-            child: Column(
-              children: [
-                NikuText("My Health Information").style(kBody01Semibold),
-                kSizedBoxVerticalS,
-                TabList(
-                    tabs: _tabs,
-                    selected: _selectedTab,
-                    changeType: (tab) {
-                      setState(() {
-                        _selectedTab = tab;
-                      });
-                    }),
-                getScreenBody()
-              ],
-            )));
+      child: Container(
+          padding: EdgeInsets.all(kSizeS),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NikuText("My Health Information").style(kBody01Semibold),
+              kSizedBoxVerticalS,
+              TabList(
+                  tabs: _tabs,
+                  selected: _selectedTab,
+                  changeType: (tab) {
+                    setState(() {
+                      _selectedTab = tab;
+                    });
+                  }),
+              kSizedBoxVerticalXS,
+              CustomDivider(),
+              Expanded(child: getScreenBody())
+            ],
+          )),
+      hasAction: _selectedTab == TabType.Allergies,
+      action: () {
+        print("Open Allergies Popup");
+      },
+    );
   }
 }
