@@ -23,31 +23,31 @@ class GeneralInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeS),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                NikuText("General Information")
-                    .style(kBody02Semibold)
-                    .color(kNeutral02),
-                Niku(NikuText("edit")
-                        .style(kBody04Medium)
-                        .color(kPrimaryColor05)
-                        .textDecoration(TextDecoration.underline))
-                    .on(tap: () {
-                  print("Edit General Information");
-                })
-              ],
-            ),
-            ...data
-                .map((e) => DetailTile(
-                    title: e["title"].toString(),
-                    detail: e["detail"].toString()))
-                .toList()
-          ],
-        ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              NikuText("General Information")
+                  .style(kBody02Semibold)
+                  .color(kNeutral02),
+              Niku(NikuText("edit")
+                      .style(kBody04Medium)
+                      .color(kPrimaryColor05)
+                      .textDecoration(TextDecoration.underline))
+                  .on(tap: () {
+                print("Edit General Information");
+              })
+            ],
+          ),
+          Expanded(
+              child: ListView.builder(
+            itemBuilder: (ctx, index) => DetailTile(
+                title: data[index]["title"].toString(),
+                detail: data[index]["detail"].toString()),
+            itemCount: data.length,
+          ))
+        ],
       ),
     );
   }

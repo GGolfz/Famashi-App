@@ -1,6 +1,8 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/widget/health/allergiesInfo.dart';
 import 'package:famashi/widget/health/generalInfo.dart';
+import 'package:famashi/widget/health/medicationInfo.dart';
 import 'package:famashi/widget/health/tabList.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/utils/customDiver.dart';
@@ -28,15 +30,11 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   Widget getScreenBody() {
     switch (_selectedTab) {
       case TabType.Allergies:
-        return Center(
-          child: NikuText("Allergies"),
-        );
+        return AllergiesInfo();
       case TabType.General:
         return GeneralInfo();
       case TabType.Medication:
-        return Center(
-          child: NikuText("Medication Info"),
-        );
+        return MedicationInfo();
     }
   }
 

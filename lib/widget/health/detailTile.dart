@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/text.dart';
@@ -12,10 +13,11 @@ class DetailTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: NikuText(title)
-          .style(big ? kBody02Semibold : kBody04SemiBold)
+          .style(big ? kBody03Semibold : kBody04SemiBold)
           .color(kPrimaryColor05),
       subtitle: NikuText(detail).style(kBody05).color(kNeutral02),
-      contentPadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.symmetric(vertical: big ? kSizeXS : 0),
+      dense: !big,
     );
   }
 }
