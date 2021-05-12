@@ -21,22 +21,22 @@ class AuthForm extends StatelessWidget {
   final TextEditingController _confirmPassword = TextEditingController();
   AuthForm({required this.authType, required this.changeType});
   String? _getTitle() {
-    return {AuthType.Register: "Sign Up", AuthType.SignIn: "Log In"}[authType];
+    return {AuthType.SignUp: "Sign Up", AuthType.LogIn: "Log In"}[authType];
   }
 
   final _formKey = GlobalKey<FormState>();
 
   Widget _getChangeType() {
     var data = {
-      AuthType.Register: {
+      AuthType.SignUp: {
         "text": "Already have an account?",
         "changeText": "Log in",
-        "authType": AuthType.SignIn
+        "authType": AuthType.LogIn
       },
-      AuthType.SignIn: {
+      AuthType.LogIn: {
         "text": "Don't have any account?",
         "changeText": "Sign up",
-        "authType": AuthType.Register
+        "authType": AuthType.SignUp
       }
     };
     return NikuRow([
@@ -57,13 +57,13 @@ class AuthForm extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       String email = _email.text;
       String password = _password.text;
-      if (authType == AuthType.Register) {
+      if (authType == AuthType.SignUp) {
         String confirmPassword = _confirmPassword.text;
         if (password == confirmPassword) {
           await Provider.of<AuthenticateProvider>(context, listen: false)
               .register(email, password);
         }
-      } else if (authType == AuthType.SignIn) {
+      } else if (authType == AuthType.LogIn) {
         await Provider.of<AuthenticateProvider>(context, listen: false)
             .login(email, password);
       }
@@ -98,7 +98,7 @@ class AuthForm extends StatelessWidget {
                       prefixIcon: Iconly.lock,
                       isPassword: true,
                     ),
-                    if (authType == AuthType.Register) ...[
+                    if (authType == AuthType.SignUp) ...[
                       kSizedBoxVerticalS,
                       CustomTextField(
                           controller: _confirmPassword,
@@ -108,7 +108,7 @@ class AuthForm extends StatelessWidget {
                           isPassword: true,
                           compare: _password),
                     ],
-                    if (authType == AuthType.SignIn) ...[
+                    if (authType == AuthType.LogIn) ...[
                       kSizedBoxVerticalS,
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         NikuText("Forget password?")

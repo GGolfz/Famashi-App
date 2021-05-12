@@ -1,7 +1,7 @@
 import 'package:famashi/widget/auth/authLayout.dart';
 import 'package:flutter/material.dart';
 
-enum AuthType { Register, SignIn }
+enum AuthType { SignUp, LogIn }
 
 class AuthScreen extends StatefulWidget {
   static String routeName = '/auth';
@@ -13,7 +13,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var authType;
   @override
   void initState() {
-    authType = AuthType.SignIn;
+    authType = AuthType.LogIn;
     super.initState();
   }
 
