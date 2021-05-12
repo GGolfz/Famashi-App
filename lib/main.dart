@@ -1,5 +1,6 @@
 import 'package:famashi/config/theme.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
+import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:flutter/services.dart';
 import 'package:famashi/screen/AuthScreen.dart';
@@ -31,7 +32,12 @@ class FamashiApp extends StatelessWidget {
           ChangeNotifierProxyProvider<AuthenticateProvider, UserProvider>(
               create: (ctx) => UserProvider(token: null, user: null),
               update: (ctx, auth, prev) =>
-                  UserProvider(token: auth.token, user: prev?.user))
+                  UserProvider(token: auth.token, user: prev?.user)),
+          ChangeNotifierProxyProvider<AuthenticateProvider, MedicalProvider>(
+              create: (ctx) =>
+                  MedicalProvider(token: null, medicalInfo: MedicalInfo.base),
+              update: (ctx, auth, prev) => MedicalProvider(
+                  token: auth.token, medicalInfo: prev?.medicalInfo))
         ],
         child: MaterialApp(
           title: 'Famashi',
