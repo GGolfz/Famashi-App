@@ -29,11 +29,16 @@ class AuthenticateProvider with ChangeNotifier {
     }
   }
 
-  Future<void> register(String email, String password) async {
+  Future<void> register(
+      String email, String password, String firstname, String lastname) async {
     final prefs = await SharedPreferences.getInstance();
     try {
-      final response = await Dio().post(apiEndpoint + '/auth/register',
-          data: {"email": email, "password": password});
+      final response = await Dio().post(apiEndpoint + '/auth/register', data: {
+        "email": email,
+        "password": password,
+        "firstname": firstname,
+        "lastname": lastname
+      });
       _token = response.data["token"];
       prefs.setString('userToken', _token!);
       notifyListeners();
