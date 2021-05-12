@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
 import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticateProvider with ChangeNotifier {

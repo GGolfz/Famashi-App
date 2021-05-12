@@ -1,4 +1,5 @@
 import 'package:famashi/config/theme.dart';
+import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
@@ -39,6 +40,13 @@ class FamashiApp extends StatelessWidget {
               update: (ctx, auth, prev) {
                 return MedicalProvider(
                     token: auth.token, medicalInfo: prev?.medicalInfo);
+              }),
+          ChangeNotifierProxyProvider<AuthenticateProvider, AllergiesProvider>(
+              create: (ctx) =>
+                  AllergiesProvider(token: null, allergyList: AllergyList.base),
+              update: (ctx, auth, prev) {
+                return AllergiesProvider(
+                    token: auth.token, allergyList: prev?.allergyList);
               })
         ],
         child: MaterialApp(
