@@ -17,7 +17,6 @@ class MedicationInfo extends StatelessWidget {
         itemBuilder: (ctx, index) => DetailTile(
           title: data[index]["title"].toString(),
           detail: data[index]["detail"].toString(),
-          big: true,
         ),
         separatorBuilder: (context, index) => CustomDivider(),
         itemCount: data.length,
