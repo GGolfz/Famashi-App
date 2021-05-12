@@ -23,10 +23,18 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: isHome
           ? IconButton(
               onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: Icon(CoolIcons.menu_alt_05))
+              icon: Icon(
+                CoolIcons.menu_alt_05,
+                size: kSizeM,
+                color: kNeutral01,
+              ))
           : IconButton(
               onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(Iconly.arrow_left)),
+              icon: Icon(
+                Iconly.arrow_left,
+                color: kNeutral01,
+                size: kSizeM,
+              )),
       title: Container(child: Text(title, style: kBody01Semibold)),
       titleSpacing: 0,
       centerTitle: false,

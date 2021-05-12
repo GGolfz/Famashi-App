@@ -2,9 +2,11 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
+import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/utils/customDiver.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class FamashiDrawer extends StatelessWidget {
@@ -24,31 +26,33 @@ class FamashiDrawer extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserProvider>(context, listen: false).fetchUser();
     return Drawer(
         child: Container(
             padding: EdgeInsets.symmetric(horizontal: kSizeS),
             child: Column(children: [
               kSizedBoxVerticalL,
-              Container(
-                  margin: EdgeInsets.all(kSizeXS),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                          borderRadius: kBorderRadiusS,
-                          child: SizedBox(
-                              width: kSizeL,
-                              height: kSizeL,
-                              child: Image.network(
-                                "https://instagram.fbkk22-4.fna.fbcdn.net/v/t51.2885-15/e35/s1080x1080/174779557_377856969974255_5115754287508607467_n.jpg?tp=1&_nc_ht=instagram.fbkk22-4.fna.fbcdn.net&_nc_cat=111&_nc_ohc=UKBK5XkAvE0AX9hVIdS&edm=AP_V10EBAAAA&oh=3f1caf91d014925d74332acb0bca0160&oe=60C0C9B1",
-                                fit: BoxFit.contain,
-                              ))),
-                      kSizedBoxHorizontalS,
-                      Text(
-                        "Kaewket Saelee",
-                        style: kBody03Medium.copyWith(color: kAccentColor04),
-                      )
-                    ],
-                  )),
+              Consumer<UserProvider>(
+                  builder: (ctx, user, _) => Container(
+                      margin: EdgeInsets.all(kSizeXS),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                              borderRadius: kBorderRadiusS,
+                              child: SizedBox(
+                                  width: kSizeL,
+                                  height: kSizeL,
+                                  child: Image.network(
+                                    user.user!.img,
+                                    fit: BoxFit.contain,
+                                  ))),
+                          kSizedBoxHorizontalS,
+                          NikuText(
+                                  "${user.user!.firstname} ${user.user!.lastname}")
+                              .style(kBody03Medium)
+                              .color(kAccentColor04)
+                        ],
+                      ))),
               kSizedBoxVerticalS,
               CustomDivider(),
               kSizedBoxVerticalXS,
@@ -63,10 +67,9 @@ class FamashiDrawer extends StatelessWidget {
                               item["icon"],
                               color: kPrimaryColor02,
                             ),
-                            title: Text(
+                            title: NikuText(
                               item["name"].toString(),
-                              style: kBody04Medium.copyWith(color: kNeutral02),
-                            ),
+                            ).style(kBody04Medium).color(kNeutral02),
                             horizontalTitleGap: 0,
                             onTap: () {
                               Navigator.of(context)
@@ -76,10 +79,9 @@ class FamashiDrawer extends StatelessWidget {
                       itemCount: drawerData.length)),
               ListTile(
                   leading: Icon(Iconly.logout, color: kPrimaryColor02),
-                  title: Text(
-                    "Log Out",
-                    style: kBody03Medium.copyWith(color: kNeutral02),
-                  ),
+                  title: NikuText("Log Out")
+                      .style(kBody03Medium)
+                      .color(kNeutral02),
                   horizontalTitleGap: 0,
                   onTap: () async {
                     Provider.of<AuthenticateProvider>(context, listen: false)
