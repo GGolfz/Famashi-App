@@ -33,7 +33,7 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
               icon: Icon(
                 Iconly.arrow_left,
                 color: kNeutral01,
-                size: kSizeM,
+                size: kSizeS * 1.8,
               )),
       title: Container(child: Text(title, style: kBody01Semibold)),
       titleSpacing: 0,

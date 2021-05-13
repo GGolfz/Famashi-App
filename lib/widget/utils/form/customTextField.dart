@@ -15,8 +15,8 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? compare;
   CustomTextField(
       {required this.controller,
-      required this.hintText,
       required this.name,
+      this.hintText = '',
       this.prefixIcon,
       this.suffixIcon,
       this.isPassword = false,

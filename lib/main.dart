@@ -3,6 +3,7 @@ import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
 import 'package:famashi/screen/AuthScreen.dart';
 import 'package:famashi/screen/HealthInfoScreen.dart';
@@ -25,6 +26,30 @@ void main() {
 }
 
 class FamashiApp extends StatelessWidget {
+  final routes = {
+    '/': Consumer<AuthenticateProvider>(
+        builder: (ctx, auth, _) => auth.isAuth
+            ? HomeScreen()
+            : FutureBuilder(
+                future: Future<bool>.sync(() async {
+                  try {
+                    await auth.tryAutoLogin();
+                    return true;
+                  } catch (error) {
+                    return false;
+                  }
+                }),
+                builder: (ctx, authResultSnapshot) => AuthScreen())),
+    HealthInfoScreen.routeName: HealthInfoScreen(),
+    NotificationScreen.routeName: NotificationScreen(),
+    MedicineAddScreen.routeName: MedicineAddScreen(),
+    MedicineEditScreen.routeName: MedicineEditScreen(),
+    MedicineDetailScreen.routeName: MedicineDetailScreen(),
+    SettingHomeScreen.routeName: SettingHomeScreen(),
+    SettingProfileScreen.routeName: SettingProfileScreen(),
+    SettingPasswordScreen.routeName: SettingPasswordScreen(),
+    SettingNotificationScreen.routeName: SettingNotificationScreen()
+  };
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -50,33 +75,10 @@ class FamashiApp extends StatelessWidget {
               })
         ],
         child: MaterialApp(
-          title: 'Famashi',
-          theme: famashiTheme,
-          home: Consumer<AuthenticateProvider>(
-              builder: (ctx, auth, _) => auth.isAuth
-                  ? HomeScreen()
-                  : FutureBuilder(
-                      future: Future<bool>.sync(() async {
-                        try {
-                          await auth.tryAutoLogin();
-                          return true;
-                        } catch (error) {
-                          return false;
-                        }
-                      }),
-                      builder: (ctx, authResultSnapshot) => AuthScreen())),
-          routes: {
-            HealthInfoScreen.routeName: (ctx) => HealthInfoScreen(),
-            NotificationScreen.routeName: (ctx) => NotificationScreen(),
-            MedicineAddScreen.routeName: (ctx) => MedicineAddScreen(),
-            MedicineEditScreen.routeName: (ctx) => MedicineEditScreen(),
-            MedicineDetailScreen.routeName: (ctx) => MedicineDetailScreen(),
-            SettingHomeScreen.routeName: (ctx) => SettingHomeScreen(),
-            SettingProfileScreen.routeName: (ctx) => SettingProfileScreen(),
-            SettingPasswordScreen.routeName: (ctx) => SettingPasswordScreen(),
-            SettingNotificationScreen.routeName: (ctx) =>
-                SettingNotificationScreen()
-          },
-        ));
+            title: 'Famashi',
+            theme: famashiTheme,
+            onGenerateRoute: (setting) => NoAnimatedPageRoute(
+                builder: (BuildContext ctx) =>
+                    routes[setting.name.toString()]!)));
   }
 }
