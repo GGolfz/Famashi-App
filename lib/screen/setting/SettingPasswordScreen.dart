@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SettingPasswordScreen extends StatelessWidget {
-  static String routeName = '/medicine-password';
+  static String routeName = '/setting-password';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
