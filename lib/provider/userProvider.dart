@@ -41,4 +41,15 @@ class UserProvider with ChangeNotifier {
       print(error);
     }
   }
+
+  Future<void> changePassword(String oldPassword, String newPassword) async {
+    try {
+      await Dio().patch(apiEndpoint + '/user/password',
+          data: {"old_password": oldPassword, "new_password": newPassword},
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
 }

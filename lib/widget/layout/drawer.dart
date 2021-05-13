@@ -84,8 +84,10 @@ class FamashiDrawer extends StatelessWidget {
                       .color(kNeutral02),
                   horizontalTitleGap: 0,
                   onTap: () async {
-                    Provider.of<AuthenticateProvider>(context, listen: false)
+                    await Provider.of<AuthenticateProvider>(context,
+                            listen: false)
                         .logout();
+                    Navigator.of(context).pushNamed('/');
                   })
             ])));
   }
