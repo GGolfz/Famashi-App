@@ -4,11 +4,11 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/user/profile_img_selector.dart';
 import 'package:famashi/widget/utils/customDiver.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
@@ -17,8 +17,6 @@ import 'package:provider/provider.dart';
 class SettingProfileScreen extends StatelessWidget {
   static String routeName = '/setting-profile';
   final _formKey = GlobalKey<FormState>();
-  final ImagePicker picker = ImagePicker();
-
   final _email = TextEditingController();
   final _firstname = TextEditingController();
   final _lastname = TextEditingController();
@@ -65,23 +63,12 @@ class SettingProfileScreen extends StatelessWidget {
                 child: NikuColumn([
                   Expanded(
                       child: NikuColumn([
-                    Niku(ClipRRect(
-                      child: Image.network(
-                        user.user!.img,
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: kBorderRadiusS,
-                    ))
-                        .on(tap: () async {
-                          final file = await picker.getImage(
-                              source: ImageSource.gallery);
-                          if (file != null) {
-                            uploadedFile =
-                                await MultipartFile.fromFile(file.path);
-                          }
-                        })
-                        .height(kSizeL)
-                        .width(kSizeL),
+                    ProfileImageSelector(
+                        img: user.user!.img,
+                        onUpload: (file) async {
+                          uploadedFile =
+                              await MultipartFile.fromFile(file.path);
+                        }),
                     kSizedBoxVerticalS,
                     ..._buildForm()
                   ]).crossStart()),
