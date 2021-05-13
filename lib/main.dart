@@ -26,7 +26,7 @@ void main() {
 }
 
 class FamashiApp extends StatelessWidget {
-  var routes = {
+  final routes = {
     '/': Consumer<AuthenticateProvider>(
         builder: (ctx, auth, _) => auth.isAuth
             ? HomeScreen()
