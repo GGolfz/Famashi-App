@@ -5,7 +5,7 @@ import 'package:famashi/widget/health/generalInfo.dart';
 import 'package:famashi/widget/health/medicationInfo.dart';
 import 'package:famashi/widget/health/tabList.dart';
 import 'package:famashi/widget/layout/template.dart';
-import 'package:famashi/widget/utils/customDiver.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/text.dart';
 

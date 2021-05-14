@@ -5,7 +5,7 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/user/profile_img_selector.dart';
-import 'package:famashi/widget/utils/customDiver.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:flutter/material.dart';
