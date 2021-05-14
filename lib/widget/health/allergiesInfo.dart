@@ -2,7 +2,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/widget/health/detailTile.dart';
-import 'package:famashi/widget/utils/customDiver.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';

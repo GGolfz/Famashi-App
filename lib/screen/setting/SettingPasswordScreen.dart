@@ -3,7 +3,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/layout/template.dart';
-import 'package:famashi/widget/utils/customDiver.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';

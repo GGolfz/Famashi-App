@@ -2,6 +2,8 @@ import 'package:famashi/config/theme.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
+import 'package:famashi/provider/medicineProvider.dart';
+import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +61,14 @@ class FamashiApp extends StatelessWidget {
               create: (ctx) => UserProvider(token: null, user: User.base),
               update: (ctx, auth, prev) =>
                   UserProvider(token: auth.token, user: prev?.user)),
+          ChangeNotifierProxyProvider<AuthenticateProvider,
+                  NotificationProvider>(
+              create: (ctx) => NotificationProvider(
+                  token: null, notify: UserNotifications.base),
+              update: (ctx, auth, prev) {
+                return NotificationProvider(
+                    token: auth.token, notify: prev?.notify);
+              }),
           ChangeNotifierProxyProvider<AuthenticateProvider, MedicalProvider>(
               create: (ctx) =>
                   MedicalProvider(token: null, medicalInfo: MedicalInfo.base),
@@ -72,6 +82,12 @@ class FamashiApp extends StatelessWidget {
               update: (ctx, auth, prev) {
                 return AllergiesProvider(
                     token: auth.token, allergyList: prev?.allergyList);
+              }),
+          ChangeNotifierProxyProvider<AuthenticateProvider, MedicineProvider>(
+              create: (ctx) => MedicineProvider(token: null, medicines: []),
+              update: (ctx, auth, prev) {
+                return MedicineProvider(
+                    token: auth.token, medicines: prev?.medicines);
               })
         ],
         child: MaterialApp(

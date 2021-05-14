@@ -1,6 +1,6 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/widget/health/detailTile.dart';
-import 'package:famashi/widget/utils/customDiver.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:flutter/material.dart';
 
 class MedicationInfo extends StatelessWidget {

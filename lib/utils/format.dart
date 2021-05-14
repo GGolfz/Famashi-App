@@ -7,3 +7,7 @@ enum MedicineTime {
   AFTER_EVENING,
   BEDTIME,
 }
+
+String formatTime(int time) {
+  return time >= 10 ? "$time" : "0$time";
+}
