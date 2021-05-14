@@ -16,17 +16,17 @@ class ProfileImageSelector extends StatefulWidget {
 }
 
 class _ProfileImageSelectorState extends State<ProfileImageSelector> {
-  var display_file;
+  var displayFile;
   @override
   Widget build(BuildContext context) {
     return Niku(ClipRRect(
-      child: display_file == null
+      child: displayFile == null
           ? Image.network(
               widget.img,
               fit: BoxFit.cover,
             )
           : Image.file(
-              display_file,
+              displayFile,
               fit: BoxFit.cover,
             ),
       borderRadius: kBorderRadiusS,
@@ -36,7 +36,7 @@ class _ProfileImageSelectorState extends State<ProfileImageSelector> {
               await widget.picker.getImage(source: ImageSource.gallery);
           if (file != null) {
             setState(() {
-              display_file = new File(file.path);
+              displayFile = new File(file.path);
             });
             widget.onUpload(file);
           }

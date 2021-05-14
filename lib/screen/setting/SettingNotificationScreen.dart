@@ -1,4 +1,7 @@
+import 'package:famashi/config/color.dart';
+import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/form/customTimePicker.dart';
 import 'package:famashi/widget/utils/form/customTimePickerField.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/utils/format.dart';
 import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
+import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class SettingNotificationScreen extends StatelessWidget {
@@ -48,6 +52,27 @@ class SettingNotificationScreen extends StatelessWidget {
         });
   }
 
+  List<Widget> _buildNotificationGroup(
+      String title, Widget left, Widget right) {
+    return [
+      NikuText(title).style(kBody02Semibold).color(kPrimaryColor05),
+      kSizedBoxVerticalXS,
+      Row(children: [
+        Expanded(flex: 5, child: left),
+        kSizedBoxHorizontalS,
+        Expanded(flex: 5, child: right)
+      ])
+    ];
+  }
+
+  Widget _buildTextFieldGroup(String title, Widget widget) {
+    return Niku(NikuColumn([
+      NikuText(title).style(kBody04Medium).color(kNeutral02),
+      kSizedBoxVerticalXS,
+      widget
+    ]).crossStart());
+  }
+
   @override
   Widget build(BuildContext context) {
     Provider.of<NotificationProvider>(context, listen: false)
@@ -64,14 +89,55 @@ class SettingNotificationScreen extends StatelessWidget {
         return Form(
             key: _formKey,
             child: NikuColumn([
-              _buildTimeTextField(_beforeMorning, context),
-              _buildTimeTextField(_afterMorning, context),
-              _buildTimeTextField(_beforeNoon, context),
-              _buildTimeTextField(_afterNoon, context),
-              _buildTimeTextField(_beforeEvening, context),
-              _buildTimeTextField(_afterEvening, context),
-              _buildTimeTextField(_bedtime, context),
-              Expanded(child: NikuColumn([]).crossStart()),
+              Expanded(
+                  child: NikuColumn([
+                ..._buildNotificationGroup(
+                    'Morning Medicine',
+                    _buildTextFieldGroup(
+                      'Before Meal',
+                      _buildTimeTextField(_beforeMorning, context),
+                    ),
+                    _buildTextFieldGroup(
+                      'After Meal',
+                      _buildTimeTextField(_afterMorning, context),
+                    )),
+                kSizedBoxVerticalS,
+                CustomDivider(),
+                kSizedBoxVerticalS,
+                ..._buildNotificationGroup(
+                    'Noon Medicine',
+                    _buildTextFieldGroup(
+                      'Before Meal',
+                      _buildTimeTextField(_beforeNoon, context),
+                    ),
+                    _buildTextFieldGroup(
+                      'After Meal',
+                      _buildTimeTextField(_afterNoon, context),
+                    )),
+                kSizedBoxVerticalS,
+                CustomDivider(),
+                kSizedBoxVerticalS,
+                ..._buildNotificationGroup(
+                    'Evening Medicine',
+                    _buildTextFieldGroup(
+                      'Before Meal',
+                      _buildTimeTextField(_beforeEvening, context),
+                    ),
+                    _buildTextFieldGroup(
+                      'After Meal',
+                      _buildTimeTextField(_afterEvening, context),
+                    )),
+                kSizedBoxVerticalS,
+                CustomDivider(),
+                kSizedBoxVerticalS,
+                ..._buildNotificationGroup(
+                    'Bedtime Medicine',
+                    _buildTextFieldGroup(
+                      'Bedtime',
+                      _buildTimeTextField(_beforeEvening, context),
+                    ),
+                    Niku()),
+              ]).crossStart()),
               PrimaryButton(
                   text: "Save",
                   onPressed: () async {
