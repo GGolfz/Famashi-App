@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Allergy {
   String? medicineName;
   String? sideEffect;
-  Allergy(medicineName, sideEffect);
+  Allergy(this.medicineName, this.sideEffect);
 }
 
 class AllergyList {
@@ -30,6 +30,19 @@ class AllergiesProvider with ChangeNotifier {
   Future<void> fetchAllergies() async {
     try {
       final response = await Dio().get(apiEndpoint + '/allergies',
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      allergyList = modifyResponse(response.data);
+      notifyListeners();
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> createAllergy(String medicineName, String sideEffect) async {
+    try {
+      final response = await Dio().post(apiEndpoint + '/allergies',
+          data: {"medicine_name": medicineName, "side_effect": sideEffect},
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
       allergyList = modifyResponse(response.data);
