@@ -1,12 +1,16 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/widget/health/allergiesForm.dart';
 import 'package:famashi/widget/health/allergiesInfo.dart';
 import 'package:famashi/widget/health/generalInfo.dart';
 import 'package:famashi/widget/health/medicationInfo.dart';
 import 'package:famashi/widget/health/tabList.dart';
+import 'package:famashi/widget/layout/popup.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
+import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 
 class HealthInfoScreen extends StatefulWidget {
@@ -62,7 +66,8 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
           )),
       hasAction: _selectedTab == TabType.Allergies,
       action: () {
-        print("Open Allergies Popup");
+        showDialog(
+            context: context, builder: (ctx) => Popup(widget: AllergiesForm()));
       },
     );
   }
