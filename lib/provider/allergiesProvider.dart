@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class Allergy {
   String? medicineName;
   String? sideEffect;
-  Allergy(this.medicineName, this.sideEffect);
+  int? id;
+  Allergy(this.id, this.medicineName, this.sideEffect);
 }
 
 class AllergyList {
@@ -13,7 +14,8 @@ class AllergyList {
   AllergyList({this.allergies = const []});
   List<Map<String, dynamic>> get report {
     return allergies
-        .map((e) => {"title": e.medicineName, "detail": e.sideEffect})
+        .map((e) =>
+            {"id": e.id, "title": e.medicineName, "detail": e.sideEffect})
         .toList();
   }
 
@@ -52,10 +54,23 @@ class AllergiesProvider with ChangeNotifier {
     }
   }
 
+  Future<void> deleteAllergy(int id) async {
+    try {
+      final response = await Dio().delete(apiEndpoint + '/allergies/$id',
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      allergyList = modifyResponse(response.data);
+      notifyListeners();
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
   AllergyList modifyResponse(List<dynamic> data) {
     List<Allergy> allergies = [];
     data.forEach((element) {
-      allergies.add(Allergy(element["medicine_name"], element["side_effect"]));
+      allergies.add(Allergy(
+          element["id"], element["medicine_name"], element["side_effect"]));
     });
     return AllergyList(allergies: allergies);
   }

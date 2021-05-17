@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 class AllergiesForm extends StatelessWidget {
   final _medicineName = TextEditingController();
   final _sideEffect = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Niku(NikuColumn([
@@ -23,12 +24,14 @@ class AllergiesForm extends StatelessWidget {
           .style(kBody04Medium)
           .color(kPrimaryColor05),
       kSizedBoxVerticalXS,
-      CustomTextField(
-        controller: _medicineName,
-        name: 'medicine name',
-        hintText: 'allergy medicine name',
-      ),
-      kSizedBoxVerticalXS,
+      Form(
+          key: _formKey,
+          child: CustomTextField(
+            controller: _medicineName,
+            name: 'medicine name',
+            hintText: 'allergy medicine name',
+          )),
+      kSizedBoxVerticalS,
       NikuText("Side effect").style(kBody04Medium).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
       CustomTextField(
@@ -40,13 +43,15 @@ class AllergiesForm extends StatelessWidget {
       Niku(PrimaryButton(
         text: "Save",
         onPressed: () async {
-          await Provider.of<AllergiesProvider>(context, listen: false)
-              .createAllergy(_medicineName.text, _sideEffect.text);
-          Navigator.of(context).pop();
+          if (_formKey.currentState!.validate()) {
+            await Provider.of<AllergiesProvider>(context, listen: false)
+                .createAllergy(_medicineName.text, _sideEffect.text);
+            Navigator.of(context).pop();
+          }
         },
       )).widthPercent(80).center()
     ]).crossStart())
         .padding(EdgeInsets.all(kSizeM))
-        .height(kSizeXXL * 1.65);
+        .height(kSizeXXL * 1.76);
   }
 }
