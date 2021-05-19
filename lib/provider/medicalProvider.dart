@@ -107,6 +107,51 @@ class MedicalProvider with ChangeNotifier {
     }
   }
 
+  Future<void> updateMedicalInfo(
+      String gender,
+      DateTime birthdate,
+      String weight,
+      String height,
+      String g6pd,
+      String liver,
+      String kidney,
+      String gastritis,
+      String breastfeeding,
+      String pregnant) async {
+    try {
+      int genderVal = gender == "Male" ? 0 : 1;
+      String birthdateVal =
+          "${birthdate.day}/${birthdate.month}/${birthdate.year}";
+      double weightVal = double.parse(weight);
+      double heightVal = double.parse(height);
+      bool isG6PD = g6pd == "Yes";
+      bool isLiver = liver == "Yes";
+      bool isKidney = kidney == "Yes";
+      bool isGastritis = gastritis == "Yes";
+      bool isBreastfeeding = breastfeeding == "Yes";
+      bool isPregnant = pregnant == "Yes";
+      final response = await Dio().patch(apiEndpoint + '/medical',
+          data: {
+            "gender": genderVal,
+            "birthdate": birthdateVal,
+            "weight": weightVal,
+            "height": heightVal,
+            "isG6PD": isG6PD,
+            "isLiver": isLiver,
+            "isKidney": isKidney,
+            "isGastritis": isGastritis,
+            "isBreastfeeding": isBreastfeeding,
+            "isPregnant": isPregnant
+          },
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      medicalInfo = modifyResponse(response.data);
+      notifyListeners();
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
   Gender? getGenderString(n) {
     return {0: Gender.Male, 1: Gender.Female}[n];
   }
