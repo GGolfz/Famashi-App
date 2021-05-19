@@ -37,7 +37,7 @@ class SettingPasswordScreen extends StatelessWidget {
   List<Widget> _buildTextFieldGroup(String text,
       TextEditingController controller, TextEditingController? compare) {
     return [
-      NikuText(text).style(kBody03Medium).color(kPrimaryColor05),
+      NikuText(text).style(kBody03Semibold).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
       compare != null
           ? CustomTextField(

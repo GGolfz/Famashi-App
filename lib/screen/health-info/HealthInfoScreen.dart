@@ -44,26 +44,24 @@ class _HealthInfoScreenState extends State<HealthInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return TemplateLayout(
-      child: Container(
-          padding: EdgeInsets.all(kSizeS),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              NikuText("My Health Information").style(kBody01Semibold),
-              kSizedBoxVerticalS,
-              TabList(
-                  tabs: _tabs,
-                  selected: _selectedTab,
-                  changeType: (tab) {
-                    setState(() {
-                      _selectedTab = tab;
-                    });
-                  }),
-              kSizedBoxVerticalXS,
-              CustomDivider(),
-              Expanded(child: getScreenBody())
-            ],
-          )),
+      child: Niku(NikuColumn(
+        [
+          NikuText("My Health Information").style(kBody01Semibold),
+          kSizedBoxVerticalS,
+          TabList(
+              tabs: _tabs,
+              selected: _selectedTab,
+              changeType: (tab) {
+                setState(() {
+                  _selectedTab = tab;
+                });
+              }),
+          kSizedBoxVerticalXS,
+          CustomDivider(),
+          Expanded(child: getScreenBody())
+        ],
+      ).crossStart())
+          .padding(EdgeInsets.all(kSizeS)),
       hasAction: _selectedTab == TabType.Allergies,
       action: () {
         showDialog(
