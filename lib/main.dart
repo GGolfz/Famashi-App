@@ -5,10 +5,11 @@ import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
 import 'package:famashi/screen/AuthScreen.dart';
-import 'package:famashi/screen/HealthInfoScreen.dart';
+import 'package:famashi/screen/health-info/HealthInfoScreen.dart';
 import 'package:famashi/screen/HomeScreen.dart';
 import 'package:famashi/screen/NotificationScreen.dart';
 import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
@@ -43,6 +44,7 @@ class FamashiApp extends StatelessWidget {
                 }),
                 builder: (ctx, authResultSnapshot) => AuthScreen())),
     HealthInfoScreen.routeName: HealthInfoScreen(),
+    HealthInfoEditScreen.routeName: HealthInfoEditScreen(),
     NotificationScreen.routeName: NotificationScreen(),
     MedicineAddScreen.routeName: MedicineAddScreen(),
     MedicineEditScreen.routeName: MedicineEditScreen(),

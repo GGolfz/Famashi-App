@@ -40,7 +40,7 @@ class SettingProfileScreen extends StatelessWidget {
   List<Widget> _buildTextFieldGroup(
       String text, TextEditingController controller) {
     return [
-      NikuText(text).style(kBody03Medium).color(kPrimaryColor05),
+      NikuText(text).style(kBody03Semibold).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
       CustomTextField(
         controller: controller,
