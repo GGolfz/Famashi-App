@@ -2,6 +2,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/medicalProvider.dart';
+import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/health/detailTile.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
@@ -28,7 +29,8 @@ class GeneralInfo extends StatelessWidget {
                               .color(kPrimaryColor05)
                               .textDecoration(TextDecoration.underline))
                           .on(tap: () {
-                        print("Edit General Information");
+                        Navigator.of(context)
+                            .pushNamed(HealthInfoEditScreen.routeName);
                       })
                     ],
                   ),
