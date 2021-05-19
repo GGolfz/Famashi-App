@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final IconData? suffixIcon;
   final bool? isPassword;
   final TextEditingController? compare;
+  final TextInputType? inputType;
   CustomTextField(
       {required this.controller,
       required this.name,
@@ -20,7 +21,8 @@ class CustomTextField extends StatefulWidget {
       this.prefixIcon,
       this.suffixIcon,
       this.isPassword = false,
-      this.compare});
+      this.compare,
+      this.inputType = TextInputType.text});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
