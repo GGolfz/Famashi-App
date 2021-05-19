@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
   final IconData? suffixIcon;
   final bool? isPassword;
   final TextEditingController? compare;
-  final TextInputType? inputType;
+  final TextInputType inputType;
   CustomTextField(
       {required this.controller,
       required this.name,
@@ -35,6 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         .controller(widget.controller)
         .outlined(color: kNeutral06, borderRadius: kBorderRadiusS)
         .bg(kNeutral06)
+        .keyboardType(widget.inputType)
         .filled()
         .hintText(widget.hintText)
         .hintStyle(kBody04Medium.copyWith(color: kNeutral03))
