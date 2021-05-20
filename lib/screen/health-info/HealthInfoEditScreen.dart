@@ -70,7 +70,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
       ),
       kSizedBoxVerticalXS,
       ..._buildTextFieldGroup(
-          "Weight",
+          "Weight (kg)",
           CustomTextField(
             controller: _weight,
             name: "Weight",
@@ -78,7 +78,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
           )),
       kSizedBoxVerticalXS,
       ..._buildTextFieldGroup(
-          "Height",
+          "Height (cm)",
           CustomTextField(
             controller: _height,
             name: "Height",
