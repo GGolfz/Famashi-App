@@ -2,13 +2,10 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/medicalProvider.dart';
-import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/widget/layout/template.dart';
-import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/form/customDatePicker.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
-import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
@@ -162,7 +159,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
 
   List<Widget> _buildTextFieldGroup(String text, Widget widget) {
     return [
-      NikuText(text).style(kBody03Semibold).color(kPrimaryColor05),
+      NikuText(text).style(kBody04Medium).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
       widget
     ];
@@ -206,6 +203,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
         Expanded(
             child: SingleChildScrollView(
                 child: NikuColumn(_buildForm()).crossStart())),
+        kSizedBoxVerticalS,
         PrimaryButton(text: "Save", onPressed: () => save(context))
       ])).padding(EdgeInsets.only(
           top: kSizeS, bottom: kSizeM, left: kSizeM, right: kSizeM)),

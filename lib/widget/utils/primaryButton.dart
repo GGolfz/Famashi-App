@@ -16,14 +16,16 @@ class PrimaryButton extends StatelessWidget {
       this.isDisabled = false});
   @override
   Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: Ink(
-        width: double.infinity,
-        decoration: _buildBoxDecoration(context),
-        child: _buildContent(context),
-      ),
-    );
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: kSizeS),
+        child: Material(
+          type: MaterialType.transparency,
+          child: Ink(
+            width: double.infinity,
+            decoration: _buildBoxDecoration(context),
+            child: _buildContent(context),
+          ),
+        ));
   }
 
   Widget _buildContent(BuildContext context) {
