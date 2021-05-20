@@ -176,6 +176,30 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final provider = Provider.of<MedicalProvider>(context, listen: false);
+    await provider.fetchMeidcalInfo();
+    MedicalInfo data = provider.medicalInfo!;
+    setState(() {
+      _gender = data.genderString!;
+      _birthdate = data.birthdate!;
+      _weight.text = data.weight.toString();
+      _height.text = data.height.toString();
+      _g6pd = data.getBoolString(data.isG6PD!);
+      _liver = data.getBoolString(data.isLiver!);
+      _kidney = data.getBoolString(data.isKidney!);
+      _gastritis = data.getBoolString(data.isGastritis!);
+      _breastfeeding = data.getBoolString(data.isBreastfeeding!);
+      _pregnant = data.getBoolString(data.isPregnant!);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TemplateLayout(
       child: Niku(NikuColumn([
