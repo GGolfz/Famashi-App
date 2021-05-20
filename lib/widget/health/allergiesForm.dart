@@ -28,7 +28,7 @@ class AllergiesForm extends StatelessWidget {
           key: _formKey,
           child: CustomTextField(
             controller: _medicineName,
-            name: 'medicine name',
+            name: 'Medicine name',
             hintText: 'allergy medicine name',
           )),
       kSizedBoxVerticalS,
@@ -40,7 +40,7 @@ class AllergiesForm extends StatelessWidget {
         hintText: 'side effect',
       ),
       kSizedBoxVerticalS,
-      Niku(PrimaryButton(
+      PrimaryButton(
         text: "Save",
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
@@ -49,7 +49,7 @@ class AllergiesForm extends StatelessWidget {
             Navigator.of(context).pop();
           }
         },
-      )).widthPercent(80).center()
+      )
     ]).crossStart())
         .padding(EdgeInsets.all(kSizeM))
         .height(kSizeXXL * 1.76);
