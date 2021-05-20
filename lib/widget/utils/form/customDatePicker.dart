@@ -14,7 +14,7 @@ class CustomDatePicker extends StatelessWidget {
         .controller(TextEditingController.fromValue(TextEditingValue(
             text: "${current.day}/${current.month}/${current.year}")))
         .outlined(color: kNeutral06, borderRadius: kBorderRadiusS)
-        .bg(kNeutral06)
+        .fillColor(kNeutral06)
         .filled()
         .textStyle(kBody04Medium.copyWith(color: kNeutral02))
         .readOnly(true)

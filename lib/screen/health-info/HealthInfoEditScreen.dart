@@ -70,7 +70,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
       ),
       kSizedBoxVerticalXS,
       ..._buildTextFieldGroup(
-          "Weight",
+          "Weight (kg)",
           CustomTextField(
             controller: _weight,
             name: "Weight",
@@ -78,7 +78,7 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
           )),
       kSizedBoxVerticalXS,
       ..._buildTextFieldGroup(
-          "Height",
+          "Height (cm)",
           CustomTextField(
             controller: _height,
             name: "Height",
@@ -173,6 +173,30 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
         .updateMedicalInfo(_gender, _birthdate, _weight.text, _height.text,
             _g6pd, _liver, _kidney, _gastritis, _breastfeeding, _pregnant);
     Navigator.of(context).pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final provider = Provider.of<MedicalProvider>(context, listen: false);
+    await provider.fetchMeidcalInfo();
+    MedicalInfo data = provider.medicalInfo!;
+    setState(() {
+      _gender = data.genderString!;
+      _birthdate = data.birthdate!;
+      _weight.text = data.weight.toString();
+      _height.text = data.height.toString();
+      _g6pd = data.getBoolString(data.isG6PD!);
+      _liver = data.getBoolString(data.isLiver!);
+      _kidney = data.getBoolString(data.isKidney!);
+      _gastritis = data.getBoolString(data.isGastritis!);
+      _breastfeeding = data.getBoolString(data.isBreastfeeding!);
+      _pregnant = data.getBoolString(data.isPregnant!);
+    });
   }
 
   @override
