@@ -1,6 +1,8 @@
+import 'package:famashi/config/color.dart';
+import 'package:famashi/config/constant.dart';
+import 'package:famashi/config/style.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/text.dart';
-import 'package:niku/widget/textField.dart';
 
 class CustomSelector extends StatelessWidget {
   final String current;
@@ -18,6 +20,12 @@ class CustomSelector extends StatelessWidget {
       onChanged: (val) {
         onChange(val);
       },
+      style: kBody04Medium.copyWith(color: kNeutral02),
+      decoration: InputDecoration(
+          fillColor: kNeutral06,
+          filled: true,
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none, borderRadius: kBorderRadiusS)),
     );
   }
 }
