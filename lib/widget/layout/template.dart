@@ -30,7 +30,10 @@ class TemplateLayout extends StatelessWidget {
       floatingActionButton: hasAction
           ? FloatingActionButton(
               onPressed: this.action,
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.add,
+                color: kNeutralWhite,
+              ),
               backgroundColor: kPrimaryColor04,
               splashColor: kPrimaryColor03,
               elevation: 0,

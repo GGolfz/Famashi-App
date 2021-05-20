@@ -7,9 +7,7 @@ import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/deleteDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
-import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
-import 'package:niku/widget/button.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
