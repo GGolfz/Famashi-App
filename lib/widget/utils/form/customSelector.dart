@@ -1,6 +1,7 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/text.dart';
 
@@ -20,6 +21,10 @@ class CustomSelector extends StatelessWidget {
       onChanged: (val) {
         onChange(val);
       },
+      icon: Icon(
+        Iconly.arrow_down_2,
+        color: kNeutral03,
+      ),
       style: kBody04Medium.copyWith(color: kNeutral02),
       decoration: InputDecoration(
           fillColor: kNeutral06,
