@@ -3,6 +3,8 @@ import 'package:famashi/screen/AuthScreen.dart';
 import 'package:famashi/widget/auth/authForm.dart';
 import 'package:famashi/widget/auth/introductionText.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
+import 'package:niku/widget/base.dart';
 
 class AuthLayout extends StatelessWidget {
   final AuthType authType;
@@ -14,23 +16,17 @@ class AuthLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(kSizeS),
-      height: double.infinity,
-      child: Column(
-        children: [
-          kSizedBoxVerticalXXL,
-          IntroductionText(
-            authType: authType,
-          ),
-          getSpace(),
-          Expanded(
-              child: AuthForm(
-            changeType: changeType,
-            authType: authType,
-          ))
-        ],
-      ),
-    );
+    return Niku(
+      SingleChildScrollView(
+          reverse: true,
+          child: NikuColumn(
+            [
+              AuthForm(
+                changeType: changeType,
+                authType: authType,
+              )
+            ],
+          )),
+    ).height(double.infinity).margin(EdgeInsets.all(kSizeS));
   }
 }

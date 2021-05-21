@@ -74,6 +74,9 @@ class _AuthFormState extends State<AuthForm> {
               .color(kAccentColor01))
           .on(tap: () {
         _formKey.currentState!.reset();
+        setState(() {
+          _page = 0;
+        });
         widget.changeType(data[widget.authType]!["authType"]);
       })
     ]).mainCenter();
@@ -197,13 +200,12 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: kBorderRadiusS,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: kSizeM),
-        child: SingleChildScrollView(
+      child: Niku(
+        SingleChildScrollView(
             child: Form(
                 key: _formKey,
-                child: Column(
-                  children: [
+                child: NikuColumn(
+                  [
                     kSizedBoxVerticalM,
                     NikuRow([
                       ..._getBackButton(),
@@ -225,9 +227,10 @@ class _AuthFormState extends State<AuthForm> {
                     kSizedBoxVerticalS,
                   ],
                 ))),
-        width: double.infinity,
-        color: kNeutralWhite,
-      ),
+      )
+          .padding(EdgeInsets.symmetric(horizontal: kSizeM))
+          .width(double.infinity)
+          .backgroundColor(kNeutralWhite),
     );
   }
 }
