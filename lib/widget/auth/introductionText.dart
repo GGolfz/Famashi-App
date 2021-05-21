@@ -3,6 +3,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/screen/AuthScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/niku.dart';
 import 'package:niku/widget/text.dart';
 
 class IntroductionText extends StatelessWidget {
@@ -20,12 +21,9 @@ class IntroductionText extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(kSizeS * 1.25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return Niku(
+      NikuColumn(
+        [
           NikuText(textList[authType]!["headline"].toString())
               .style(kHeading)
               .color(kNeutralWhite),
@@ -34,7 +32,7 @@ class IntroductionText extends StatelessWidget {
               .style(kBody02Light)
               .color(kNeutralWhite),
         ],
-      ),
-    );
+      ).crossStart(),
+    ).padding(EdgeInsets.all(kSizeS * 1.25)).width(double.infinity);
   }
 }
