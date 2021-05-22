@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context, listen: false).fetchUser();
-    Provider.of<MedicineProvider>(context, listen: false).medicines;
+    
     return TemplateLayout(
         child: Niku(
           Padding(

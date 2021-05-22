@@ -26,8 +26,8 @@ class MedicineAddScreen extends StatefulWidget {
 
 class _MedicineAddScreenState extends State<MedicineAddScreen> {
   var medicineImage;
-
   var leafletImage;
+  
 
   ImagePicker picker = ImagePicker();
 
@@ -71,9 +71,11 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                         ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
       
                         Niku(
-                          PrimaryButton(text: "Add", onPressed:() => Navigator.of(context).pop() ),
-                        ).padding(EdgeInsets.fromLTRB(40,5,40,5)),
-                        
+                          PrimaryButton(text: "Add", 
+                          onPressed:() async{
+                          await Provider.of<MedicineProvider>(context, listen: false).createMedicine(medicineImage, leafletImage);
+                          Navigator.of(context).pop();}),
+                        ).padding(EdgeInsets.fromLTRB(40,5,40,5)),               
 
                   ],
                 ),
