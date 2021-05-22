@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/widget.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/widget/medicine/medicineImage.dart';
 
 class MedicineInfo extends StatelessWidget {
   @override
@@ -13,37 +14,31 @@ class MedicineInfo extends StatelessWidget {
         color: kNeutralWhite,
         height: 252,
         width: 149,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: 149.0,
-              height: 207.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://i.pinimg.com/originals/a8/30/3a/a8303a4cbce1c08005c40c469c2565f7.jpg')),
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: kNeutral04,
+        child: GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, '/medicine-detail');
+          } ,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              MedicineImage(),
+              SizedBox(
+                height: 8,
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left:5.0),
-              child: Text(
-                'Drug Name',
-                style: kBody04Medium,
+              Padding(
+                padding: const EdgeInsets.only(left:5.0),
+                child: Text(
+                  'Drug Name',
+                  style: kBody04Medium,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left:5.0,top: 1.0),
-              child: Text('Remaining 12',
-              style: kBody05,),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left:5.0,top: 1.0),
+                child: Text('Remaining 12',
+                style: kBody05,),
+              )
+            ],
+          ),
         ),
       ),
     );
