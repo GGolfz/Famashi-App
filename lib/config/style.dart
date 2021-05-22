@@ -15,7 +15,7 @@ const kTitle = TextStyle(
     fontSize: kFontSizeXXL,
     fontFamily: kMontserratFont,
     fontWeight: kFontWeightSemiBold,
-    color: kNeutral01);
+    color: kAccentColor04);
 
 const kBody01Semibold = TextStyle(
     fontSize: kFontSizeXL,
@@ -63,7 +63,7 @@ const kBody03 = TextStyle(
     fontSize: kFontSizeM,
     fontFamily: kMontserratFont,
     fontWeight: kFontWeightRegular,
-    color: kNeutralBlack);
+    color: kNeutral02);
 
 const kBody04SemiBold = TextStyle(
     fontSize: kFontSizeS,
@@ -75,7 +75,7 @@ const kBody04Medium = TextStyle(
     fontSize: kFontSizeS,
     fontFamily: kMontserratFont,
     fontWeight: kFontWeightMedium,
-    color: kNeutralBlack);
+    color: kNeutral01);
 
 const kBody04 = TextStyle(
     fontSize: kFontSizeS,
@@ -99,4 +99,4 @@ const kBody05 = TextStyle(
     fontSize: kFontSizeXS,
     fontFamily: kMontserratFont,
     fontWeight: kFontWeightRegular,
-    color: kNeutralBlack);
+    color: kNeutral02);
