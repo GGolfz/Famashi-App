@@ -13,7 +13,7 @@ class FunctionTab extends StatelessWidget {
     return NikuRow([
             IconButton(
                 onPressed: () {
-                  Navigator.pop(context, '/medicine-edit');
+                  Navigator.pushNamed(context, '/medicine-edit');
                 },
                 icon: Icon(Iconly.edit_square)),
             IconButton(

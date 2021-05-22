@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
+import 'package:famashi/widget/medicine/medicineInfo.dart';
 import 'package:flutter/material.dart';
 
 class Medicine {
@@ -26,10 +27,24 @@ class Medicine {
       required this.medicineLeaflet});
 }
 
+
+
 class MedicineProvider with ChangeNotifier {
   String? token;
   List<Medicine>? medicines;
-  MedicineProvider({required this.token, required this.medicines});
+  MedicineProvider({required this.token, this.medicines});
+
+  // Future<void> fetchMedicines() async {
+  //   try {
+  //     final response = await Dio().get(apiEndpoint + '/medicines',
+  //         options: Options(
+  //             headers: {"Authorization": "Bearer " + token.toString()}));
+  //     medicines = modifyResponse(response.data);
+  //     notifyListeners();
+  //   } on DioError catch (error) {
+  //     print(error);
+  //   }
+  // }
 
   Future<void> createMedicine(
       MultipartFile? medicineImage, MultipartFile? medicineLeaflet) async {
@@ -90,4 +105,12 @@ class MedicineProvider with ChangeNotifier {
       print(error);
     }
   }
+  // Medicine modifyResponse(List<dynamic> data) {
+  //   List<Medicine> medicines = [];
+  //   data.forEach((element) {
+  //     medicines.add(Medicine(
+  //         element["id"], element["medicine_name"], element["side_effect"]));
+  //   });
+  //   return Medicine(medicines: medicines);
+  // }
 }

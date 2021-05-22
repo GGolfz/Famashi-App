@@ -16,6 +16,7 @@ import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/config/color.dart';
 import 'package:famashi/widget/medicine/addMedicineForm.dart';
+import 'package:famashi/widget/medicine/medicineImage.dart';
 
 class MedicineAddScreen extends StatefulWidget {
   static String routeName = '/medicine-add';
@@ -49,18 +50,15 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                           medicineImage =
                               await MultipartFile.fromFile(file!.path.toString());
                         },
-                        child: Container(
-                          width: 149.0,
-                          height: 207.0,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    'https://i.pinimg.com/originals/a8/30/3a/a8303a4cbce1c08005c40c469c2565f7.jpg')),
-                            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                            color: kNeutral04,
-                          ),
-                        ),
+                        child: 
+                        Stack(
+                          children:[
+                            MedicineImage(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(55,80,55,80),
+                              child: Icon(Iconly.image,color: kNeutral06,size: 40,),
+                            ),
+                            ] ),
                         ),
                         AddMedicineForm(),
                         kSizedBoxHorizontalS,
