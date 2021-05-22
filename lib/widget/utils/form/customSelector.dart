@@ -9,13 +9,14 @@ class CustomSelector extends StatelessWidget {
   final String current;
   final List<String> items;
   final Function onChange;
+  final TextStyle style;
   CustomSelector(
-      {required this.current, required this.items, required this.onChange});
+      {required this.current, required this.items, required this.onChange, this.style = kBody03});
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       items: items
-          .map((e) => DropdownMenuItem<String>(value: e, child: NikuText(e)))
+          .map((e) => DropdownMenuItem<String>(value: e, child: NikuText(e).style(style)))
           .toList(),
       value: current,
       onChanged: (val) {
