@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:famashi/config/constant.dart';
+import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:niku/widget/axis.dart';
@@ -22,8 +25,6 @@ class MedicineAddScreen extends StatefulWidget {
 }
 
 class _MedicineAddScreenState extends State<MedicineAddScreen> {
-  List<String> list = ["BB", "AB", "BN", "AN", "BD", "AD", "BED"];
-  var myList = [];
   var medicineImage;
 
   var leafletImage;
@@ -62,60 +63,24 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                         ),
                         ),
                         AddMedicineForm(),
+                        kSizedBoxHorizontalS,
+                        Niku(NikuRow([
+                          Icon(Iconly.danger,color: kNeutral03,size: 25,),
+                          SizedBox(width: 10,),
+                          NikuText("go to notification etting to change time.").style(kBody05SemiBold.copyWith(color: kNeutral03))
+                        ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
+      
+                        Niku(
+                          PrimaryButton(text: "Add", onPressed:() => Navigator.of(context).pop() ),
+                        ).padding(EdgeInsets.fromLTRB(40,5,40,5)),
+                        
+
                   ],
                 ),
               ),
             ),
                 
-            // Niku(
-            //   ListView.builder(
-            //     itemBuilder: (ctx, index) => Niku(NikuRow([
-            //       Expanded(
-            //           child: CustomSelector(
-            //               current: myList[index],
-            //               items: list
-            //                   .where((element) =>
-            //                       myList.indexOf(element) == -1 ||
-            //                       element == myList[index])
-            //                   .toList(),
-            //               onChange: (val) {
-            //                 setState(() {
-            //                   myList[index] = val;
-            //                 });
-            //               })),
-            //       IconButton(
-            //           onPressed: () {
-            //             setState(() {
-            //               myList.removeAt(index);
-            //             });
-            //           },
-            //           icon: Icon(CoolIcons.close_big))
-            //     ])),
-            //     itemCount: myList.length,
-            //   ),
-            // ).height(300),
-            // if (myList.length < 7)
-            //   PrimaryButton(
-            //       text: "Add",
-            //       onPressed: () {
-            //         for (var i in list) {
-            //           if (!myList.contains(i)) {
-            //             setState(() {
-            //               myList.add(i);
-            //             });
-            //             break;
-            //           }
-            //         }
-            //       }),
-            // Niku(NikuText("LEAF")).on(tap: () async {
-            //   final file = await picker.getImage(source: ImageSource.gallery);
-            //   leafletImage =
-            //       await MultipartFile.fromFile(file!.path.toString());
-            // }),
-            // NikuButton(NikuText("Submit")).onPressed(() async {
-            //   await Provider.of<MedicineProvider>(context, listen: false)
-            //       .createMedicine(medicineImage, leafletImage);
-            // })
+            
           ],
         ).crossCenter(),
       ),

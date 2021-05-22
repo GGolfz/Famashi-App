@@ -17,19 +17,12 @@ class AddMedicineForm extends StatefulWidget {
 
 class _AddMedicineFormState extends State<AddMedicineForm> {
   List<String> list = ["Before morning", "After morning", "Before noon", "After noon", "Before evening", "After evening", "Bedtime"];
-
   var myList = [];
-
   final _medicineName = TextEditingController();
-
   final _description = TextEditingController();
-
   final _totalRecieved = TextEditingController();
-
   final _dosagePerDose = TextEditingController();
-
   final _medicineUnit = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -128,6 +121,7 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
                     Icons.add,
                     color: kNeutral03,
                   ),
+                  kSizedBoxHorizontalS,
                   Text(
                     "Add more",
                     style: kBody04Medium.copyWith(color: kNeutral03),
