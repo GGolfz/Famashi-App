@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/screen/medicine/MedicineEditScreen.dart';
 import 'package:famashi/widget/utils/deleteDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class FunctionTab extends StatelessWidget {
     return NikuRow([
       IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/medicine-edit/$medicineId');
+            Navigator.pushNamed(context, MedicineEditScreen.routeName);
           },
           icon: Icon(Iconly.edit_square)),
       IconButton(

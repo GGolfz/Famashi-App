@@ -28,7 +28,6 @@ class MedicineAddScreen extends StatefulWidget {
 class _MedicineAddScreenState extends State<MedicineAddScreen> {
   var medicineImage;
   var leafletImage;
-  
 
   ImagePicker picker = ImagePicker();
 
@@ -44,43 +43,54 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                   alignment: WrapAlignment.center,
                   children: [
                     GestureDetector(
-                        onTap: () async {
-                          final file =
-                              await picker.getImage(source: ImageSource.gallery);
-                          medicineImage =
-                              await MultipartFile.fromFile(file!.path.toString());
-                        },
-                        child: 
-                        Stack(
-                          children:[
-                            MedicineImage(),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(55,80,55,80),
-                              child: Icon(Iconly.image,color: kNeutral06,size: 40,),
-                            ),
-                            ] ),
+                      onTap: () async {
+                        final file =
+                            await picker.getImage(source: ImageSource.gallery);
+                        medicineImage =
+                            await MultipartFile.fromFile(file!.path.toString());
+                      },
+                      child: Stack(children: [
+                        MedicineImage(),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(55, 80, 55, 80),
+                          child: Icon(
+                            Iconly.image,
+                            color: kNeutral06,
+                            size: 40,
+                          ),
                         ),
-                        AddMedicineForm(),
-                        kSizedBoxHorizontalS,
-                        Niku(NikuRow([
-                          Icon(Iconly.danger,color: kNeutral03,size: 25,),
-                          SizedBox(width: 10,),
-                          NikuText("go to notification etting to change time.").style(kBody05SemiBold.copyWith(color: kNeutral03))
-                        ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
-      
-                        Niku(
-                          PrimaryButton(text: "Add", 
-                          onPressed:() async{
-                          await Provider.of<MedicineProvider>(context, listen: false).createMedicine(medicineImage, leafletImage);
-                          Navigator.of(context).pop();}),
-                        ).padding(EdgeInsets.fromLTRB(40,5,40,5)),               
-
+                      ]),
+                    ),
+                    AddMedicineForm(),
+                    kSizedBoxHorizontalS,
+                    Niku(NikuRow([
+                      Icon(
+                        Iconly.danger,
+                        color: kNeutral03,
+                        size: 25,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      NikuText("go to notification editing to change time.")
+                          .style(kBody05SemiBold.copyWith(color: kNeutral03))
+                    ]).crossCenter())
+                        .padding(EdgeInsets.fromLTRB(
+                            kSizeM, kSizeS, kSizeM, kSizeS)),
+                    Niku(
+                      PrimaryButton(
+                          text: "Add",
+                          onPressed: () async {
+                            await Provider.of<MedicineProvider>(context,
+                                    listen: false)
+                                .createMedicine(medicineImage, leafletImage);
+                            Navigator.of(context).pop();
+                          }),
+                    ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
                   ],
                 ),
               ),
             ),
-                
-            
           ],
         ).crossCenter(),
       ),

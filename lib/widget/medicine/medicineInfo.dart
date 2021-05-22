@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/screen/medicine/MedicineDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/widget.dart';
@@ -15,9 +16,9 @@ class MedicineInfo extends StatelessWidget {
         height: 252,
         width: 149,
         child: GestureDetector(
-          onTap: (){
-            Navigator.pushNamed(context, '/medicine-detail');
-          } ,
+          onTap: () {
+            Navigator.pushNamed(context, MedicineDetailScreen.routeName);
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -26,16 +27,18 @@ class MedicineInfo extends StatelessWidget {
                 height: 8,
               ),
               Padding(
-                padding: const EdgeInsets.only(left:5.0),
+                padding: const EdgeInsets.only(left: 5.0),
                 child: Text(
                   'Drug Name',
                   style: kBody04Medium,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left:5.0,top: 1.0),
-                child: Text('Remaining 12',
-                style: kBody05,),
+                padding: const EdgeInsets.only(left: 5.0, top: 1.0),
+                child: Text(
+                  'Remaining 12',
+                  style: kBody05,
+                ),
               )
             ],
           ),
