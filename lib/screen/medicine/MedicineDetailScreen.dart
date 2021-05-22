@@ -17,7 +17,9 @@ class MedicineDetailScreen extends StatelessWidget {
     return TemplateLayout(
       child: Niku(NikuColumn([
         NikuColumn([
-          FunctionTab(),
+          FunctionTab(
+            medicineId: "1",
+          ),
           kSizedBoxVerticalXS,
           NikuText("Remaining 12 out of 20")
               .style(kBody04Medium.copyWith(color: kNeutral03)),
@@ -57,7 +59,6 @@ class MedicineDetailScreen extends StatelessWidget {
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
                           side: BorderSide(color: kPrimaryColor04)))),
-             
               child: NikuText("Information Leaflet")
                   .style(kBody04Medium.copyWith(color: kPrimaryColor04)),
               onPressed: () async {
@@ -68,20 +69,23 @@ class MedicineDetailScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40)),
                       elevation: 16,
-                      child:
-                      Padding(
+                      child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Niku(
-                        NikuColumn([
-                          NikuRow([
-                          IconButton(onPressed: (){
-                            Navigator.pop(context);
-                          }, 
-                          icon: Icon(Iconly.close_square)),
-                          ]).mainEnd(),
-                          Niku(NikuText("Information Leaflet").style(kBody03Semibold.copyWith(color: kNeutral02))),
-                        ]),).height(100).width(160),
-                      ),);
+                          NikuColumn([
+                            NikuRow([
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(Iconly.close_square)),
+                            ]).mainEnd(),
+                            Niku(NikuText("Information Leaflet").style(
+                                kBody03Semibold.copyWith(color: kNeutral02))),
+                          ]),
+                        ).height(100).width(160),
+                      ),
+                    );
                   },
                 );
               },
