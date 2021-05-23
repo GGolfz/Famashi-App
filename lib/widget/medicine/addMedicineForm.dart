@@ -50,15 +50,15 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
     return Form(
         key: _formKey,
         child: Niku(NikuColumn([
-          GestureDetector(
+          Niku(GestureDetector(
             onTap: () async {
               final file = await picker.getImage(source: ImageSource.gallery);
-              if(file != null) {
-              setState(() async {
+              if (file != null) {
                 medicineImage =
                     await MultipartFile.fromFile(file.path.toString());
-                medicineImageFile = new File(file.path);
-              });
+                setState(() {
+                  medicineImageFile = new File(file.path);
+                });
               } else {
                 medicineImage = null;
                 medicineImageFile = null;
@@ -79,8 +79,8 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
                 ),
               ),
             ]),
-          ),
-          kSizedBoxVerticalXXS,
+          )).center(),
+          kSizedBoxVerticalXS,
           NikuText("Medicine name").style(kBody04Medium).color(kPrimaryColor05),
           kSizedBoxVerticalXS,
           CustomTextField(
@@ -130,9 +130,9 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
           GestureDetector(
             onTap: () async {
               final file = await picker.getImage(source: ImageSource.gallery);
-              if(file != null) {
-              leafletImage =
-                  await MultipartFile.fromFile(file.path.toString());
+              if (file != null) {
+                leafletImage =
+                    await MultipartFile.fromFile(file.path.toString());
               } else {
                 leafletImage = null;
               }
@@ -152,7 +152,7 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
                   kSizedBoxHorizontalXS,
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: NikuText(leafletImage == null ? "Upload information leaflet" : "Information leaflet is already uploaded")
+                    child: NikuText("Upload information leaflet")
                         .style(kBody04Medium.copyWith(color: kPrimaryColor04)),
                   ),
                 ],
@@ -259,42 +259,36 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
             PrimaryButton(
                 text: "Add",
                 onPressed: () async {
-                  myList.map((e) {
+                  var temp = myList.map((e) {
                     switch (e) {
                       case "Before morning":
-                        {
-                          return 1;
-                        }
+                        return 0;
                       case "After morning":
-                        {
-                          return 2;
-                        }
+                        return 1;
                       case "Before noon":
-                        {
-                          return 3;
-                        }
+                        return 2;
                       case "After noon":
-                        {
-                          return 4;
-                        }
+                        return 3;
                       case "Before evening":
-                        {
-                          return 5;
-                        }
+                        return 4;
                       case "After evening":
-                        {
-                          return 6;
-                        }
+                        return 5;
                       case "Bedtime":
-                        {
-                          return 7;
-                        }
+                        return 6;
                     }
-                  });
-                  String reminder = myList.join(';');
-                  await Provider.of<MedicineProvider>(context,
-                          listen: false)
-                      .createMedicine(_medicineName.text,_description.text,int.parse(_totalRecieved.text),int.parse(_dosagePerDose.text),_medicineUnit.text,reminder, medicineImage, leafletImage);
+                  }).toList();
+                  temp.sort();
+                  String reminder = temp.join(',');
+                  await Provider.of<MedicineProvider>(context, listen: false)
+                      .createMedicine(
+                          _medicineName.text,
+                          _description.text,
+                          int.parse(_totalRecieved.text),
+                          int.parse(_dosagePerDose.text),
+                          _medicineUnit.text,
+                          reminder,
+                          medicineImage,
+                          leafletImage);
                   Navigator.of(context).pop();
                 }),
           ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),

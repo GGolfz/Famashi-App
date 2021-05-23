@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
-import 'package:famashi/widget/medicine/medicineInfo.dart';
 import 'package:flutter/material.dart';
 
 class Medicine {
@@ -47,8 +46,15 @@ class MedicineProvider with ChangeNotifier {
     }
   }
 
-  Future<void> createMedicine(String medicineName, String description, int totalAmount, int dosagePerDose, String medicineUnit,
-      String reminder, MultipartFile? medicineImage, MultipartFile? medicineLeaflet) async {
+  Future<void> createMedicine(
+      String medicineName,
+      String description,
+      int totalAmount,
+      int dosagePerDose,
+      String medicineUnit,
+      String reminder,
+      MultipartFile? medicineImage,
+      MultipartFile? medicineLeaflet) async {
     try {
       FormData formData = new FormData();
 
@@ -76,8 +82,14 @@ class MedicineProvider with ChangeNotifier {
   }
 
   Future<void> editMedicine(
-      String medicineName, String description, int totalAmount, int dosagePerDose, String medicineUnit,
-      List reminder, MultipartFile? medicineImage, MultipartFile? medicineLeaflet) async {
+      String medicineName,
+      String description,
+      int totalAmount,
+      int dosagePerDose,
+      String medicineUnit,
+      List reminder,
+      MultipartFile? medicineImage,
+      MultipartFile? medicineLeaflet) async {
     try {
       FormData formData = new FormData();
 
@@ -108,17 +120,17 @@ class MedicineProvider with ChangeNotifier {
     List<Medicine>? medicines = [];
     data.forEach((element) {
       medicines.add(Medicine(
-          medicineId: element["medicine_id"]??0,
-          medicineName: element["medicine_name"]??"",
-          description: element["description"]??"",
-          totalAmount: element["total_amount"]??0,
-          remainAmount: element["remain_amount"]??0,
-          medicineUnit: element["medicine_unit"]??"",
-          dosageAmount: element["dosage_amount"]??0,
-          dosageUnit: element["dosage_unit"]??"",
-          reminder: element["reminder"]??[],
+          medicineId: element["medicine_id"] ?? 0,
+          medicineName: element["medicine_name"] ?? "",
+          description: element["description"] ?? "",
+          totalAmount: element["total_amount"] ?? 0,
+          remainAmount: element["remain_amount"] ?? 0,
+          medicineUnit: element["medicine_unit"] ?? "",
+          dosageAmount: element["dosage_amount"] ?? 0,
+          dosageUnit: element["dosage_unit"] ?? "",
+          reminder: element["reminder"] ?? [],
           medicineImage: element["medicine_image"],
-          medicineLeaflet: element["medicine_leaflet"]??""));
+          medicineLeaflet: element["medicine_leaflet"] ?? ""));
     });
     return medicines;
   }
