@@ -5,8 +5,8 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/widget/utils/icon/CoolIcons.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
-import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/provider/medicineProvider.dart';
+import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -181,6 +181,57 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
             ),
           ).height(55).width(400),
         ),
+         kSizedBoxHorizontalS,
+                    Niku(NikuRow([
+                      Icon(
+                        Iconly.danger,
+                        color: kNeutral03,
+                        size: 25,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      NikuText("go to notification editing to change time.")
+                          .style(kBody05SemiBold.copyWith(color: kNeutral03))
+                    ]))
+                        .padding(EdgeInsets.only(top:30,bottom: 20)),
+                    Niku(
+                      PrimaryButton(
+                          text: "Add",
+                          onPressed: () async {
+                            myList.map((e){
+                              switch(e){
+                                case "Before morning":{
+                                  return 1;
+                                }
+                                case  "After morning":{
+                                  return 2;
+                                }
+                                case  "Before noon":{
+                                  return 3;
+                                }
+                                case   "After noon":{
+                                  return 4;
+                                }
+                                case   "Before evening":{
+                                  return 5;
+                                }
+                                case   "After evening":{
+                                  return 6;
+                                }
+                                case   "Bedtime":{
+                                  return 7;
+                                }
+                              }
+                            });
+                            String reminder = myList.join(';');
+                            await Provider.of<MedicineProvider>(context,
+                                    listen: false)
+                                .createMedicine(_medicineName.text,_description.text,int.parse(_totalRecieved.text),int.parse(_dosagePerDose.text),_medicineUnit.text,reminder, medicineImage, leafletImage);
+                            Navigator.of(context).pop();
+                            
+                          }),
+                    ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
         
         
     ]).crossStart())

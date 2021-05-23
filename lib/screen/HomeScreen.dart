@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context, listen: false).fetchUser();
-    
+    Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
     return TemplateLayout(
         child: Niku(
           Padding(
@@ -59,20 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 10.0,
-                    runSpacing: 4.0,
-                    children: [
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                      MedicineInfo(),
-                    ],
+                  child: Consumer<MedicineProvider>(
+        builder: (ctx, medicine, _) => Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 10.0,
+                      runSpacing: 4.0,
+                      children: medicine
+                  .medicines!.map((e) => MedicineInfo(medicineID: e.medicineId,medicineImage: e.medicineImage.toString(), medicineName: e.medicineName.toString(), remainAmount: e.remainAmount,) ).toList(),
+                    ),
                   ),
                 ),
               ),

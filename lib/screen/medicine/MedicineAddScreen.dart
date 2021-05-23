@@ -50,7 +50,7 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                             await MultipartFile.fromFile(file!.path.toString());
                       },
                       child: Stack(children: [
-                        MedicineImage(),
+                        MedicineImage(medicineImage: null,),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(55, 80, 55, 80),
                           child: Icon(
@@ -62,31 +62,7 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
                       ]),
                     ),
                     AddMedicineForm(),
-                    kSizedBoxHorizontalS,
-                    Niku(NikuRow([
-                      Icon(
-                        Iconly.danger,
-                        color: kNeutral03,
-                        size: 25,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      NikuText("go to notification editing to change time.")
-                          .style(kBody05SemiBold.copyWith(color: kNeutral03))
-                    ]).crossCenter())
-                        .padding(EdgeInsets.fromLTRB(
-                            kSizeM, kSizeS, kSizeM, kSizeS)),
-                    Niku(
-                      PrimaryButton(
-                          text: "Add",
-                          onPressed: () async {
-                            await Provider.of<MedicineProvider>(context,
-                                    listen: false)
-                                .createMedicine(medicineImage, leafletImage);
-                            Navigator.of(context).pop();
-                          }),
-                    ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
+                   
                   ],
                 ),
               ),

@@ -16,6 +16,7 @@ import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/config/color.dart';
 import 'package:famashi/widget/medicine/editMedicineForm.dart';
+import 'package:famashi/widget/medicine/addMedicineForm.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
 
 class MedicineEditScreen extends StatefulWidget {
@@ -50,22 +51,22 @@ class _MedicineEditScreenState extends State<MedicineEditScreen> {
                           medicineImage =
                               await MultipartFile.fromFile(file!.path.toString());
                         },
-                        child: MedicineImage(),
+                        child: MedicineImage(medicineImage: null,),
                         ),
                         EditMedicineForm(),
-                        kSizedBoxHorizontalS,
-                        Niku(NikuRow([
-                          Icon(Iconly.danger,color: kNeutral03,size: 25,),
-                          SizedBox(width: 10,),
-                          NikuText("go to notification etting to change time.").style(kBody05SemiBold.copyWith(color: kNeutral03))
-                        ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
+                        // kSizedBoxHorizontalS,
+                        // Niku(NikuRow([
+                        //   Icon(Iconly.danger,color: kNeutral03,size: 25,),
+                        //   SizedBox(width: 10,),
+                        //   NikuText("go to notification etting to change time.").style(kBody05SemiBold.copyWith(color: kNeutral03))
+                        // ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
       
-                        Niku(
-                          PrimaryButton(text: "Save", 
-                          onPressed:() async{
-                          await Provider.of<MedicineProvider>(context, listen: false).createMedicine(medicineImage, leafletImage);
-                          Navigator.of(context).pop();}),
-                        ).padding(EdgeInsets.fromLTRB(40,5,40,5)),               
+                        // Niku(
+                        //   PrimaryButton(text: "Save", 
+                        //   onPressed:() async{
+                        //   await Provider.of<MedicineProvider>(context, listen: false).createMedicine(_medicineName.text,_description.text,int.parse(_totalRecieved.text),int.parse(_dosagePerDose.text),_medicineUnit.text,reminder, medicineImage, leafletImage);
+                        //   Navigator.of(context).pop();}),
+                        // ).padding(EdgeInsets.fromLTRB(40,5,40,5)),               
 
                   ],
                 ),

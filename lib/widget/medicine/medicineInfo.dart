@@ -7,6 +7,11 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
 
 class MedicineInfo extends StatelessWidget {
+  final int medicineID;
+  final String? medicineImage;
+  final String medicineName;
+  final int remainAmount;
+  MedicineInfo({required this.medicineID,required this.medicineImage, required this.medicineName, required this.remainAmount });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,26 +22,26 @@ class MedicineInfo extends StatelessWidget {
         width: 149,
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, MedicineDetailScreen.routeName);
+            Navigator.pushNamed(context, MedicineDetailScreen.routeName,arguments:{"medicine_id": medicineID});
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MedicineImage(),
+              MedicineImage(medicineImage: medicineImage,),
               SizedBox(
                 height: 8,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Text(
-                  'Drug Name',
+                  medicineName,
                   style: kBody04Medium,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0, top: 1.0),
                 child: Text(
-                  'Remaining 12',
+                  'Remaining ' "${remainAmount.toString()}",
                   style: kBody05,
                 ),
               )
