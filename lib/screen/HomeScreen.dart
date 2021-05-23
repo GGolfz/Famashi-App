@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       spacing: 10.0,
                       runSpacing: 4.0,
                       children: medicine
-                  .medicines!.map((e) => MedicineInfo(medicineID: e.medicineId,medicineImage: e.medicineImage.toString(), medicineName: e.medicineName.toString(), remainAmount: e.remainAmount,) ).toList(),
+                  .medicines!.map((e) => MedicineInfo(medicineID: e.medicineId,medicineImage: e.medicineImage, medicineName: e.medicineName.toString(), remainAmount: e.remainAmount,) ).toList(),
                     ),
                   ),
                 ),
