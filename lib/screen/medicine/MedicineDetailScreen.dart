@@ -24,7 +24,7 @@ class MedicineDetailScreen extends StatelessWidget {
           NikuText("Remaining 12 out of 20")
               .style(kBody04Medium.copyWith(color: kNeutral03)),
           kSizedBoxVerticalM,
-          MedicineImage(),
+          MedicineImage(medicineImage: null,),
           kSizedBoxVerticalS,
           NikuText("Drug Name")
               .style(kBody04SemiBold.copyWith(color: kNeutral02)),
