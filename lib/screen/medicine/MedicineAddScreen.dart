@@ -26,11 +26,6 @@ class MedicineAddScreen extends StatefulWidget {
 }
 
 class _MedicineAddScreenState extends State<MedicineAddScreen> {
-  var medicineImage;
-  var leafletImage;
-
-  ImagePicker picker = ImagePicker();
-
   @override
   Widget build(BuildContext context) {
     return TemplateLayout(
@@ -39,32 +34,7 @@ class _MedicineAddScreenState extends State<MedicineAddScreen> {
           [
             Expanded(
               child: SingleChildScrollView(
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () async {
-                        final file =
-                            await picker.getImage(source: ImageSource.gallery);
-                        medicineImage =
-                            await MultipartFile.fromFile(file!.path.toString());
-                      },
-                      child: Stack(children: [
-                        MedicineImage(medicineImage: null,),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(55, 80, 55, 80),
-                          child: Icon(
-                            Iconly.image,
-                            color: kNeutral06,
-                            size: 40,
-                          ),
-                        ),
-                      ]),
-                    ),
-                    AddMedicineForm(),
-                   
-                  ],
-                ),
+                child: AddMedicineForm(),
               ),
             ),
           ],
