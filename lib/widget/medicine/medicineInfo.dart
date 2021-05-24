@@ -11,7 +11,11 @@ class MedicineInfo extends StatelessWidget {
   final String? medicineImage;
   final String medicineName;
   final int remainAmount;
-  MedicineInfo({required this.medicineID,required this.medicineImage, required this.medicineName, required this.remainAmount });
+  MedicineInfo(
+      {required this.medicineID,
+      required this.medicineImage,
+      required this.medicineName,
+      required this.remainAmount});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,12 +26,15 @@ class MedicineInfo extends StatelessWidget {
         width: 149,
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, MedicineDetailScreen.routeName,arguments:{"medicine_id": medicineID});
+            Navigator.of(context).pushNamed(MedicineDetailScreen.routeName,
+                arguments: {"medicine_id": medicineID.toString()});
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MedicineImage(medicineImage: medicineImage,),
+              MedicineImage(
+                medicineImage: medicineImage,
+              ),
               SizedBox(
                 height: 8,
               ),

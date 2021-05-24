@@ -86,17 +86,20 @@ class FamashiApp extends StatelessWidget {
                     token: auth.token, allergyList: prev?.allergyList);
               }),
           ChangeNotifierProxyProvider<AuthenticateProvider, MedicineProvider>(
-              create: (ctx) => MedicineProvider(token: null, medicines: []),
+              create: (ctx) => MedicineProvider(
+                  token: null, medicines: [], selectedMedicines: null),
               update: (ctx, auth, prev) {
                 return MedicineProvider(
-                    token: auth.token, medicines: prev?.medicines);
+                    token: auth.token,
+                    medicines: prev?.medicines,
+                    selectedMedicines: prev?.selectedMedicines);
               })
         ],
         child: MaterialApp(
             title: 'Famashi',
             theme: famashiTheme,
             onGenerateRoute: (setting) => NoAnimatedPageRoute(
-                builder: (BuildContext ctx) =>
-                    routes[setting.name.toString()]!)));
+                builder: (BuildContext ctx) => routes[setting.name.toString()]!,
+                settings: setting)));
   }
 }

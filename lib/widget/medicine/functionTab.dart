@@ -1,9 +1,11 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/screen/medicine/MedicineEditScreen.dart';
 import 'package:famashi/widget/utils/deleteDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
+import 'package:provider/provider.dart';
 
 class FunctionTab extends StatelessWidget {
   final String medicineId;
@@ -22,8 +24,11 @@ class FunctionTab extends StatelessWidget {
               context: context,
               builder: (context) => DeleteDialog(
                   text: "medicine",
-                  onDelete: () {
-                    print("Delete medicine $medicineId");
+                  onDelete: () async {
+                    await Provider.of<MedicineProvider>(context, listen: false)
+                        .deleteMedicine(medicineId);
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   }),
             );
           },
