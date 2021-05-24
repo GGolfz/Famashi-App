@@ -1,14 +1,9 @@
-import 'package:famashi/config/color.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
 import 'package:famashi/widget/layout/template.dart';
-import 'package:famashi/widget/utils/form/customSelector.dart';
-import 'package:famashi/widget/utils/icon/CoolIcons.dart';
-import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:flutter/material.dart';
-import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context, listen: false).fetchUser();
     Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
@@ -47,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ).style(kBody03),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 25.0, left: 10.0),
+                padding:
+                    const EdgeInsets.only(top: 25.0, left: 10.0, bottom: 5.0),
                 child: NikuText(
                   'My Medication',
                 ).style(kBody01Semibold),
@@ -56,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Consumer<MedicineProvider>(
                     builder: (ctx, medicine, _) => Wrap(
-                      alignment: WrapAlignment.center,
+                      alignment: WrapAlignment.start,
                       spacing: 10.0,
                       runSpacing: 4.0,
                       children: medicine.medicines!
