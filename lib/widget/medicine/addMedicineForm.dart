@@ -4,6 +4,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/utils/format.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/widget/utils/icon/CoolIcons.dart';
@@ -259,24 +260,7 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
             PrimaryButton(
                 text: "Add",
                 onPressed: () async {
-                  var temp = myList.map((e) {
-                    switch (e) {
-                      case "Before morning":
-                        return 0;
-                      case "After morning":
-                        return 1;
-                      case "Before noon":
-                        return 2;
-                      case "After noon":
-                        return 3;
-                      case "Before evening":
-                        return 4;
-                      case "After evening":
-                        return 5;
-                      case "Bedtime":
-                        return 6;
-                    }
-                  }).toList();
+                  var temp = myList.map((e) => formatTimeTypeToInt(e)).toList();
                   temp.sort();
                   String reminder = temp.join(',');
                   await Provider.of<MedicineProvider>(context, listen: false)
