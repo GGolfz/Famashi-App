@@ -51,7 +51,6 @@ class MedicineProvider with ChangeNotifier {
       final response = await Dio().get(apiEndpoint + '/medicines/$medicineID',
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
-      print(response.data);
       selectedMedicines = modifyResponseSingle(
           response.data["medicine"], response.data["reminder"]);
       notifyListeners();

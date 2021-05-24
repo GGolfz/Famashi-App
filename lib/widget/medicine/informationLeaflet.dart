@@ -10,12 +10,8 @@ import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 
 class InformationLeaflet extends StatelessWidget {
-  final File? leafletImageFile;
-  final bool fromFile;
   final String? leafletImage;
-  InformationLeaflet({required this.leafletImage,
-      this.fromFile = false,
-      this.leafletImageFile});
+  InformationLeaflet({required this.leafletImage});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,26 +51,17 @@ class InformationLeaflet extends StatelessWidget {
                         ]).mainEnd(),
                         Niku(NikuText("Information Leaflet").style(
                             kBody03Semibold.copyWith(color: kNeutral02))),
-                            kSizedBoxVerticalM,
+                        kSizedBoxVerticalM,
                         Container(
                           width: 230.0,
                           height: 350.0,
                           decoration: BoxDecoration(
-                            image: fromFile
-                                ? DecorationImage(
-                                    image: FileImage(leafletImageFile!))
-                                : (leafletImage == null
-                                    ? DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/medicine-default.png'),
-                                      )
-                                    : DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            'http://13.76.251.165:3000/uploads/leaflet_image/' +
-                                                leafletImage.toString()),
-                                      )),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'http://13.76.251.165:3000/uploads/medicine_leaflet/' +
+                                      leafletImage.toString()),
+                            ),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
                             color: kNeutral04,
