@@ -86,10 +86,12 @@ class MedicineProvider with ChangeNotifier {
         formData.files.add(MapEntry('medicine_leaflet', medicineLeaflet));
         formData.fields.add(MapEntry('upload_leaflet', 'true'));
       }
-      await Dio().post(apiEndpoint + '/medicines',
+      final response = await Dio().post(apiEndpoint + '/medicines',
           data: formData,
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
+      medicines = modifyResponse(response.data);
+      notifyListeners();
     } on DioError catch (error) {
       print(error);
     }
@@ -110,7 +112,7 @@ class MedicineProvider with ChangeNotifier {
       formData.fields.add(MapEntry("medicine_name", medicineName));
       formData.fields.add(MapEntry("description", description));
       formData.fields.add(MapEntry("total_amount", totalAmount.toString()));
-      formData.fields.add(MapEntry("remain_amount", dosagePerDose.toString()));
+      formData.fields.add(MapEntry("dosage_amount", dosagePerDose.toString()));
       formData.fields.add(MapEntry("medicine_unit", medicineUnit));
       formData.fields.add(MapEntry("reminder", reminder.toString()));
       if (medicineImage != null) {
@@ -121,10 +123,12 @@ class MedicineProvider with ChangeNotifier {
         formData.files.add(MapEntry('medicine_leaflet', medicineLeaflet));
         formData.fields.add(MapEntry('upload_leaflet', 'true'));
       }
-      await Dio().patch(apiEndpoint + '/medicines/13',
+      final response = await Dio().patch(apiEndpoint + '/medicines/13',
           data: formData,
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
+      medicines = modifyResponse(response.data);
+      notifyListeners();
     } on DioError catch (error) {
       print(error);
     }
