@@ -96,7 +96,7 @@ class FamashiApp extends StatelessWidget {
             title: 'Famashi',
             theme: famashiTheme,
             onGenerateRoute: (setting) => NoAnimatedPageRoute(
-                builder: (BuildContext ctx) =>
-                    routes[setting.name.toString()]!)));
+                builder: (BuildContext ctx) => routes[setting.name.toString()]!,
+                settings: setting)));
   }
 }

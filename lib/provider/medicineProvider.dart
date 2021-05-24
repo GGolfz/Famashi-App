@@ -44,21 +44,6 @@ class MedicineProvider with ChangeNotifier {
       print(error);
     }
   }
-  // Future<void> fetchMedicinesDetail(int medicineID) async {
-  //   try {
-  //     if(medicineID == int.parse(modifyResponse(medicineID).toString())){
-
-  //     }
-  //     final response = await Dio().get(apiEndpoint + '/medicines',
-  //         options: Options(
-  //             headers: {"Authorization": "Bearer " + token.toString()}));
-  //     medicines = modifyResponse(response.data);
-  //     // medicines.map((e) => e.medicineId);
-  //     notifyListeners();
-  //   } on DioError catch (error) {
-  //     print(error);
-  //   }
-  // }
 
   Future<void> createMedicine(
       String medicineName,
@@ -130,11 +115,24 @@ class MedicineProvider with ChangeNotifier {
     }
   }
 
+  Future<void> deleteMedicine(String medicineID) async {
+    try {
+      final response = await Dio().delete(
+          apiEndpoint + '/medicines/$medicineID',
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      medicines = modifyResponse(response.data);
+      notifyListeners();
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
   List<Medicine> modifyResponse(List<dynamic> data) {
     List<Medicine>? medicines = [];
     data.forEach((element) {
       medicines.add(Medicine(
-          medicineId: element["medicine_id"] ?? 0,
+          medicineId: element["id"] ?? 0,
           medicineName: element["medicine_name"] ?? "",
           description: element["description"] ?? "",
           totalAmount: element["total_amount"] ?? 0,

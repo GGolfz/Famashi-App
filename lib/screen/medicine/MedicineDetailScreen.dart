@@ -1,17 +1,9 @@
-import 'package:famashi/config/color.dart';
-import 'package:famashi/config/constant.dart';
-import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/medicineProvider.dart';
-import 'package:famashi/widget/medicine/informationLeaflet.dart';
 import 'package:famashi/widget/medicine/medicineDetail.dart';
-import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
-import 'package:niku/widget/text.dart';
-import 'package:famashi/widget/medicine/functionTab.dart';
-import 'package:famashi/widget/medicine/medicineImage.dart';
 import 'package:provider/provider.dart';
 
 class MedicineDetailScreen extends StatelessWidget {
@@ -19,27 +11,31 @@ class MedicineDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
     return TemplateLayout(
       child: Niku(NikuColumn([
         Expanded(
           child: SingleChildScrollView(
-            child: Consumer<MedicineProvider>(
-              builder: (ctx, medicine, _) => Wrap(
-                children: medicine.medicines!
-                .map((e) => MedicineDetail(
+            child: Consumer<MedicineProvider>(builder: (ctx, medicine, _) {
+              Medicine? e = medicine.medicines?.firstWhere((element) =>
+                  element.medicineId ==
+                  int.parse(routeArgs!["medicine_id"].toString()));
+              if (e != null)
+                return MedicineDetail(
                   medicineID: e.medicineId,
                   medicineName: e.medicineName.toString(),
                   description: e.description.toString(),
+                  medicineImage: e.medicineImage,
                   totalReceived: e.totalAmount,
                   dosagePerDose: e.dosageAmount,
                   medicineUnit: e.medicineUnit.toString(),
                   reminder: e.reminder.toString(),
                   remainAmount: e.remainAmount,
                   leafletImage: e.medicineLeaflet,
-                ),
-                ).toList(),
-              ),
-            ),
+                );
+              return Niku();
+            }),
           ),
         ),
       ]).crossAxisAlignment(CrossAxisAlignment.stretch)),
