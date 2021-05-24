@@ -22,12 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // ScrollController _scrollController;
   @override
-  void initState() {
-    // _scrollController = new ScrollController();
-    // super.initState();
-  }
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context, listen: false).fetchUser();
     Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
