@@ -33,12 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Consumer<UserProvider>(
-                builder: (ctx, user, _) =>
-                    Padding(
-                      padding: const EdgeInsets.only( left: 10.0),
-                      child: NikuText("${user.user!.firstname} ${user.user!.lastname}")
+                builder: (ctx, user, _) => Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child:
+                      NikuText("${user.user!.firstname} ${user.user!.lastname}")
                           .style(kTitle),
-                    ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0, left: 10.0),
@@ -55,12 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Consumer<MedicineProvider>(
-        builder: (ctx, medicine, _) => Wrap(
+                    builder: (ctx, medicine, _) => Wrap(
                       alignment: WrapAlignment.center,
                       spacing: 10.0,
                       runSpacing: 4.0,
-                      children: medicine
-                  .medicines!.map((e) => MedicineInfo(medicineID: e.medicineId,medicineImage: e.medicineImage, medicineName: e.medicineName.toString(), remainAmount: e.remainAmount,) ).toList(),
+                      children: medicine.medicines!
+                          .map((e) => MedicineInfo(
+                                medicineID: e.medicineId,
+                                medicineImage: e.medicineImage,
+                                medicineName: e.medicineName.toString(),
+                                remainAmount: e.remainAmount,
+                              ))
+                          .toList(),
                     ),
                   ),
                 ),

@@ -22,11 +22,24 @@ class MedicineDetailScreen extends StatelessWidget {
     return TemplateLayout(
       child: Niku(NikuColumn([
         Expanded(
-          child:
-          SingleChildScrollView(
-            child: 
-                MedicineDetail(),
-             
+          child: SingleChildScrollView(
+            child: Consumer<MedicineProvider>(
+              builder: (ctx, medicine, _) => Wrap(
+                children: medicine.medicines!
+                .map((e) => MedicineDetail(
+                  medicineID: e.medicineId,
+                  medicineName: e.medicineName.toString(),
+                  description: e.description.toString(),
+                  totalReceived: e.totalAmount,
+                  dosagePerDose: e.dosageAmount,
+                  medicineUnit: e.medicineUnit.toString(),
+                  reminder: e.reminder.toString(),
+                  remainAmount: e.remainAmount,
+                  leafletImage: e.medicineLeaflet,
+                ),
+                ).toList(),
+              ),
+            ),
           ),
         ),
       ]).crossAxisAlignment(CrossAxisAlignment.stretch)),

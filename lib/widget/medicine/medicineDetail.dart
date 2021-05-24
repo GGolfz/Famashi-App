@@ -9,21 +9,33 @@ import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/text.dart';
 
 class MedicineDetail extends StatelessWidget {
+  final int medicineID;
+  final String medicineName;
+  final int remainAmount;
+  final String description;
+  final int totalReceived;
+  final int dosagePerDose;
+  final String medicineUnit;
+  final String? reminder;
+  final String? leafletImage;
+  MedicineDetail({required this.medicineID, required this.medicineName, required this.remainAmount,
+  required this.description, required this.totalReceived, required this.dosagePerDose, required this.medicineUnit, required this.reminder
+  ,required this.leafletImage});
   @override
   Widget build(BuildContext context) {
     return NikuColumn(
       [
         FunctionTab(medicineId: "1"),
-        NikuText("Remaining 12 out of 20")
+        NikuText('Remaining ' "${remainAmount.toString()}" ' out of ' "${totalReceived.toString()}")
               .style(kBody04Medium.copyWith(color: kNeutral03)),
           kSizedBoxVerticalM,
           MedicineImage(medicineImage: null,),
           kSizedBoxVerticalS,
-          NikuText("Drug Name")
+          NikuText(medicineName)
               .style(kBody04SemiBold.copyWith(color: kNeutral02)),
           kSizedBoxVerticalM,
           Padding(
-            padding: const EdgeInsets.only(left: 40.0),
+            padding: const EdgeInsets.only(left: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -31,34 +43,37 @@ class MedicineDetail extends StatelessWidget {
                 NikuText("Description")
                     .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
                 kSizedBoxVerticalXS,
-                NikuText("Lorem ipsum dolor sit amet consectetur")
+                NikuText(description)
                     .style(kBody05Medium.copyWith(color: kNeutral03)),
                     kSizedBoxVerticalS,
                 NikuText("Total Received")
                     .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
                 kSizedBoxVerticalXS,
-                NikuText("amount")
+                NikuText(totalReceived.toString())
                     .style(kBody05Medium.copyWith(color: kNeutral03)),
                      kSizedBoxVerticalS,
                 NikuText("Dosage per dose")
                     .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
                 kSizedBoxVerticalXS,
-                NikuText("amount")
+                NikuText(dosagePerDose.toString())
                     .style(kBody05Medium.copyWith(color: kNeutral03)),
                      kSizedBoxVerticalS,
                 NikuText("Medicine unit")
                     .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
                 kSizedBoxVerticalXS,
-                NikuText("pill")
+                NikuText(medicineUnit)
                     .style(kBody05Medium.copyWith(color: kNeutral03)),
                      kSizedBoxVerticalS,
                 NikuText("Set medicine reminder")
                     .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
                 kSizedBoxVerticalXS,
-                NikuText("before morning")
+                NikuText(reminder.toString())
                     .style(kBody05Medium.copyWith(color: kNeutral03)),
-                    kSizedBoxVerticalXS,
-                InformationLeaflet(),
+                    kSizedBoxVerticalM,
+                Padding(
+                  padding: const EdgeInsets.only(right:25 ),
+                  child: Container(child: InformationLeaflet(leafletImage: leafletImage)),
+                ),
               ],
             ),
           )

@@ -44,6 +44,21 @@ class MedicineProvider with ChangeNotifier {
       print(error);
     }
   }
+  // Future<void> fetchMedicinesDetail(int medicineID) async {
+  //   try {
+  //     if(medicineID == int.parse(modifyResponse(medicineID).toString())){
+
+  //     }
+  //     final response = await Dio().get(apiEndpoint + '/medicines',
+  //         options: Options(
+  //             headers: {"Authorization": "Bearer " + token.toString()}));
+  //     medicines = modifyResponse(response.data);
+  //     // medicines.map((e) => e.medicineId);
+  //     notifyListeners();
+  //   } on DioError catch (error) {
+  //     print(error);
+  //   }
+  // }
 
   Future<void> createMedicine(
       String medicineName,
