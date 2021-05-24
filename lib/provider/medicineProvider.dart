@@ -75,7 +75,7 @@ class MedicineProvider with ChangeNotifier {
       formData.fields.add(MapEntry("medicine_name", medicineName));
       formData.fields.add(MapEntry("description", description));
       formData.fields.add(MapEntry("total_amount", totalAmount.toString()));
-      formData.fields.add(MapEntry("remain_amount", dosagePerDose.toString()));
+      formData.fields.add(MapEntry("dosage_amount", dosagePerDose.toString()));
       formData.fields.add(MapEntry("medicine_unit", medicineUnit));
       formData.fields.add(MapEntry("reminder", reminder.toString()));
       if (medicineImage != null) {
