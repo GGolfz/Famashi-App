@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
+import 'package:famashi/utils/format.dart';
 import 'package:flutter/material.dart';
 
 class Medicine {
@@ -10,8 +11,7 @@ class Medicine {
   final int remainAmount;
   final String? medicineUnit;
   final int dosageAmount;
-  final String? dosageUnit;
-  final List<int> reminder;
+  final List<String> reminder;
   final String? medicineImage;
   final String? medicineLeaflet;
   Medicine(
@@ -22,7 +22,6 @@ class Medicine {
       required this.remainAmount,
       required this.medicineUnit,
       required this.dosageAmount,
-      required this.dosageUnit,
       required this.reminder,
       required this.medicineImage,
       required this.medicineLeaflet});
@@ -31,7 +30,9 @@ class Medicine {
 class MedicineProvider with ChangeNotifier {
   String? token;
   List<Medicine>? medicines;
-  MedicineProvider({required this.token, this.medicines});
+  Medicine? selectedMedicines;
+  MedicineProvider(
+      {required this.token, this.medicines, this.selectedMedicines});
 
   Future<void> fetchMedicines() async {
     try {
@@ -39,6 +40,20 @@ class MedicineProvider with ChangeNotifier {
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
       medicines = modifyResponse(response.data);
+      notifyListeners();
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> fetchMedicineById(String medicineID) async {
+    try {
+      final response = await Dio().get(apiEndpoint + '/medicines/$medicineID',
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      print(response.data);
+      selectedMedicines = modifyResponseSingle(
+          response.data["medicine"], response.data["reminder"]);
       notifyListeners();
     } on DioError catch (error) {
       print(error);
@@ -128,6 +143,25 @@ class MedicineProvider with ChangeNotifier {
     }
   }
 
+  Medicine? modifyResponseSingle(
+      Map<String, dynamic> medicineData, List<dynamic> reminder) {
+    List<String> reminders = [];
+    reminder.forEach((element) {
+      reminders.add(formatTimeTypeToString(element["time_type"]).toString());
+    });
+    return Medicine(
+        medicineId: medicineData["id"] ?? 0,
+        medicineName: medicineData["medicine_name"] ?? "",
+        description: medicineData["description"] ?? "",
+        totalAmount: medicineData["total_amount"] ?? 0,
+        remainAmount: medicineData["remain_amount"] ?? 0,
+        medicineUnit: medicineData["medicine_unit"] ?? "",
+        dosageAmount: medicineData["dosage_amount"] ?? 0,
+        reminder: reminders,
+        medicineImage: medicineData["medicine_image"],
+        medicineLeaflet: medicineData["medicine_leaflet"]);
+  }
+
   List<Medicine> modifyResponse(List<dynamic> data) {
     List<Medicine>? medicines = [];
     data.forEach((element) {
@@ -139,10 +173,9 @@ class MedicineProvider with ChangeNotifier {
           remainAmount: element["remain_amount"] ?? 0,
           medicineUnit: element["medicine_unit"] ?? "",
           dosageAmount: element["dosage_amount"] ?? 0,
-          dosageUnit: element["dosage_unit"] ?? "",
-          reminder: element["reminder"] ?? [],
+          reminder: [],
           medicineImage: element["medicine_image"],
-          medicineLeaflet: element["medicine_leaflet"] ?? ""));
+          medicineLeaflet: element["medicine_leaflet"]));
     });
     return medicines;
   }

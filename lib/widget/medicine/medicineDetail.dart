@@ -17,7 +17,7 @@ class MedicineDetail extends StatelessWidget {
   final int totalReceived;
   final int dosagePerDose;
   final String medicineUnit;
-  final String? reminder;
+  final List<String> reminder;
   final String? leafletImage;
   MedicineDetail(
       {required this.medicineID,
@@ -76,17 +76,18 @@ class MedicineDetail extends StatelessWidget {
             NikuText(medicineUnit)
                 .style(kBody05Medium.copyWith(color: kNeutral03)),
             kSizedBoxVerticalS,
-            NikuText("Set medicine reminder")
+            NikuText("Medicine reminder")
                 .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
             kSizedBoxVerticalXS,
-            NikuText(reminder.toString())
+            NikuText(reminder.join(',\n'))
                 .style(kBody05Medium.copyWith(color: kNeutral03)),
             kSizedBoxVerticalM,
-            Padding(
-              padding: const EdgeInsets.only(right: 25),
-              child: Container(
-                  child: InformationLeaflet(leafletImage: leafletImage)),
-            ),
+            if (leafletImage != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: Container(
+                    child: InformationLeaflet(leafletImage: leafletImage)),
+              ),
           ],
         ),
       )

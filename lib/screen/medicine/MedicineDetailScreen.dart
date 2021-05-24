@@ -10,17 +10,17 @@ class MedicineDetailScreen extends StatelessWidget {
   static String routeName = '/medicine-detail';
   @override
   Widget build(BuildContext context) {
-    Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
+
+    Provider.of<MedicineProvider>(context, listen: false)
+        .fetchMedicineById(routeArgs!["medicine_id"].toString());
     return TemplateLayout(
       child: Niku(NikuColumn([
         Expanded(
           child: SingleChildScrollView(
             child: Consumer<MedicineProvider>(builder: (ctx, medicine, _) {
-              Medicine? e = medicine.medicines?.firstWhere((element) =>
-                  element.medicineId ==
-                  int.parse(routeArgs!["medicine_id"].toString()));
+              Medicine? e = medicine.selectedMedicines;
               if (e != null)
                 return MedicineDetail(
                   medicineID: e.medicineId,
@@ -30,7 +30,7 @@ class MedicineDetailScreen extends StatelessWidget {
                   totalReceived: e.totalAmount,
                   dosagePerDose: e.dosageAmount,
                   medicineUnit: e.medicineUnit.toString(),
-                  reminder: e.reminder.toString(),
+                  reminder: e.reminder,
                   remainAmount: e.remainAmount,
                   leafletImage: e.medicineLeaflet,
                 );
