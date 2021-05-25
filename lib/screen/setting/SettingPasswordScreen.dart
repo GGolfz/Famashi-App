@@ -1,6 +1,7 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
@@ -69,9 +70,13 @@ class SettingPasswordScreen extends StatelessWidget {
           await Provider.of<UserProvider>(context, listen: false)
               .changePassword(currentPassword, newPassword);
         } on ErrorResponse catch (error) {
-          showDialog(
-              context: context,
-              builder: (ctx) => ErrorDialog(error: error.toString()));
+          if (error.toString() == "Unauthorize") {
+            Provider.of<AuthenticateProvider>(context, listen: false).logout();
+          } else {
+            showDialog(
+                context: context,
+                builder: (ctx) => ErrorDialog(error: error.toString()));
+          }
         }
       }
     }

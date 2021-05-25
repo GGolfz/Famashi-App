@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/screen/medicine/MedicineEditScreen.dart';
 import 'package:famashi/utils/error.dart';
@@ -35,10 +36,16 @@ class FunctionTab extends StatelessWidget {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     } on ErrorResponse catch (error) {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) =>
-                              ErrorDialog(error: error.toString()));
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
                     }
                   }),
             );

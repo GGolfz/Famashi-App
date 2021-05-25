@@ -86,17 +86,10 @@ class FamashiDrawer extends StatelessWidget {
                       .color(kNeutral02),
                   horizontalTitleGap: 0,
                   onTap: () async {
-                    try {
-                      await Provider.of<AuthenticateProvider>(context,
-                              listen: false)
-                          .logout();
-                      Navigator.of(context).pushNamed('/');
-                    } on ErrorResponse catch (error) {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) =>
-                              ErrorDialog(error: error.toString()));
-                    }
+                    await Provider.of<AuthenticateProvider>(context,
+                            listen: false)
+                        .logout();
+                    Navigator.of(context).pushNamed('/');
                   })
             ])));
   }

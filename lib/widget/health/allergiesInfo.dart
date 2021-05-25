@@ -2,6 +2,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/health/detailTile.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
@@ -55,10 +56,16 @@ class AllergiesInfo extends StatelessWidget {
                                           .allergyList!.report[index]["id"]);
                                   Navigator.of(ctx).pop(true);
                                 } on ErrorResponse catch (error) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (ctx) =>
-                                          ErrorDialog(error: error.toString()));
+                                  if (error.toString() == "Unauthorize") {
+                                    Provider.of<AuthenticateProvider>(context,
+                                            listen: false)
+                                        .logout();
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (ctx) => ErrorDialog(
+                                            error: error.toString()));
+                                  }
                                 }
                               }));
                     },

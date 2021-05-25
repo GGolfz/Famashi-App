@@ -22,7 +22,7 @@ class MedicineInfo extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: Container(
         color: kNeutralWhite,
-        height: 252,
+        height: 260,
         width: 149,
         child: GestureDetector(
           onTap: () {

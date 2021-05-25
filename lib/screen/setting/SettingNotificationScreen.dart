@@ -1,5 +1,6 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
@@ -156,10 +157,16 @@ class SettingNotificationScreen extends StatelessWidget {
                         "BEDTIME": _bedtime.text,
                       });
                     } on ErrorResponse catch (error) {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) =>
-                              ErrorDialog(error: error.toString()));
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
                     }
                   })
             ]));

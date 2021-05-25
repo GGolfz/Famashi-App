@@ -4,6 +4,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/utils/format.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
@@ -312,10 +313,16 @@ class _MedicineFormState extends State<MedicineForm> {
                               medicineImage,
                               leafletImage);
                     } on ErrorResponse catch (error) {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) =>
-                              ErrorDialog(error: error.toString()));
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
                     }
                   } else if (widget.type == "Edit") {
                     try {
@@ -333,10 +340,16 @@ class _MedicineFormState extends State<MedicineForm> {
                               medicineImage,
                               leafletImage);
                     } on ErrorResponse catch (error) {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) =>
-                              ErrorDialog(error: error.toString()));
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
                     }
                   }
                   Navigator.of(context).pop();

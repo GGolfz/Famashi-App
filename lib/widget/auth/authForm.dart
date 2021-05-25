@@ -194,9 +194,19 @@ class _AuthFormState extends State<AuthForm> {
               await Provider.of<AuthenticateProvider>(context, listen: false)
                   .register(email, password, firstName, lastName);
             } on ErrorResponse catch (error) {
-              showDialog(
-                  context: context,
-                  builder: (ctx) => ErrorDialog(error: error.toString()));
+              if (error.toString() == "Unauthorize") {
+                Provider.of<AuthenticateProvider>(context, listen: false)
+                    .logout();
+              } else {
+                if (error.toString() == "This email is already taken") {
+                  setState(() {
+                    _page = 0;
+                  });
+                }
+                showDialog(
+                    context: context,
+                    builder: (ctx) => ErrorDialog(error: error.toString()));
+              }
             }
           }
         } else if (widget.authType == AuthType.LogIn) {
@@ -204,9 +214,14 @@ class _AuthFormState extends State<AuthForm> {
             await Provider.of<AuthenticateProvider>(context, listen: false)
                 .login(email, password);
           } on ErrorResponse catch (error) {
-            showDialog(
-                context: context,
-                builder: (ctx) => ErrorDialog(error: error.toString()));
+            if (error.toString() == "Unauthorize") {
+              Provider.of<AuthenticateProvider>(context, listen: false)
+                  .logout();
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (ctx) => ErrorDialog(error: error.toString()));
+            }
           }
         }
       }
