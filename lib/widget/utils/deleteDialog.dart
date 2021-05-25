@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/utils/cancelButton.dart';
 import 'package:famashi/widget/utils/deleteButton.dart';
@@ -17,8 +18,9 @@ class DeleteDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 16,
       title: NikuText("Are you sure to delete this $text?")
-          .style(kBody02Semibold)
+          .style(kBody02Medium)
           .alignCenter(),
+      contentPadding: EdgeInsets.all(kSizeS * 1.7),
       content: NikuRow([
         Flexible(flex: 1, child: CancelButton()),
         Flexible(
