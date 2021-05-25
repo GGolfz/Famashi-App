@@ -25,6 +25,20 @@ class Medicine {
       required this.reminder,
       required this.medicineImage,
       required this.medicineLeaflet});
+
+  static get base {
+    return Medicine(
+        medicineId: 0,
+        medicineName: "",
+        description: "",
+        totalAmount: 0,
+        remainAmount: 0,
+        medicineUnit: "",
+        dosageAmount: 0,
+        reminder: [],
+        medicineImage: null,
+        medicineLeaflet: null);
+  }
 }
 
 class MedicineProvider with ChangeNotifier {
@@ -80,10 +94,14 @@ class MedicineProvider with ChangeNotifier {
       if (medicineImage != null) {
         formData.files.add(MapEntry('medicine_image', medicineImage));
         formData.fields.add(MapEntry('upload_image', 'true'));
+      } else {
+        formData.fields.add(MapEntry('upload_image', 'false'));
       }
       if (medicineLeaflet != null) {
         formData.files.add(MapEntry('medicine_leaflet', medicineLeaflet));
         formData.fields.add(MapEntry('upload_leaflet', 'true'));
+      } else {
+        formData.fields.add(MapEntry('upload_leaflet', 'false'));
       }
       final response = await Dio().post(apiEndpoint + '/medicines',
           data: formData,
@@ -97,12 +115,14 @@ class MedicineProvider with ChangeNotifier {
   }
 
   Future<void> editMedicine(
+      String medicineId,
       String medicineName,
       String description,
       int totalAmount,
+      int remainAmount,
       int dosagePerDose,
       String medicineUnit,
-      List reminder,
+      String reminder,
       MultipartFile? medicineImage,
       MultipartFile? medicineLeaflet) async {
     try {
@@ -111,25 +131,31 @@ class MedicineProvider with ChangeNotifier {
       formData.fields.add(MapEntry("medicine_name", medicineName));
       formData.fields.add(MapEntry("description", description));
       formData.fields.add(MapEntry("total_amount", totalAmount.toString()));
+      formData.fields.add(MapEntry("remain_amount", remainAmount.toString()));
       formData.fields.add(MapEntry("dosage_amount", dosagePerDose.toString()));
       formData.fields.add(MapEntry("medicine_unit", medicineUnit));
       formData.fields.add(MapEntry("reminder", reminder.toString()));
       if (medicineImage != null) {
         formData.files.add(MapEntry('medicine_image', medicineImage));
         formData.fields.add(MapEntry('upload_image', 'true'));
+      } else {
+        formData.fields.add(MapEntry('upload_image', 'false'));
       }
       if (medicineLeaflet != null) {
         formData.files.add(MapEntry('medicine_leaflet', medicineLeaflet));
         formData.fields.add(MapEntry('upload_leaflet', 'true'));
+      } else {
+        formData.fields.add(MapEntry('upload_leaflet', 'false'));
       }
-      final response = await Dio().patch(apiEndpoint + '/medicines/13',
+      final response = await Dio().patch(apiEndpoint + '/medicines/$medicineId',
           data: formData,
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
       medicines = modifyResponse(response.data);
+      fetchMedicineById(medicineId);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      print(error.response!.data);
     }
   }
 

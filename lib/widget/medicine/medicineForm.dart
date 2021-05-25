@@ -18,14 +18,18 @@ import 'package:niku/widget/base.dart';
 import 'package:niku/widget/widget.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 
-class AddMedicineForm extends StatefulWidget {
+class MedicineForm extends StatefulWidget {
+  final Medicine medicine;
+  final String type;
+  MedicineForm({required this.medicine, required this.type});
   @override
-  State<AddMedicineForm> createState() => _AddMedicineFormState();
+  State<MedicineForm> createState() => _MedicineFormState();
 }
 
-class _AddMedicineFormState extends State<AddMedicineForm> {
+class _MedicineFormState extends State<MedicineForm> {
   var medicineImage;
   var leafletImage;
+  var medicineImageDefault;
   var medicineImageFile;
 
   ImagePicker picker = ImagePicker();
@@ -38,6 +42,7 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
     "After evening",
     "Bedtime"
   ];
+
   var myList = [];
   final _medicineName = TextEditingController();
   final _description = TextEditingController();
@@ -45,6 +50,18 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
   final _dosagePerDose = TextEditingController();
   final _medicineUnit = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    _medicineName.text = widget.medicine.medicineName.toString();
+    _description.text = widget.medicine.description.toString();
+    _totalRecieved.text = widget.medicine.totalAmount.toString();
+    _dosagePerDose.text = widget.medicine.dosageAmount.toString();
+    _medicineUnit.text = widget.medicine.medicineUnit.toString();
+    myList = widget.medicine.reminder;
+    medicineImageDefault = widget.medicine.medicineImage;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +84,7 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
             },
             child: Stack(children: [
               MedicineImage(
-                medicineImage: null,
+                medicineImage: medicineImageDefault,
                 medicineImageFile: medicineImageFile,
                 fromFile: medicineImageFile != null,
               ),
@@ -258,21 +275,36 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
           ])).padding(EdgeInsets.only(top: 30, bottom: 20)),
           Niku(
             PrimaryButton(
-                text: "Add",
+                text: "${widget.type}",
                 onPressed: () async {
                   var temp = myList.map((e) => formatTimeTypeToInt(e)).toList();
                   temp.sort();
                   String reminder = temp.join(',');
-                  await Provider.of<MedicineProvider>(context, listen: false)
-                      .createMedicine(
-                          _medicineName.text,
-                          _description.text,
-                          int.parse(_totalRecieved.text),
-                          int.parse(_dosagePerDose.text),
-                          _medicineUnit.text,
-                          reminder,
-                          medicineImage,
-                          leafletImage);
+                  if (widget.type == "Add") {
+                    await Provider.of<MedicineProvider>(context, listen: false)
+                        .createMedicine(
+                            _medicineName.text,
+                            _description.text,
+                            int.parse(_totalRecieved.text),
+                            int.parse(_dosagePerDose.text),
+                            _medicineUnit.text,
+                            reminder,
+                            medicineImage,
+                            leafletImage);
+                  } else if (widget.type == "Edit") {
+                    await Provider.of<MedicineProvider>(context, listen: false)
+                        .editMedicine(
+                            widget.medicine.medicineId.toString(),
+                            _medicineName.text,
+                            _description.text,
+                            int.parse(_totalRecieved.text),
+                            widget.medicine.remainAmount,
+                            int.parse(_dosagePerDose.text),
+                            _medicineUnit.text,
+                            reminder,
+                            medicineImage,
+                            leafletImage);
+                  }
                   Navigator.of(context).pop();
                 }),
           ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
