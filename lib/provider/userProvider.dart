@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -37,7 +38,15 @@ class UserProvider with ChangeNotifier {
       user = modifyResponse(response.data["user"]);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -48,7 +57,15 @@ class UserProvider with ChangeNotifier {
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -73,7 +90,15 @@ class UserProvider with ChangeNotifier {
       user = modifyResponse(response.data["user"]);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 

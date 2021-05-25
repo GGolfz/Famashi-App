@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/utils/format.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,15 @@ class MedicineProvider with ChangeNotifier {
       medicines = modifyResponse(response.data);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -69,7 +78,15 @@ class MedicineProvider with ChangeNotifier {
           response.data["medicine"], response.data["reminder"]);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -110,7 +127,15 @@ class MedicineProvider with ChangeNotifier {
       medicines = modifyResponse(response.data);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -168,7 +193,15 @@ class MedicineProvider with ChangeNotifier {
       medicines = modifyResponse(response.data);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 

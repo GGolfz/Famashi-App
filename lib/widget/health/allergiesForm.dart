@@ -2,7 +2,10 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
+import 'package:famashi/utils/error.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +47,20 @@ class AllergiesForm extends StatelessWidget {
         text: "Save",
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
-            await Provider.of<AllergiesProvider>(context, listen: false)
-                .createAllergy(_medicineName.text, _sideEffect.text);
-            Navigator.of(context).pop();
+            try {
+              await Provider.of<AllergiesProvider>(context, listen: false)
+                  .createAllergy(_medicineName.text, _sideEffect.text);
+              Navigator.of(context).pop();
+            } on ErrorResponse catch (error) {
+              if (error.toString() == "Unauthorize") {
+                Provider.of<AuthenticateProvider>(context, listen: false)
+                    .logout();
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (ctx) => ErrorDialog(error: error.toString()));
+              }
+            }
           }
         },
       )

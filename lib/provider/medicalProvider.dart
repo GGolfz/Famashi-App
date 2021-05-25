@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
 import 'package:famashi/config/enum.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:flutter/material.dart';
 
 class MedicalInfo {
@@ -103,7 +104,15 @@ class MedicalProvider with ChangeNotifier {
       medicalInfo = modifyResponse(response.data);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
@@ -148,7 +157,15 @@ class MedicalProvider with ChangeNotifier {
       medicalInfo = modifyResponse(response.data);
       notifyListeners();
     } on DioError catch (error) {
-      print(error);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 

@@ -1,7 +1,10 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customTimePicker.dart';
 import 'package:famashi/widget/utils/form/customTimePickerField.dart';
 import 'package:flutter/material.dart';
@@ -141,17 +144,30 @@ class SettingNotificationScreen extends StatelessWidget {
               PrimaryButton(
                   text: "Save",
                   onPressed: () async {
-                    await Provider.of<UserNotificationProvider>(context,
-                            listen: false)
-                        .editNotification({
-                      "BEFORE_MORNING": _beforeMorning.text,
-                      "AFTER_MORNING": _afterMorning.text,
-                      "BEFORE_NOON": _beforeNoon.text,
-                      "AFTER_NOON": _afterNoon.text,
-                      "BEFORE_EVENING": _beforeEvening.text,
-                      "AFTER_EVENING": _afterEvening.text,
-                      "BEDTIME": _bedtime.text,
-                    });
+                    try {
+                      await Provider.of<UserNotificationProvider>(context,
+                              listen: false)
+                          .editNotification({
+                        "BEFORE_MORNING": _beforeMorning.text,
+                        "AFTER_MORNING": _afterMorning.text,
+                        "BEFORE_NOON": _beforeNoon.text,
+                        "AFTER_NOON": _afterNoon.text,
+                        "BEFORE_EVENING": _beforeEvening.text,
+                        "AFTER_EVENING": _afterEvening.text,
+                        "BEDTIME": _bedtime.text,
+                      });
+                    } on ErrorResponse catch (error) {
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
+                    }
                   })
             ]));
       })).padding(EdgeInsets.only(

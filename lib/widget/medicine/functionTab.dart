@@ -1,7 +1,10 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/screen/medicine/MedicineEditScreen.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/utils/deleteDialog.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
@@ -26,10 +29,24 @@ class FunctionTab extends StatelessWidget {
               builder: (context) => DeleteDialog(
                   text: "medicine",
                   onDelete: () async {
-                    await Provider.of<MedicineProvider>(context, listen: false)
-                        .deleteMedicine(medicineId);
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    try {
+                      await Provider.of<MedicineProvider>(context,
+                              listen: false)
+                          .deleteMedicine(medicineId);
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    } on ErrorResponse catch (error) {
+                      if (error.toString() == "Unauthorize") {
+                        Provider.of<AuthenticateProvider>(context,
+                                listen: false)
+                            .logout();
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) =>
+                                ErrorDialog(error: error.toString()));
+                      }
+                    }
                   }),
             );
           },
