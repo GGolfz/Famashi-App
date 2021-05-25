@@ -152,6 +152,7 @@ class MedicineProvider with ChangeNotifier {
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
       medicines = modifyResponse(response.data);
+      fetchMedicineById(medicineId);
       notifyListeners();
     } on DioError catch (error) {
       print(error.response!.data);
