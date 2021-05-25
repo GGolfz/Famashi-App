@@ -63,6 +63,11 @@ class _MedicineFormState extends State<MedicineForm> {
     super.initState();
   }
 
+  bool isUploadLeafLet() {
+    return (leafletImage != null ||
+        (widget.type == 'Edit' && widget.medicine.medicineLeaflet != null));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -151,8 +156,14 @@ class _MedicineFormState extends State<MedicineForm> {
               if (file != null) {
                 leafletImage =
                     await MultipartFile.fromFile(file.path.toString());
+                setState(() {
+                  leafletImage = leafletImage;
+                });
               } else {
                 leafletImage = null;
+                setState(() {
+                  leafletImage = leafletImage;
+                });
               }
             },
             child: Container(
@@ -160,17 +171,22 @@ class _MedicineFormState extends State<MedicineForm> {
               width: 400,
               decoration: BoxDecoration(
                   border: Border.all(color: kPrimaryColor04),
-                  borderRadius: BorderRadius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: isUploadLeafLet()
+                      ? kPrimaryColor04.withAlpha(40)
+                      : Colors.transparent),
               child: NikuRow(
                 [
                   Icon(
-                    Iconly.upload,
+                    isUploadLeafLet() ? Iconly.tick_square : Iconly.upload,
                     color: kPrimaryColor04,
                   ),
                   kSizedBoxHorizontalXS,
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: NikuText("Upload information leaflet")
+                    child: NikuText(isUploadLeafLet()
+                            ? "Uploaded leaflet"
+                            : "Upload information leaflet")
                         .style(kBody04Medium.copyWith(color: kPrimaryColor04)),
                   ),
                 ],

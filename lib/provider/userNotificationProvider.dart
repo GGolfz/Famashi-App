@@ -30,10 +30,10 @@ class UserNotifications {
   }
 }
 
-class NotificationProvider with ChangeNotifier {
+class UserNotificationProvider with ChangeNotifier {
   String? token;
   UserNotifications? notify;
-  NotificationProvider({required this.token, required this.notify});
+  UserNotificationProvider({required this.token, required this.notify});
 
   Future<void> fetchNotification() async {
     try {

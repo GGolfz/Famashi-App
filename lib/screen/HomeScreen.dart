@@ -50,19 +50,22 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Consumer<MedicineProvider>(
-                    builder: (ctx, medicine, _) => Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: 10.0,
-                      runSpacing: 4.0,
-                      children: medicine.medicines!
-                          .map((e) => MedicineInfo(
-                                medicineID: e.medicineId,
-                                medicineImage: e.medicineImage,
-                                medicineName: e.medicineName.toString(),
-                                remainAmount: e.remainAmount,
-                              ))
-                          .toList(),
-                    ),
+                    builder: (ctx, medicine, _) => medicine
+                            .medicines!.isNotEmpty
+                        ? Wrap(
+                            alignment: WrapAlignment.start,
+                            spacing: 10.0,
+                            runSpacing: 4.0,
+                            children: medicine.medicines!
+                                .map((e) => MedicineInfo(
+                                      medicineID: e.medicineId,
+                                      medicineImage: e.medicineImage,
+                                      medicineName: e.medicineName.toString(),
+                                      remainAmount: e.remainAmount,
+                                    ))
+                                .toList(),
+                          )
+                        : Niku(NikuText("No medicine")).center(),
                   ),
                 ),
               ),
