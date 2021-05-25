@@ -151,8 +151,14 @@ class _MedicineFormState extends State<MedicineForm> {
               if (file != null) {
                 leafletImage =
                     await MultipartFile.fromFile(file.path.toString());
+                setState(() {
+                  leafletImage = leafletImage;
+                });
               } else {
                 leafletImage = null;
+                setState(() {
+                  leafletImage = leafletImage;
+                });
               }
             },
             child: Container(
