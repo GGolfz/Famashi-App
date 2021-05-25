@@ -4,8 +4,10 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/utils/format.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/widget/utils/icon/CoolIcons.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
@@ -297,29 +299,45 @@ class _MedicineFormState extends State<MedicineForm> {
                   temp.sort();
                   String reminder = temp.join(',');
                   if (widget.type == "Add") {
-                    await Provider.of<MedicineProvider>(context, listen: false)
-                        .createMedicine(
-                            _medicineName.text,
-                            _description.text,
-                            int.parse(_totalRecieved.text),
-                            int.parse(_dosagePerDose.text),
-                            _medicineUnit.text,
-                            reminder,
-                            medicineImage,
-                            leafletImage);
+                    try {
+                      await Provider.of<MedicineProvider>(context,
+                              listen: false)
+                          .createMedicine(
+                              _medicineName.text,
+                              _description.text,
+                              int.parse(_totalRecieved.text),
+                              int.parse(_dosagePerDose.text),
+                              _medicineUnit.text,
+                              reminder,
+                              medicineImage,
+                              leafletImage);
+                    } on ErrorResponse catch (error) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) =>
+                              ErrorDialog(error: error.toString()));
+                    }
                   } else if (widget.type == "Edit") {
-                    await Provider.of<MedicineProvider>(context, listen: false)
-                        .editMedicine(
-                            widget.medicine.medicineId.toString(),
-                            _medicineName.text,
-                            _description.text,
-                            int.parse(_totalRecieved.text),
-                            widget.medicine.remainAmount,
-                            int.parse(_dosagePerDose.text),
-                            _medicineUnit.text,
-                            reminder,
-                            medicineImage,
-                            leafletImage);
+                    try {
+                      await Provider.of<MedicineProvider>(context,
+                              listen: false)
+                          .editMedicine(
+                              widget.medicine.medicineId.toString(),
+                              _medicineName.text,
+                              _description.text,
+                              int.parse(_totalRecieved.text),
+                              widget.medicine.remainAmount,
+                              int.parse(_dosagePerDose.text),
+                              _medicineUnit.text,
+                              reminder,
+                              medicineImage,
+                              leafletImage);
+                    } on ErrorResponse catch (error) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) =>
+                              ErrorDialog(error: error.toString()));
+                    }
                   }
                   Navigator.of(context).pop();
                 }),

@@ -3,6 +3,8 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/screen/AuthScreen.dart';
+import 'package:famashi/utils/error.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
@@ -74,6 +76,7 @@ class _AuthFormState extends State<AuthForm> {
               .color(kAccentColor01))
           .on(tap: () {
         _formKey.currentState!.reset();
+        FocusScope.of(context).unfocus();
         setState(() {
           _page = 0;
         });
@@ -156,6 +159,7 @@ class _AuthFormState extends State<AuthForm> {
                   setState(() {
                     _page -= 1;
                   });
+                  FocusScope.of(context).unfocus();
                 })),
           ]
         : [];
@@ -174,6 +178,7 @@ class _AuthFormState extends State<AuthForm> {
   Future<void> _submitForm(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       if (_page != getForm()[widget.authType]!.length - 1) {
+        FocusScope.of(context).unfocus();
         setState(() {
           _page += 1;
         });
@@ -185,12 +190,24 @@ class _AuthFormState extends State<AuthForm> {
           String firstName = _firstname.text;
           String lastName = _lastname.text;
           if (password == confirmPassword) {
-            await Provider.of<AuthenticateProvider>(context, listen: false)
-                .register(email, password, firstName, lastName);
+            try {
+              await Provider.of<AuthenticateProvider>(context, listen: false)
+                  .register(email, password, firstName, lastName);
+            } on ErrorResponse catch (error) {
+              showDialog(
+                  context: context,
+                  builder: (ctx) => ErrorDialog(error: error.toString()));
+            }
           }
         } else if (widget.authType == AuthType.LogIn) {
-          await Provider.of<AuthenticateProvider>(context, listen: false)
-              .login(email, password);
+          try {
+            await Provider.of<AuthenticateProvider>(context, listen: false)
+                .login(email, password);
+          } on ErrorResponse catch (error) {
+            showDialog(
+                context: context,
+                builder: (ctx) => ErrorDialog(error: error.toString()));
+          }
         }
       }
     }

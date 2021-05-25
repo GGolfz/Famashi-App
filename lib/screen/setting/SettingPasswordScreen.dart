@@ -2,8 +2,10 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:famashi/widget/utils/primaryButton.dart';
@@ -63,8 +65,14 @@ class SettingPasswordScreen extends StatelessWidget {
       String newPassword = _newPassword.text;
       String confirmNewPassword = _confirmNewPassword.text;
       if (newPassword == confirmNewPassword) {
-        Provider.of<UserProvider>(context, listen: false)
-            .changePassword(currentPassword, newPassword);
+        try {
+          await Provider.of<UserProvider>(context, listen: false)
+              .changePassword(currentPassword, newPassword);
+        } on ErrorResponse catch (error) {
+          showDialog(
+              context: context,
+              builder: (ctx) => ErrorDialog(error: error.toString()));
+        }
       }
     }
   }
