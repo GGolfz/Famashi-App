@@ -15,7 +15,8 @@ class FunctionTab extends StatelessWidget {
     return NikuRow([
       IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, MedicineEditScreen.routeName);
+            Navigator.of(context).pushNamed(MedicineEditScreen.routeName,
+                arguments: {"medicine_id": medicineId.toString()});
           },
           icon: Icon(Iconly.edit_square)),
       IconButton(
