@@ -1,8 +1,6 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/screen/medicine/MedicineDetailScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:niku/widget/base.dart';
-import 'package:niku/widget/widget.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
 
