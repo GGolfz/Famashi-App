@@ -44,29 +44,17 @@ class _MedicineEditScreenState extends State<MedicineEditScreen> {
                 child: Wrap(
                   alignment: WrapAlignment.center,
                   children: [
-                    GestureDetector(
-                        onTap: () async {
-                          final file =
-                              await picker.getImage(source: ImageSource.gallery);
-                          medicineImage =
-                              await MultipartFile.fromFile(file!.path.toString());
-                        },
-                        child: MedicineImage(medicineImage: null,),
-                        ),
+                    // GestureDetector(
+                    //     onTap: () async {
+                    //       final file =
+                    //           await picker.getImage(source: ImageSource.gallery);
+                    //       medicineImage =
+                    //           await MultipartFile.fromFile(file!.path.toString());
+                    //     },
+                    //     child: MedicineImage(medicineImage: null,),
+                    //     ),
                         EditMedicineForm(),
-                        // kSizedBoxHorizontalS,
-                        // Niku(NikuRow([
-                        //   Icon(Iconly.danger,color: kNeutral03,size: 25,),
-                        //   SizedBox(width: 10,),
-                        //   NikuText("go to notification etting to change time.").style(kBody05SemiBold.copyWith(color: kNeutral03))
-                        // ]).crossCenter()).padding(EdgeInsets.fromLTRB(kSizeM, kSizeS, kSizeM, kSizeS)),
-      
-                        // Niku(
-                        //   PrimaryButton(text: "Save", 
-                        //   onPressed:() async{
-                        //   await Provider.of<MedicineProvider>(context, listen: false).createMedicine(_medicineName.text,_description.text,int.parse(_totalRecieved.text),int.parse(_dosagePerDose.text),_medicineUnit.text,reminder, medicineImage, leafletImage);
-                        //   Navigator.of(context).pop();}),
-                        // ).padding(EdgeInsets.fromLTRB(40,5,40,5)),               
+                                   
 
                   ],
                 ),

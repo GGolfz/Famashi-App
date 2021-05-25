@@ -102,7 +102,7 @@ class MedicineProvider with ChangeNotifier {
       int totalAmount,
       int dosagePerDose,
       String medicineUnit,
-      List reminder,
+      String reminder,
       MultipartFile? medicineImage,
       MultipartFile? medicineLeaflet) async {
     try {
