@@ -164,13 +164,21 @@ class _MedicineFormState extends State<MedicineForm> {
               child: NikuRow(
                 [
                   Icon(
-                    Iconly.upload,
+                    (leafletImage != null ||
+                            (widget.type == 'Edit' &&
+                                widget.medicine.medicineLeaflet != null))
+                        ? Iconly.tick_square
+                        : Iconly.upload,
                     color: kPrimaryColor04,
                   ),
                   kSizedBoxHorizontalXS,
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: NikuText("Upload information leaflet")
+                    child: NikuText((leafletImage != null ||
+                                (widget.type == 'Edit' &&
+                                    widget.medicine.medicineLeaflet != null))
+                            ? "Uploaded leaflet"
+                            : "Upload information leaflet")
                         .style(kBody04Medium.copyWith(color: kPrimaryColor04)),
                   ),
                 ],

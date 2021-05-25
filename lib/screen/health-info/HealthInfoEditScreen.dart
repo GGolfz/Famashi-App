@@ -184,15 +184,19 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
     MedicalInfo data = provider.medicalInfo!;
     setState(() {
       _gender = data.genderString!;
-      _birthdate = data.birthdate!;
-      _weight.text = data.weight.toString();
-      _height.text = data.height.toString();
-      _g6pd = data.getBoolString(data.isG6PD!);
-      _liver = data.getBoolString(data.isLiver!);
-      _kidney = data.getBoolString(data.isKidney!);
-      _gastritis = data.getBoolString(data.isGastritis!);
-      _breastfeeding = data.getBoolString(data.isBreastfeeding!);
-      _pregnant = data.getBoolString(data.isPregnant!);
+      _birthdate = data.birthdate ?? DateTime.now();
+      if (data.weight != null) {
+        _weight.text = data.weight.toString();
+      }
+      if (data.height != null) {
+        _height.text = data.height.toString();
+      }
+      _g6pd = data.getBoolString(data.isG6PD);
+      _liver = data.getBoolString(data.isLiver);
+      _kidney = data.getBoolString(data.isKidney);
+      _gastritis = data.getBoolString(data.isGastritis);
+      _breastfeeding = data.getBoolString(data.isBreastfeeding);
+      _pregnant = data.getBoolString(data.isPregnant);
     });
   }
 

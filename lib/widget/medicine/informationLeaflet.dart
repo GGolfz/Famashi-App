@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
@@ -36,7 +34,7 @@ class InformationLeaflet extends StatelessWidget {
               builder: (context) {
                 return Dialog(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40)),
+                      borderRadius: BorderRadius.circular(15)),
                   elevation: 16,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

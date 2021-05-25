@@ -59,8 +59,8 @@ class MedicalInfo {
     ];
   }
 
-  String getBoolString(bool val) {
-    return val ? "Yes" : "No";
+  String getBoolString(bool? val) {
+    return (val == null || val == false) ? "No" : "Yes";
   }
 
   String? get genderString {

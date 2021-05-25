@@ -14,6 +14,8 @@ class DeleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 16,
       title: NikuText("Are you sure to delete this $text?")
           .style(kBody02Semibold)
           .alignCenter(),

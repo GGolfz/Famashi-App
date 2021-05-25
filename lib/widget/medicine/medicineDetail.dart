@@ -47,7 +47,7 @@ class MedicineDetail extends StatelessWidget {
       NikuText(medicineName).style(kBody04SemiBold.copyWith(color: kNeutral02)),
       kSizedBoxVerticalM,
       Padding(
-        padding: const EdgeInsets.only(left: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,

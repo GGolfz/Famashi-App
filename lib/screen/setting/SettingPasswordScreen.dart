@@ -75,7 +75,9 @@ class SettingPasswordScreen extends StatelessWidget {
       child: Niku(Form(
               key: _formKey,
               child: NikuColumn([
-                Expanded(child: NikuColumn(_buildForm()).crossStart()),
+                Expanded(
+                    child: SingleChildScrollView(
+                        child: NikuColumn(_buildForm()).crossStart())),
                 PrimaryButton(
                     text: "Save", onPressed: () => changePassword(context))
               ])))
