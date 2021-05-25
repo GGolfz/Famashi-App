@@ -1,6 +1,6 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/style.dart';
-import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/form/customTimePicker.dart';
 import 'package:famashi/widget/utils/form/customTimePickerField.dart';
@@ -75,10 +75,10 @@ class SettingNotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<NotificationProvider>(context, listen: false)
+    Provider.of<UserNotificationProvider>(context, listen: false)
         .fetchNotification();
     return TemplateLayout(
-      child: Niku(Consumer<NotificationProvider>(builder: (ctx, notify, _) {
+      child: Niku(Consumer<UserNotificationProvider>(builder: (ctx, notify, _) {
         _beforeMorning.text = notify.notify!.beforeMorning;
         _afterMorning.text = notify.notify!.afterMorning;
         _beforeNoon.text = notify.notify!.beforeNoon;
@@ -141,7 +141,7 @@ class SettingNotificationScreen extends StatelessWidget {
               PrimaryButton(
                   text: "Save",
                   onPressed: () async {
-                    await Provider.of<NotificationProvider>(context,
+                    await Provider.of<UserNotificationProvider>(context,
                             listen: false)
                         .editNotification({
                       "BEFORE_MORNING": _beforeMorning.text,

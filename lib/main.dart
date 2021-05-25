@@ -3,7 +3,7 @@ import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
-import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/utils/routing.dart';
@@ -64,11 +64,11 @@ class FamashiApp extends StatelessWidget {
               update: (ctx, auth, prev) =>
                   UserProvider(token: auth.token, user: prev?.user)),
           ChangeNotifierProxyProvider<AuthenticateProvider,
-                  NotificationProvider>(
-              create: (ctx) => NotificationProvider(
+                  UserNotificationProvider>(
+              create: (ctx) => UserNotificationProvider(
                   token: null, notify: UserNotifications.base),
               update: (ctx, auth, prev) {
-                return NotificationProvider(
+                return UserNotificationProvider(
                     token: auth.token, notify: prev?.notify);
               }),
           ChangeNotifierProxyProvider<AuthenticateProvider, MedicalProvider>(
