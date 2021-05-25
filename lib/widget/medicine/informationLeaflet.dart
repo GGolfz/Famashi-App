@@ -1,3 +1,4 @@
+import 'package:famashi/config/api.dart';
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
@@ -56,9 +57,9 @@ class InformationLeaflet extends StatelessWidget {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'http://13.76.251.165:3000/uploads/medicine_leaflet/' +
-                                      leafletImage.toString()),
+                              image: NetworkImage(uploadEndpoint +
+                                  '/medicine_leaflet/' +
+                                  leafletImage.toString()),
                             ),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),

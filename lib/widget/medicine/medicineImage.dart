@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:famashi/config/api.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/config/color.dart';
 
@@ -26,9 +27,9 @@ class MedicineImage extends StatelessWidget {
                   )
                 : DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'http://13.76.251.165:3000/uploads/medicine_image/' +
-                            medicineImage.toString()),
+                    image: NetworkImage(uploadEndpoint +
+                        '/medicine_image/' +
+                        medicineImage.toString()),
                   )),
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
         color: kNeutral04,
