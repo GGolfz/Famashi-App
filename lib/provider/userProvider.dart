@@ -86,7 +86,6 @@ class UserProvider with ChangeNotifier {
           data: formData,
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
-      print(response.data);
       user = modifyResponse(response.data["user"]);
       notifyListeners();
     } on DioError catch (error) {

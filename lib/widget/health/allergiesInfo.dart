@@ -5,6 +5,7 @@ import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/health/detailTile.dart';
+import 'package:famashi/widget/health/emptyAllergy.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/deleteDialog.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
@@ -73,7 +74,7 @@ class AllergiesInfo extends StatelessWidget {
                   separatorBuilder: (context, index) => CustomDivider(),
                   itemCount: allergies.allergyList!.report.length,
                 )
-              : Niku(NikuText("No allergy").style(kBody03)).center(),
+              : EmptyAllergy(),
         ));
   }
 }

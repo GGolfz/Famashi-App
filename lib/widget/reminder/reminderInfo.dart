@@ -1,4 +1,5 @@
 import 'package:famashi/config/color.dart';
+import 'package:famashi/config/constant.dart';
 import 'package:famashi/provider/notificationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/config/style.dart';
@@ -9,8 +10,10 @@ import 'package:niku/widget/button.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
-class ReminderInfo extends StatefulWidget {
+class ReminderInfo extends StatelessWidget {
   final int reminderID;
+  final int selectedID;
+  final Function onSelect;
   final String? medicineImage;
   final String medicineName;
   final int dosageAmount;
@@ -20,25 +23,15 @@ class ReminderInfo extends StatefulWidget {
       required this.medicineImage,
       required this.medicineName,
       required this.dosageAmount,
-      required this.medicineUnit});
-
-  @override
-  State<ReminderInfo> createState() => _ReminderInfoState();
-}
-
-class _ReminderInfoState extends State<ReminderInfo> {
-  var onTap = false;
-
-  void tap() {
-    setState(() {
-      onTap = !onTap;
-    });
-  }
+      required this.medicineUnit,
+      required this.selectedID,
+      required this.onSelect});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      key: Key(reminderID.toString()),
+      padding: const EdgeInsets.all(12),
       child: Container(
         color: kNeutralWhite,
         height: 260,
@@ -46,7 +39,7 @@ class _ReminderInfoState extends State<ReminderInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            onTap
+            reminderID == selectedID
                 ? Stack(
                     children: [
                       Container(
@@ -54,8 +47,7 @@ class _ReminderInfoState extends State<ReminderInfo> {
                             color: kNeutral06,
                             backgroundBlendMode: BlendMode.saturation,
                           ),
-                          child: MedicineImage(
-                              medicineImage: widget.medicineImage)),
+                          child: MedicineImage(medicineImage: medicineImage)),
                       Positioned.fill(
                           child: Niku(NikuColumn([
                         NikuText("Already used?")
@@ -66,7 +58,7 @@ class _ReminderInfoState extends State<ReminderInfo> {
                                   .style(kBody05)
                                   .color(kNeutralWhite))
                               .onPressed(() {
-                            tap();
+                            onSelect(-1);
                           }),
                           NikuButton(NikuText("Yes")
                                   .style(kBody05)
@@ -74,7 +66,8 @@ class _ReminderInfoState extends State<ReminderInfo> {
                               .onPressed(() async {
                             await Provider.of<NotificationProvider>(context,
                                     listen: false)
-                                .takeMedicine(widget.reminderID);
+                                .takeMedicine(reminderID);
+                            onSelect(-1);
                           })
                         ]).mainCenter()
                       ]).mainEnd()))
@@ -82,10 +75,10 @@ class _ReminderInfoState extends State<ReminderInfo> {
                   )
                 : GestureDetector(
                     onTap: () {
-                      tap();
+                      onSelect(reminderID);
                     },
                     child: MedicineImage(
-                      medicineImage: widget.medicineImage,
+                      medicineImage: medicineImage,
                     )),
             SizedBox(
               height: 8,
@@ -93,14 +86,14 @@ class _ReminderInfoState extends State<ReminderInfo> {
             Padding(
               padding: const EdgeInsets.only(left: 5.0),
               child: Text(
-                widget.medicineName,
+                medicineName,
                 style: kBody04Medium,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 5.0, top: 1.0),
               child: Text(
-                'Amount ${widget.dosageAmount} ${widget.medicineUnit}',
+                'Amount ${dosageAmount} ${medicineUnit}',
                 style: kBody05,
               ),
             )

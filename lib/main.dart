@@ -4,8 +4,11 @@ import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/usageProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/push_notification.dart';
+import 'package:famashi/screen/SplashScreen.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
@@ -25,13 +28,23 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(FamashiApp());
-
+  PushNotification.initialize();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
 class FamashiApp extends StatelessWidget {
   final routes = {
-    '/': Consumer<AuthenticateProvider>(
+    '/': Consumer<AuthenticateProvider>(builder: (ctx, auth, _) {
+      if (!auth.isAuth) {
+        try {
+          auth.tryAutoLogin();
+        } catch (error) {
+          auth.logout();
+        }
+      }
+      return SplashScreen();
+    }),
+    HomeScreen.routeName: Consumer<AuthenticateProvider>(
         builder: (ctx, auth, _) => auth.isAuth
             ? HomeScreen()
             : FutureBuilder(
@@ -102,6 +115,12 @@ class FamashiApp extends StatelessWidget {
                     token: auth.token,
                     medicines: prev?.medicines,
                     selectedMedicines: prev?.selectedMedicines);
+              }),
+          ChangeNotifierProxyProvider<AuthenticateProvider, UsageProvider>(
+              create: (ctx) => UsageProvider(token: null, usageList: []),
+              update: (ctx, auth, prev) {
+                return UsageProvider(
+                    token: auth.token, usageList: prev?.usageList);
               })
         ],
         child: MaterialApp(

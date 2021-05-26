@@ -1,6 +1,9 @@
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
+import 'package:famashi/push_notification.dart';
 import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +11,10 @@ import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:famashi/widget/medicine/medicineInfo.dart';
+import 'package:famashi/widget/medicine/emptyMedicine.dart';
 
 class HomeScreen extends StatefulWidget {
-  static String routeName = '/';
+  static String routeName = '/home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -20,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Provider.of<UserProvider>(context, listen: false).fetchUser();
     Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
+    Provider.of<UserNotificationProvider>(context, listen: false)
+        .setupNotification();
     return TemplateLayout(
         child: Niku(
           Padding(
@@ -65,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ))
                                 .toList(),
                           )
-                        : Niku(NikuText("No medicine")).center(),
+                        : EmptyMedicine(),
                   ),
                 ),
               ),
@@ -73,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ).height(double.infinity),
         hasAction: true,
-        action: () {
+        action: () async {
           Navigator.of(context).pushNamed(MedicineAddScreen.routeName);
         });
   }

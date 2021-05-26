@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
+import 'package:famashi/push_notification.dart';
 import 'package:famashi/utils/error.dart';
+import 'package:famashi/utils/format.dart';
 import 'package:flutter/material.dart';
 
 class UserNotifications {
@@ -71,7 +73,38 @@ class UserNotificationProvider with ChangeNotifier {
           options: Options(
               headers: {"Authorization": "Bearer " + token.toString()}));
       notify = modifyResponse(response.data);
+      setupNotification();
       notifyListeners();
+    } on DioError catch (error) {
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
+    }
+  }
+
+  Future<void> setupNotification() async {
+    try {
+      await PushNotification.clearAllNotification();
+      final response = await Dio().get(apiEndpoint + '/reminders/list',
+          options: Options(
+              headers: {"Authorization": "Bearer " + token.toString()}));
+      List data = response.data;
+      var now = DateTime.now();
+      data.forEach((e) async {
+        var timeType = e["time_type"];
+        var time = e["time"].split(' ')[1].split(':');
+        await PushNotification.scheduleNotification(
+            timeType,
+            formatTimeTypeToString(timeType).toString(),
+            DateTime(now.year, now.month, now.day, int.parse(time[0]),
+                int.parse(time[1])));
+      });
     } on DioError catch (error) {
       if (error.response != null) {
         if (error.response!.statusCode == 500) {

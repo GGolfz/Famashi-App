@@ -13,8 +13,21 @@ import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   static String routeName = '/notification';
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  var _selectedId = -1;
+  void _onSelect(id) {
+    setState(() {
+      _selectedId = id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Provider.of<NotificationProvider>(context, listen: false)
@@ -31,6 +44,7 @@ class NotificationScreen extends StatelessWidget {
           showDialog(context: context, builder: (ctx) => InstructionDialog());
         })
       ]).crossCenter().mainAxisAlignment(MainAxisAlignment.spaceBetween),
+      kSizedBoxVerticalS,
       Expanded(child: SingleChildScrollView(
         child: Consumer<NotificationProvider>(builder: (ctx, notify, _) {
           List data = notify.notify!.getData(DateTime.now());
@@ -38,8 +52,17 @@ class NotificationScreen extends StatelessWidget {
           for (var i in data) {
             widgets.add(
               ReminderGroup(
-                  time: i["time"], timeType: i["time_type"], data: i["data"]),
+                id: i["time_type"],
+                time: i["time"],
+                timeType: i["time_type"],
+                data: i["data"],
+                selectedId: _selectedId,
+                onSelect: (val) => _onSelect(val),
+              ),
             );
+          }
+          if (widgets.length == 0) {
+            widgets.add(Niku(NikuText("No notification")).center());
           }
           return NikuColumn(widgets);
         }),
