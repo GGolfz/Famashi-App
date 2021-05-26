@@ -61,6 +61,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             );
           }
+          if (widgets.length == 0) {
+            widgets.add(Niku(NikuText("No notification")).center());
+          }
           return NikuColumn(widgets);
         }),
       ))
