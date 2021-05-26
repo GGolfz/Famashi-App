@@ -14,7 +14,7 @@ import 'package:famashi/widget/medicine/medicineInfo.dart';
 import 'package:famashi/widget/medicine/emptyMedicine.dart';
 
 class HomeScreen extends StatefulWidget {
-  static String routeName = '/';
+  static String routeName = '/home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

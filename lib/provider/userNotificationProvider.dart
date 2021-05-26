@@ -104,7 +104,6 @@ class UserNotificationProvider with ChangeNotifier {
             formatTimeTypeToString(timeType).toString(),
             DateTime(now.year, now.month, now.day, int.parse(time[0]),
                 int.parse(time[1])));
-        await PushNotification.getPending();
       });
     } on DioError catch (error) {
       if (error.response != null) {

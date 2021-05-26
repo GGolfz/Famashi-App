@@ -8,6 +8,7 @@ import 'package:famashi/provider/usageProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/push_notification.dart';
+import 'package:famashi/screen/SplashScreen.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +34,17 @@ void main() {
 
 class FamashiApp extends StatelessWidget {
   final routes = {
-    '/': Consumer<AuthenticateProvider>(
+    '/': Consumer<AuthenticateProvider>(builder: (ctx, auth, _) {
+      if (!auth.isAuth) {
+        try {
+          auth.tryAutoLogin();
+        } catch (error) {
+          auth.logout();
+        }
+      }
+      return SplashScreen();
+    }),
+    HomeScreen.routeName: Consumer<AuthenticateProvider>(
         builder: (ctx, auth, _) => auth.isAuth
             ? HomeScreen()
             : FutureBuilder(
