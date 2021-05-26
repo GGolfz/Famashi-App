@@ -7,6 +7,7 @@ import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/provider/usageProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/push_notification.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
 import 'package:famashi/widget/utils/routing.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(FamashiApp());
-
+  PushNotification.initialize();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
