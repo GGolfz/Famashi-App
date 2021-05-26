@@ -98,7 +98,6 @@ class UserNotificationProvider with ChangeNotifier {
       var now = DateTime.now();
       data.forEach((e) async {
         var timeType = e["time_type"];
-        print(timeType);
         var time = e["time"].split(' ')[1].split(':');
         await PushNotification.scheduleNotification(
             timeType,

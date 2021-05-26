@@ -180,7 +180,15 @@ class MedicineProvider with ChangeNotifier {
       fetchMedicineById(medicineId);
       notifyListeners();
     } on DioError catch (error) {
-      print(error.response!.data);
+      if (error.response != null) {
+        if (error.response!.statusCode == 500) {
+          throw ErrorResponse(ErrorResponse.statusToMessage(500));
+        } else {
+          throw ErrorResponse(error.response!.data["message"]);
+        }
+      } else {
+        throw ErrorResponse(ErrorResponse.statusToMessage(0));
+      }
     }
   }
 
