@@ -64,7 +64,6 @@ class Notifications {
     List<Map> resp = [];
     for (var i = 0; i < data.length; i++) {
       if (data[i].length > 0) {
-        Map d = {};
         var timeList = data[i][0].time.split(':');
         if (now.isBefore(DateTime(
             now.year,
@@ -73,11 +72,12 @@ class Notifications {
             int.parse(timeList[0]),
             int.parse(timeList[1]),
             int.parse(timeList[2])))) {
+          Map d = {};
           d["time_type"] = data[i][0].timeType;
           d["time"] = "${timeList[0]}:${timeList[1]}";
           d["data"] = data[i];
+          resp.add(d);
         }
-        resp.add(d);
       }
     }
     return resp;
