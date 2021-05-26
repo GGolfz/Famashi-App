@@ -38,7 +38,10 @@ class NotificationScreen extends StatelessWidget {
           for (var i in data) {
             widgets.add(
               ReminderGroup(
-                  time: i["time"], timeType: i["time_type"], data: i["data"]),
+                  id: i["time_type"],
+                  time: i["time"],
+                  timeType: i["time_type"],
+                  data: i["data"]),
             );
           }
           return NikuColumn(widgets);
