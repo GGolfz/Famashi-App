@@ -64,6 +64,8 @@ flutter:
       - assets/logo/logo-long-03.png
       - assets/images/authenticate-bg.png
       - assets/images/medicine-default.png
+      - assets/images/no-medicine.png
+      - assets/images/no-allergy.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

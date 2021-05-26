@@ -8,6 +8,7 @@ import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:famashi/widget/medicine/medicineInfo.dart';
+import 'package:famashi/widget/medicine/emptyMedicine.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/';
@@ -65,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ))
                                 .toList(),
                           )
-                        : Niku(NikuText("No medicine")).center(),
+                        : EmptyMedicine(),
                   ),
                 ),
               ),
