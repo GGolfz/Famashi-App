@@ -137,7 +137,7 @@ class SettingNotificationScreen extends StatelessWidget {
                     'Bedtime Medicine',
                     _buildTextFieldGroup(
                       'Bedtime',
-                      _buildTimeTextField(_beforeEvening, context),
+                      _buildTimeTextField(_bedtime, context),
                     ),
                     Niku()),
               ]).crossStart()),

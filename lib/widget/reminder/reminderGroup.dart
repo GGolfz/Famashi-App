@@ -20,26 +20,26 @@ class ReminderGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Niku(
-        NikuColumn([
-          NikuRow([
-            NikuText(formatTimeTypeToString(timeType).toString()),
-            NikuText("$time")
-          ]).spaceBetween(),
-          NikuRow([
-            Wrap(
-              alignment: WrapAlignment.start,
-              children: data
-                  .map((e) => ReminderInfo(
-                        reminderID: e.reminderId,
-                        medicineImage: e.medicineImage,
-                        medicineName: e.medicineName.toString(),
-                        dosageAmount: e.dosageAmount,
-                        medicineUnit: e.medicineUnit,
-                      ))
-                  .toList(),
-            )
-          ])
-        ]),
-        Key(timeType.toString()));
+            NikuColumn([
+              NikuRow([
+                NikuText(formatTimeTypeToString(timeType).toString()),
+                NikuText("$time")
+              ]).spaceBetween(),
+              Expanded(
+                  child: Wrap(
+                alignment: WrapAlignment.start,
+                children: data
+                    .map((e) => ReminderInfo(
+                          reminderID: e.reminderId,
+                          medicineImage: e.medicineImage,
+                          medicineName: e.medicineName.toString(),
+                          dosageAmount: e.dosageAmount,
+                          medicineUnit: e.medicineUnit,
+                        ))
+                    .toList(),
+              ))
+            ]).crossStart(),
+            Key(timeType.toString()))
+        .height(30 + 280.0 * (data.length / 2).round());
   }
 }

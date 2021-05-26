@@ -5,6 +5,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
+import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/utils/format.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
@@ -350,6 +351,21 @@ class _MedicineFormState extends State<MedicineForm> {
                             builder: (ctx) =>
                                 ErrorDialog(error: error.toString()));
                       }
+                    }
+                  }
+                  try {
+                    await Provider.of<UserNotificationProvider>(context,
+                            listen: false)
+                        .setupNotification();
+                  } on ErrorResponse catch (error) {
+                    if (error.toString() == "Unauthorize") {
+                      Provider.of<AuthenticateProvider>(context, listen: false)
+                          .logout();
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) =>
+                              ErrorDialog(error: error.toString()));
                     }
                   }
                   Navigator.of(context).pop();

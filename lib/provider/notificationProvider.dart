@@ -66,12 +66,13 @@ class Notifications {
       if (data[i].length > 0) {
         var timeList = data[i][0].time.split(':');
         if (now.isBefore(DateTime(
-            now.year,
-            now.month,
-            now.day,
-            int.parse(timeList[0]),
-            int.parse(timeList[1]),
-            int.parse(timeList[2])))) {
+                now.year,
+                now.month,
+                now.day,
+                int.parse(timeList[0]),
+                int.parse(timeList[1]),
+                int.parse(timeList[2]))
+            .add(Duration(minutes: 30)))) {
           Map d = {};
           d["time_type"] = data[i][0].timeType;
           d["time"] = "${timeList[0]}:${timeList[1]}";
