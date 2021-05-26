@@ -38,6 +38,7 @@ class _ReminderInfoState extends State<ReminderInfo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: Key(widget.reminderID.toString()),
       padding: const EdgeInsets.all(15),
       child: Container(
         color: kNeutralWhite,
