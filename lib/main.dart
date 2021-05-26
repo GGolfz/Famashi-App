@@ -4,6 +4,7 @@ import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/usageProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
@@ -102,6 +103,12 @@ class FamashiApp extends StatelessWidget {
                     token: auth.token,
                     medicines: prev?.medicines,
                     selectedMedicines: prev?.selectedMedicines);
+              }),
+          ChangeNotifierProxyProvider<AuthenticateProvider, UsageProvider>(
+              create: (ctx) => UsageProvider(token: null, usageList: []),
+              update: (ctx, auth, prev) {
+                return UsageProvider(
+                    token: auth.token, usageList: prev?.usageList);
               })
         ],
         child: MaterialApp(
