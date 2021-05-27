@@ -3,6 +3,7 @@ import 'package:famashi/screen/medicine/MedicineDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 
 class MedicineInfo extends StatelessWidget {
@@ -25,9 +26,8 @@ class MedicineInfo extends StatelessWidget {
             Navigator.of(context).pushNamed(MedicineDetailScreen.routeName,
                 arguments: {"medicine_id": medicineID.toString()});
           },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+          child: NikuColumn(
+            [
               MedicineImage(
                 medicineImage: medicineImage,
               ),
@@ -49,7 +49,7 @@ class MedicineInfo extends StatelessWidget {
                 ),
               )
             ],
-          ),
+          ).crossAxisAlignment(CrossAxisAlignment.stretch),
         ),
       ).width(149).height(260).backgroundColor(kNeutralWhite),
     );

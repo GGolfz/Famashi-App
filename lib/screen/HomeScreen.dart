@@ -10,6 +10,7 @@ import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Niku(
           Padding(
             padding: const EdgeInsets.all(11.0),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: NikuColumn([
               Consumer<UserProvider>(
                 builder: (ctx, user, _) => Padding(
                   padding: const EdgeInsets.only(left: 10.0),
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-            ]),
+            ]).crossStart(),
           ),
         ).height(double.infinity),
         hasAction: true,

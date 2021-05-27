@@ -36,9 +36,8 @@ class ReminderInfo extends StatelessWidget {
       key: Key(reminderID.toString()),
       padding: const EdgeInsets.all(12),
       child: Niku(
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        NikuColumn(
+          [
             reminderID == selectedID
                 ? Stack(
                     children: [
@@ -112,7 +111,7 @@ class ReminderInfo extends StatelessWidget {
               ),
             )
           ],
-        ),
+        ).crossAxisAlignment(CrossAxisAlignment.stretch),
       ).height(260).width(149).backgroundColor(kNeutralWhite),
     );
   }

@@ -49,10 +49,8 @@ class MedicineDetail extends StatelessWidget {
       kSizedBoxVerticalM,
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+        child: NikuColumn(
+          [
             NikuText("Description")
                 .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
             kSizedBoxVerticalXS,
@@ -89,7 +87,7 @@ class MedicineDetail extends StatelessWidget {
                 child: Niku(InformationLeaflet(leafletImage: leafletImage)),
               ),
           ],
-        ),
+        ).crossAxisAlignment(CrossAxisAlignment.stretch).mainStart(),
       )
     ]);
   }

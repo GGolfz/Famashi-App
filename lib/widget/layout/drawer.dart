@@ -8,6 +8,7 @@ import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +42,11 @@ class FamashiDrawer extends StatelessWidget {
       }
     }
     return Drawer(
-        child: Niku(Column(children: [
+        child: Niku(NikuColumn([
       kSizedBoxVerticalL,
       Consumer<UserProvider>(
-          builder: (ctx, user, _) => Niku(Row(
-                children: [
+          builder: (ctx, user, _) => Niku(NikuRow(
+                [
                   ClipRRect(
                       borderRadius: kBorderRadiusS,
                       child: SizedBox(

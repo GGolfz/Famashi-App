@@ -13,10 +13,8 @@ class InformationLeaflet extends StatelessWidget {
   InformationLeaflet({required this.leafletImage});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
+    return NikuColumn(
+      [
         TextButton(
           style: ButtonStyle(
               padding:
@@ -65,7 +63,7 @@ class InformationLeaflet extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(20.0)),
                               color: kNeutral04,
                             ))
-                      ]),
+                      ]).mainCenter().crossCenter(),
                     ).height(500).width(300),
                   ),
                 );

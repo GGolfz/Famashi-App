@@ -246,8 +246,8 @@ class _MedicineFormState extends State<MedicineForm> {
               padding: const EdgeInsets.only(top: 8.0),
               child: Niku(
                 OutlinedButton(
-                  child: Row(
-                    children: [
+                  child: NikuRow(
+                    [
                       Icon(
                         Icons.add,
                         color: kNeutral03,

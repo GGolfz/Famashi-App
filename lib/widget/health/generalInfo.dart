@@ -8,6 +8,7 @@ import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/health/detailTile.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +29,10 @@ class GeneralInfo extends StatelessWidget {
     }
     return Niku(
       Consumer<MedicalProvider>(
-          builder: (ctx, medical, _) => Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+          builder: (ctx, medical, _) => NikuColumn(
+                [
+                  NikuRow(
+                    [
                       NikuText("General Information")
                           .style(kBody02Semibold)
                           .color(kNeutral02),
@@ -45,7 +45,7 @@ class GeneralInfo extends StatelessWidget {
                             .pushNamed(HealthInfoEditScreen.routeName);
                       })
                     ],
-                  ),
+                  ).spaceBetween(),
                   Expanded(
                       child: ListView.builder(
                     itemBuilder: (ctx, index) => DetailTile(

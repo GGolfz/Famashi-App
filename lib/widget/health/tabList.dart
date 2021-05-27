@@ -4,6 +4,7 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/screen/health-info/HealthInfoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 
@@ -19,8 +20,8 @@ class TabList extends StatelessWidget {
     return Niku(SingleChildScrollView(
       controller: _controller,
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
+      child: NikuRow(
+        [
           ...tabs
               .map((e) => Niku(NikuText(e["label"].toString())
                           .style(kBody03Medium)

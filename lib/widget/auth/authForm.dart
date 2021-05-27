@@ -108,9 +108,9 @@ class _AuthFormState extends State<AuthForm> {
         [
           ...baseForm,
           kSizedBoxVerticalS,
-          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          NikuRow([
             NikuText("Forget password?").style(kBody05).color(kNeutral03)
-          ])
+          ]).mainEnd()
         ]
       ],
       AuthType.SignUp: [
