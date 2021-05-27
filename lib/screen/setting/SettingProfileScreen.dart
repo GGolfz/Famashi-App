@@ -37,6 +37,7 @@ class SettingProfileScreen extends StatelessWidget {
       CustomDivider(),
       kSizedBoxVerticalXS,
       ..._buildTextFieldGroup("Last name", _lastname),
+      kSizedBoxVerticalS,
     ];
   }
 
@@ -75,7 +76,8 @@ class SettingProfileScreen extends StatelessWidget {
                 key: _formKey,
                 child: NikuColumn([
                   Expanded(
-                      child: NikuColumn([
+                      child: SingleChildScrollView(
+                          child: NikuColumn([
                     ProfileImageSelector(
                         img: user.user!.img,
                         onUpload: (file) async {
@@ -84,7 +86,7 @@ class SettingProfileScreen extends StatelessWidget {
                         }),
                     kSizedBoxVerticalS,
                     ..._buildForm()
-                  ]).crossStart()),
+                  ]).crossStart())),
                   PrimaryButton(
                       text: "Save",
                       onPressed: () async {

@@ -46,9 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Consumer<UserProvider>(
                 builder: (ctx, user, _) => Padding(
                   padding: const EdgeInsets.only(left: 10.0),
-                  child:
-                      NikuText("${user.user!.firstname} ${user.user!.lastname}")
+                  child: FittedBox(
+                      child: NikuText(
+                              "${user.user!.firstname} ${user.user!.lastname}")
                           .style(kTitle),
+                      fit: BoxFit.fitWidth),
                 ),
               ),
               Padding(
