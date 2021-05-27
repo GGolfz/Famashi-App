@@ -3,6 +3,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/utils/format.dart';
+import 'package:famashi/widget/emptyNotification.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/reminder/reminderGroup.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
@@ -62,7 +63,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             );
           }
           if (widgets.length == 0) {
-            widgets.add(Niku(NikuText("No notification")).center());
+            widgets.add(EmptyNotification());
           }
           return NikuColumn(widgets);
         }),

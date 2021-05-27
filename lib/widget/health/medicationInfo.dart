@@ -1,6 +1,7 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/provider/usageProvider.dart';
 import 'package:famashi/widget/health/detailTile.dart';
+import 'package:famashi/widget/health/emptyMedicationInfo.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
@@ -23,7 +24,7 @@ class MedicationInfo extends StatelessWidget {
                   separatorBuilder: (context, index) => CustomDivider(),
                   itemCount: usage.usageList!.length,
                 )
-              : Niku(NikuText("No medication history")).center(),
+              : EmptyMedicationInfo(),
         ));
   }
 }
