@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
 import 'package:famashi/utils/error.dart';
+import 'package:famashi/utils/format.dart';
 import 'package:flutter/material.dart';
 
 class UsageHistory {
@@ -54,8 +55,11 @@ class UsageProvider with ChangeNotifier {
     data.forEach((element) {
       var date = element["date"].split('-');
       var time = element["time"].split('T')[1].split('Z')[0].split(':');
+      DateTime dt = DateTime(int.parse(date[0]), int.parse(date[1]),
+              int.parse(date[2]), int.parse(time[0]), int.parse(time[1]))
+          .add(Duration(hours: 7));
       String dateTime =
-          "${int.parse(date[2])}/${int.parse(date[1])}/${int.parse(date[0])} ${int.parse(time[0])}:${int.parse(time[1])}";
+          "${dt.day}/${dt.month}/${dt.year} ${formatTime(dt.hour)}:${formatTime(dt.minute)}";
       usageList.add(UsageHistory(
           id: element["id"],
           dosageAmount: element["amount"],
