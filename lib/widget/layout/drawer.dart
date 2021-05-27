@@ -28,7 +28,17 @@ class FamashiDrawer extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context, listen: false).fetchUser();
+    try {
+      Provider.of<UserProvider>(context, listen: false).fetchUser();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return Drawer(
         child: Container(
             padding: EdgeInsets.symmetric(horizontal: kSizeS),

@@ -1,9 +1,12 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/screen/health-info/HealthInfoEditScreen.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/health/detailTile.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
@@ -12,7 +15,17 @@ import 'package:provider/provider.dart';
 class GeneralInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Provider.of<MedicalProvider>(context, listen: false).fetchMeidcalInfo();
+    try {
+      Provider.of<MedicalProvider>(context, listen: false).fetchMeidcalInfo();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return Container(
       padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeS),
       child: Consumer<MedicalProvider>(

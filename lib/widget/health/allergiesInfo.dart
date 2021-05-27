@@ -18,7 +18,17 @@ import 'package:provider/provider.dart';
 class AllergiesInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Provider.of<AllergiesProvider>(context, listen: false).fetchAllergies();
+    try {
+      Provider.of<AllergiesProvider>(context, listen: false).fetchAllergies();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return Container(
         padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeXXS),
         child: Consumer<AllergiesProvider>(

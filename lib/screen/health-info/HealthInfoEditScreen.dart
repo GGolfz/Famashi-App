@@ -1,8 +1,11 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicalProvider.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customDatePicker.dart';
 import 'package:famashi/widget/utils/form/customSelector.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';
@@ -166,10 +169,20 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
   }
 
   Future<void> save(BuildContext context) async {
-    await Provider.of<MedicalProvider>(context, listen: false)
-        .updateMedicalInfo(_gender, _birthdate, _weight.text, _height.text,
-            _g6pd, _liver, _kidney, _gastritis, _breastfeeding, _pregnant);
-    Navigator.of(context).pop();
+    try {
+      await Provider.of<MedicalProvider>(context, listen: false)
+          .updateMedicalInfo(_gender, _birthdate, _weight.text, _height.text,
+              _g6pd, _liver, _kidney, _gastritis, _breastfeeding, _pregnant);
+      Navigator.of(context).pop();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
   }
 
   @override
@@ -179,25 +192,35 @@ class _HealthInfoEditScreenState extends State<HealthInfoEditScreen> {
   }
 
   Future<void> fetchData() async {
-    final provider = Provider.of<MedicalProvider>(context, listen: false);
-    await provider.fetchMeidcalInfo();
-    MedicalInfo data = provider.medicalInfo!;
-    setState(() {
-      _gender = data.genderString!;
-      _birthdate = data.birthdate ?? DateTime.now();
-      if (data.weight != null) {
-        _weight.text = data.weight.toString();
+    try {
+      final provider = Provider.of<MedicalProvider>(context, listen: false);
+      await provider.fetchMeidcalInfo();
+      MedicalInfo data = provider.medicalInfo!;
+      setState(() {
+        _gender = data.genderString!;
+        _birthdate = data.birthdate ?? DateTime.now();
+        if (data.weight != null) {
+          _weight.text = data.weight.toString();
+        }
+        if (data.height != null) {
+          _height.text = data.height.toString();
+        }
+        _g6pd = data.getBoolString(data.isG6PD);
+        _liver = data.getBoolString(data.isLiver);
+        _kidney = data.getBoolString(data.isKidney);
+        _gastritis = data.getBoolString(data.isGastritis);
+        _breastfeeding = data.getBoolString(data.isBreastfeeding);
+        _pregnant = data.getBoolString(data.isPregnant);
+      });
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
       }
-      if (data.height != null) {
-        _height.text = data.height.toString();
-      }
-      _g6pd = data.getBoolString(data.isG6PD);
-      _liver = data.getBoolString(data.isLiver);
-      _kidney = data.getBoolString(data.isKidney);
-      _gastritis = data.getBoolString(data.isGastritis);
-      _breastfeeding = data.getBoolString(data.isBreastfeeding);
-      _pregnant = data.getBoolString(data.isPregnant);
-    });
+    }
   }
 
   @override
