@@ -1,4 +1,5 @@
 import 'package:famashi/config/constant.dart';
+import 'package:famashi/config/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
@@ -19,13 +20,17 @@ class CustomTimePicker extends StatelessWidget {
           onSave(value);
         })
       ]),
-      CupertinoTimerPicker(
-        mode: CupertinoTimerPickerMode.hm,
-        onTimerDurationChanged: (time) {
-          value = time;
-        },
-        initialTimerDuration: currentValue,
-      )
+      CupertinoTheme(
+          data: CupertinoThemeData(
+              textTheme:
+                  CupertinoTextThemeData(pickerTextStyle: kBody04Medium)),
+          child: CupertinoTimerPicker(
+            mode: CupertinoTimerPickerMode.hm,
+            onTimerDurationChanged: (time) {
+              value = time;
+            },
+            initialTimerDuration: currentValue,
+          ))
     ]).crossEnd())
         .fitted()
         .padding(EdgeInsets.all(kSizeS));
