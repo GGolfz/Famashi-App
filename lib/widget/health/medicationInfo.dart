@@ -8,7 +8,6 @@ import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
-import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class MedicationInfo extends StatelessWidget {

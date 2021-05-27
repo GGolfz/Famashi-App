@@ -1,10 +1,8 @@
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
-import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
-import 'package:famashi/push_notification.dart';
 import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';

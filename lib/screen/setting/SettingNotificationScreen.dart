@@ -60,7 +60,7 @@ class SettingNotificationScreen extends StatelessWidget {
     return [
       NikuText(title).style(kBody02Semibold).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
-      Row(children: [
+      NikuRow([
         Expanded(flex: 5, child: left),
         kSizedBoxHorizontalS,
         Expanded(flex: 5, child: right)

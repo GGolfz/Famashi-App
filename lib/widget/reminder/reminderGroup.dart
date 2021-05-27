@@ -2,7 +2,6 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/utils/format.dart';
-import 'package:famashi/widget/medicine/medicineInfo.dart';
 import 'package:famashi/widget/reminder/reminderInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/provider/notificationProvider.dart';

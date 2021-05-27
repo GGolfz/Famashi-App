@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:famashi/config/api.dart';
-import 'package:famashi/provider/medicineProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:flutter/material.dart';
 

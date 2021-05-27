@@ -1,5 +1,4 @@
 import 'package:famashi/config/color.dart';
-import 'package:famashi/config/constant.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/utils/error.dart';
@@ -106,7 +105,7 @@ class ReminderInfo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 5.0, top: 1.0),
               child: Text(
-                'Amount ${dosageAmount} ${medicineUnit}',
+                'Amount $dosageAmount $medicineUnit',
                 style: kBody05,
               ),
             )

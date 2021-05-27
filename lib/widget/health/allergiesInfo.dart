@@ -1,6 +1,5 @@
 import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
-import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/utils/error.dart';
@@ -12,7 +11,6 @@ import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/base.dart';
-import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class AllergiesInfo extends StatelessWidget {

@@ -4,7 +4,6 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/notificationProvider.dart';
 import 'package:famashi/utils/error.dart';
-import 'package:famashi/utils/format.dart';
 import 'package:famashi/widget/emptyNotification.dart';
 import 'package:famashi/widget/layout/template.dart';
 import 'package:famashi/widget/reminder/reminderGroup.dart';

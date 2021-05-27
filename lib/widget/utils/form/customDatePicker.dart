@@ -22,7 +22,7 @@ class CustomDatePicker extends StatelessWidget {
       var now = DateTime.now();
       final date = await showDatePicker(
           context: context,
-          initialDate: current == null ? now : current,
+          initialDate: current,
           firstDate: DateTime(now.year - 120, now.month, now.day),
           lastDate: DateTime(now.year + 120, now.month, now.day));
       if (date != null) {
