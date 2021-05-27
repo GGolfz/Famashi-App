@@ -3,6 +3,7 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
+import 'package:famashi/screen/HomeScreen.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
@@ -15,7 +16,11 @@ import 'package:provider/provider.dart';
 
 class FamashiDrawer extends StatelessWidget {
   final drawerData = <Map<String, dynamic>>[
-    {"name": "My Medication", "route": "/", "icon": Iconly.bookmark},
+    {
+      "name": "My Medication",
+      "route": HomeScreen.routeName,
+      "icon": Iconly.bookmark
+    },
     {
       "name": "My Health Information",
       "route": "/healthinfo",
@@ -57,11 +62,12 @@ class FamashiDrawer extends StatelessWidget {
                             fit: BoxFit.contain,
                           ))),
                   kSizedBoxHorizontalS,
-                  NikuText("${user.user!.firstname} ${user.user!.lastname}")
+                  NikuText("${user.user!.firstname}")
                       .style(kBody03Medium)
-                      .color(kAccentColor04)
+                      .color(kAccentColor04),
                 ],
-              )).margin(EdgeInsets.all(kSizeXS))),
+              ).crossCenter())
+                  .margin(EdgeInsets.all(kSizeXS))),
       kSizedBoxVerticalS,
       CustomDivider(),
       kSizedBoxVerticalXS,
@@ -91,7 +97,7 @@ class FamashiDrawer extends StatelessWidget {
           onTap: () async {
             await Provider.of<AuthenticateProvider>(context, listen: false)
                 .logout();
-            Navigator.of(context).pushNamed('/');
+            Navigator.of(context).pushNamed(HomeScreen.routeName);
           })
     ])).padding(EdgeInsets.symmetric(horizontal: kSizeS)));
   }
