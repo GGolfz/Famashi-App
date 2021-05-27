@@ -31,6 +31,7 @@ dependencies:
   flutter_local_notifications: ^6.0.0
   image_picker: ^0.7.5
   intl: ^0.17.0
+  lottie: ^1.0.1
   niku: ^1.0.6
   package_info: ^2.0.0
   provider: ^5.0.0
@@ -56,6 +57,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - assets/animation/FamashiLogo.json
     - assets/logo/logo-short-01.png
     - assets/logo/logo-short-02.png
     - assets/logo/logo-short-03.png
