@@ -93,7 +93,7 @@ class FamashiDrawer extends StatelessWidget {
           .height(MediaQuery.of(context).size.height * 0.7),
       ListTile(
           leading: Icon(Iconly.logout, color: kPrimaryColor02),
-          title: NikuText("Log Out").style(kBody03Medium).color(kNeutral02),
+          title: NikuText("Log Out").style(kBody04Medium).color(kNeutral02),
           horizontalTitleGap: 0,
           onTap: () async {
             await Provider.of<AuthenticateProvider>(context, listen: false)
