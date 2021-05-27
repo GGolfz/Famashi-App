@@ -18,7 +18,8 @@ class DeleteDialog extends StatelessWidget {
       title: NikuText("Are you sure to delete this $text?")
           .style(kBody02Medium)
           .alignCenter(),
-      contentPadding: EdgeInsets.all(kSizeS * 1.7),
+      contentPadding:
+          EdgeInsets.symmetric(vertical: kSizeS * 1.7, horizontal: kSizeS),
       content: NikuRow([
         Flexible(flex: 1, child: CancelButton()),
         Flexible(
