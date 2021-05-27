@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.famashi">
+    package="com.famashi.famashi">
    <application
         android:label="famashi"
         android:icon="@mipmap/ic_launcher">
