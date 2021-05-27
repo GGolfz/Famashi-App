@@ -1,7 +1,6 @@
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/screen/AuthScreen.dart';
 import 'package:famashi/widget/auth/authForm.dart';
-import 'package:famashi/widget/auth/introductionText.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';

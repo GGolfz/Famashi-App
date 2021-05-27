@@ -1,5 +1,8 @@
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
@@ -18,10 +21,18 @@ class _MedicineEditScreenState extends State<MedicineEditScreen> {
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
-
-    Provider.of<MedicineProvider>(context, listen: false)
-        .fetchMedicineById(routeArgs!["medicine_id"].toString());
-
+    try {
+      Provider.of<MedicineProvider>(context, listen: false)
+          .fetchMedicineById(routeArgs!["medicine_id"].toString());
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return TemplateLayout(
       child: Niku(
         NikuColumn(

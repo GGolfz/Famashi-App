@@ -170,16 +170,8 @@ class _MedicineFormState extends State<MedicineForm> {
                 });
               }
             },
-            child: Container(
-              height: 40,
-              width: 400,
-              decoration: BoxDecoration(
-                  border: Border.all(color: kPrimaryColor04),
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: isUploadLeafLet()
-                      ? kPrimaryColor04.withAlpha(40)
-                      : Colors.transparent),
-              child: NikuRow(
+            child: Niku(
+              NikuRow(
                 [
                   Icon(
                     isUploadLeafLet() ? Iconly.tick_square : Iconly.upload,
@@ -195,7 +187,12 @@ class _MedicineFormState extends State<MedicineForm> {
                   ),
                 ],
               ).crossCenter().mainCenter(),
-            ),
+            ).height(40).width(400).boxDecoration(BoxDecoration(
+                border: Border.all(color: kPrimaryColor04),
+                borderRadius: BorderRadius.circular(20.0),
+                color: isUploadLeafLet()
+                    ? kPrimaryColor04.withAlpha(40)
+                    : Colors.transparent)),
           ),
           kSizedBoxVerticalM,
           NikuText("Set medecine reminder")
@@ -249,8 +246,8 @@ class _MedicineFormState extends State<MedicineForm> {
               padding: const EdgeInsets.only(top: 8.0),
               child: Niku(
                 OutlinedButton(
-                  child: Row(
-                    children: [
+                  child: NikuRow(
+                    [
                       Icon(
                         Icons.add,
                         color: kNeutral03,

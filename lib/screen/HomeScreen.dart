@@ -1,12 +1,14 @@
 import 'package:famashi/config/style.dart';
-import 'package:famashi/provider/notificationProvider.dart';
+import 'package:famashi/provider/authenticateProvider.dart';
 import 'package:famashi/provider/userNotificationProvider.dart';
 import 'package:famashi/provider/userProvider.dart';
 import 'package:famashi/provider/medicineProvider.dart';
-import 'package:famashi/push_notification.dart';
 import 'package:famashi/screen/medicine/MedicineAddScreen.dart';
+import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/layout/template.dart';
+import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -22,16 +24,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context, listen: false).fetchUser();
-    Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
-    Provider.of<UserNotificationProvider>(context, listen: false)
-        .setupNotification();
+    try {
+      Provider.of<UserProvider>(context, listen: false).fetchUser();
+      Provider.of<MedicineProvider>(context, listen: false).fetchMedicines();
+      Provider.of<UserNotificationProvider>(context, listen: false)
+          .setupNotification();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return TemplateLayout(
         child: Niku(
           Padding(
             padding: const EdgeInsets.all(11.0),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: NikuColumn([
               Consumer<UserProvider>(
                 builder: (ctx, user, _) => Padding(
                   padding: const EdgeInsets.only(left: 10.0),
@@ -75,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-            ]),
+            ]).crossStart(),
           ),
         ).height(double.infinity),
         hasAction: true,

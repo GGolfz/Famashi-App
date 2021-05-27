@@ -45,18 +45,7 @@ class FamashiApp extends StatelessWidget {
       return SplashScreen();
     }),
     HomeScreen.routeName: Consumer<AuthenticateProvider>(
-        builder: (ctx, auth, _) => auth.isAuth
-            ? HomeScreen()
-            : FutureBuilder(
-                future: Future<bool>.sync(() async {
-                  try {
-                    await auth.tryAutoLogin();
-                    return true;
-                  } catch (error) {
-                    return false;
-                  }
-                }),
-                builder: (ctx, authResultSnapshot) => AuthScreen())),
+        builder: (ctx, auth, _) => auth.isAuth ? HomeScreen() : AuthScreen()),
     HealthInfoScreen.routeName: HealthInfoScreen(),
     HealthInfoEditScreen.routeName: HealthInfoEditScreen(),
     NotificationScreen.routeName: NotificationScreen(),

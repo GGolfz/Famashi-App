@@ -60,7 +60,7 @@ class SettingNotificationScreen extends StatelessWidget {
     return [
       NikuText(title).style(kBody02Semibold).color(kPrimaryColor05),
       kSizedBoxVerticalXS,
-      Row(children: [
+      NikuRow([
         Expanded(flex: 5, child: left),
         kSizedBoxHorizontalS,
         Expanded(flex: 5, child: right)
@@ -78,8 +78,18 @@ class SettingNotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserNotificationProvider>(context, listen: false)
-        .fetchNotification();
+    try {
+      Provider.of<UserNotificationProvider>(context, listen: false)
+          .fetchNotification();
+    } on ErrorResponse catch (error) {
+      if (error.toString() == "Unauthorize") {
+        Provider.of<AuthenticateProvider>(context, listen: false).logout();
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => ErrorDialog(error: error.toString()));
+      }
+    }
     return TemplateLayout(
       child: Niku(Consumer<UserNotificationProvider>(builder: (ctx, notify, _) {
         _beforeMorning.text = notify.notify!.beforeMorning;

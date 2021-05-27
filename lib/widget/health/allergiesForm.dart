@@ -3,7 +3,6 @@ import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/provider/allergiesProvider.dart';
 import 'package:famashi/provider/authenticateProvider.dart';
-import 'package:famashi/provider/medicalProvider.dart';
 import 'package:famashi/utils/error.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/form/customTextField.dart';

@@ -4,6 +4,8 @@ import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/utils/icon/Coolicons.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/base.dart';
+import 'package:niku/widget/text.dart';
 
 class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
   final isHome;
@@ -35,7 +37,7 @@ class FamashiAppbar extends StatelessWidget implements PreferredSizeWidget {
                 color: kNeutral01,
                 size: kSizeS * 1.8,
               )),
-      title: Container(child: Text(title, style: kBody01Semibold)),
+      title: Niku(NikuText(title).style(kBody01Semibold)),
       titleSpacing: 0,
       centerTitle: false,
       backgroundColor: kNeutralWhite,

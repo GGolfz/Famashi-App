@@ -6,6 +6,7 @@ import 'package:famashi/widget/medicine/informationLeaflet.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/widget/axis.dart';
+import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 
 class MedicineDetail extends StatelessWidget {
@@ -48,10 +49,8 @@ class MedicineDetail extends StatelessWidget {
       kSizedBoxVerticalM,
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+        child: NikuColumn(
+          [
             NikuText("Description")
                 .style(kBody04SemiBold.copyWith(color: kPrimaryColor04)),
             kSizedBoxVerticalXS,
@@ -85,11 +84,10 @@ class MedicineDetail extends StatelessWidget {
             if (leafletImage != null)
               Padding(
                 padding: const EdgeInsets.only(right: 25),
-                child: Container(
-                    child: InformationLeaflet(leafletImage: leafletImage)),
+                child: Niku(InformationLeaflet(leafletImage: leafletImage)),
               ),
           ],
-        ),
+        ).crossAxisAlignment(CrossAxisAlignment.stretch).mainStart(),
       )
     ]);
   }

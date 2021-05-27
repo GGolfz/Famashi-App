@@ -6,24 +6,25 @@ import 'package:niku/widget/axis.dart';
 import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 
-class EmptyMedicine extends StatelessWidget {
+class EmptyNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Niku(Center(
       child: NikuColumn([
         kSizedBoxVerticalS,
         Niku(
-          Image(image: AssetImage('assets/images/no-medicine.png')),
+          Image(image: AssetImage('assets/images/no-notification.png')),
         ),
-        kSizedBoxVerticalXS,
-        NikuText("It looks like you don't have any medical.")
+        kSizedBoxVerticalS,
+        NikuText("Your notification haven’t been created")
             .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-        NikuText("press the add button below to add")
+        NikuText("Please,  go to “My medication” to create")
             .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-        NikuText("your first medicine.")
+        NikuText("your notification")
             .style(kBody05.copyWith(color: kNeutralBlack)),
+        kSizedBoxVerticalXXS,
       ]).crossCenter(),
     ));
   }
