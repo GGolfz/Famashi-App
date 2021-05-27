@@ -16,14 +16,11 @@ class EmptyAllergy extends StatelessWidget {
           Image(image: AssetImage('assets/images/no-allergy.png')),
         ),
         kSizedBoxVerticalXS,
-        NikuText("Great! now you don’t have any allergies.")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("Great! now you don’t have any allergies.").style(kBody05),
         kSizedBoxVerticalXXS,
-        NikuText("But if you have, press the add button below")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("But if you have, press the add button below").style(kBody05),
         kSizedBoxVerticalXXS,
-        NikuText("to add your allergies.")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("to add your allergies.").style(kBody05),
       ]).crossCenter(),
     ));
   }

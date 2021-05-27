@@ -16,14 +16,11 @@ class EmptyMedicine extends StatelessWidget {
           Image(image: AssetImage('assets/images/no-medicine.png')),
         ),
         kSizedBoxVerticalXS,
-        NikuText("It looks like you don't have any medical.")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("It looks like you don't have any medical.").style(kBody05),
         kSizedBoxVerticalXXS,
-        NikuText("press the add button below to add")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("press the add button below to add").style(kBody05),
         kSizedBoxVerticalXXS,
-        NikuText("your first medicine.")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("your first medicine.").style(kBody05),
       ]).crossCenter(),
     ));
   }

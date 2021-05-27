@@ -16,8 +16,7 @@ class EmptyMedicationInfo extends StatelessWidget {
           Image(image: AssetImage('assets/images/no-history.png')),
         ),
         kSizedBoxVerticalS,
-        NikuText("Your medication haven’t been created.")
-            .style(kBody05.copyWith(color: kNeutralBlack)),
+        NikuText("Your medication haven’t been created.").style(kBody05),
         kSizedBoxVerticalXXS,
       ]).crossCenter(),
     ));
