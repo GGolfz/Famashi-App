@@ -9,7 +9,7 @@ import 'package:niku/widget/base.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 1, milliseconds: 700), () {
+    Timer(Duration(seconds: 2, milliseconds: 800), () {
       Navigator.of(context).pushNamed(HomeScreen.routeName);
     });
     return Scaffold(
