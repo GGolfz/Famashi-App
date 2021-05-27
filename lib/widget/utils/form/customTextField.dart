@@ -40,7 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         .hintText(widget.hintText)
         .hintStyle(kBody04Medium.copyWith(color: kNeutral03))
         .textStyle(kBody04Medium.copyWith(color: kNeutral02))
-        .errorStyle(kBody04Medium.copyWith(color: kStateErrorBG))
+        .errorStyle(kBody05SemiBold.copyWith(color: kStateError))
         .floatingLabelBehavior(FloatingLabelBehavior.always)
         .focusColor(kAccentColor03)
         .errorBorder(OutlineInputBorder(
