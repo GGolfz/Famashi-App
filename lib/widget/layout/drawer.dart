@@ -85,7 +85,8 @@ class FamashiDrawer extends StatelessWidget {
                     ).style(kBody04Medium).color(kNeutral02),
                     horizontalTitleGap: 0,
                     onTap: () {
-                      Navigator.of(context).pushNamed(item["route"].toString());
+                      Navigator.of(context)
+                          .pushReplacementNamed(item["route"].toString());
                     });
               },
               itemCount: drawerData.length))
@@ -97,7 +98,7 @@ class FamashiDrawer extends StatelessWidget {
           onTap: () async {
             await Provider.of<AuthenticateProvider>(context, listen: false)
                 .logout();
-            Navigator.of(context).pushNamed(HomeScreen.routeName);
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
           })
     ])).padding(EdgeInsets.symmetric(horizontal: kSizeS)));
   }

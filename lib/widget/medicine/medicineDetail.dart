@@ -35,11 +35,18 @@ class MedicineDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return NikuColumn([
       FunctionTab(medicineId: medicineID.toString()),
-      NikuText('Remaining '
-              "${remainAmount.toString()}"
-              ' out of '
-              "${totalReceived.toString()}")
-          .style(kBody04Medium.copyWith(color: kNeutral03)),
+      RichText(
+          text: TextSpan(children: [
+        TextSpan(
+            text: 'Remaining ',
+            style: kBody04Medium.copyWith(color: kNeutral03)),
+        TextSpan(
+            text: '${remainAmount.toString()}',
+            style: kBody03Medium.copyWith(color: kAccentColor01)),
+        TextSpan(
+            text: " out of ${totalReceived.toString()}",
+            style: kBody04Medium.copyWith(color: kNeutral03))
+      ])),
       kSizedBoxVerticalM,
       MedicineImage(
         medicineImage: medicineImage,
