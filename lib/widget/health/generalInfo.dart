@@ -26,9 +26,8 @@ class GeneralInfo extends StatelessWidget {
             builder: (ctx) => ErrorDialog(error: error.toString()));
       }
     }
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeS),
-      child: Consumer<MedicalProvider>(
+    return Niku(
+      Consumer<MedicalProvider>(
           builder: (ctx, medical, _) => Column(
                 children: [
                   Row(
@@ -60,6 +59,6 @@ class GeneralInfo extends StatelessWidget {
                   ))
                 ],
               )),
-    );
+    ).padding(EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeS));
   }
 }

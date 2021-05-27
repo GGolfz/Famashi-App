@@ -29,62 +29,59 @@ class AllergiesInfo extends StatelessWidget {
             builder: (ctx) => ErrorDialog(error: error.toString()));
       }
     }
-    return Container(
-        padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeXXS),
-        child: Consumer<AllergiesProvider>(
-          builder: (ctx, allergies, _) => allergies
-                  .allergyList!.report.isNotEmpty
-              ? ListView.separated(
-                  itemBuilder: (ctx, index) => Dismissible(
-                    key: GlobalKey(
-                        debugLabel: allergies.allergyList!.report[index]["id"]
-                            .toString()),
-                    background: Niku(Icon(
-                      Iconly.delete,
-                      color: kNeutralWhite,
-                    ))
-                        .align(Alignment.centerRight)
-                        .padding(EdgeInsets.symmetric(horizontal: kSizeM))
-                        .backgroundColor(kStateErrorBG),
-                    direction: DismissDirection.endToStart,
-                    child: DetailTile(
-                      title: allergies.allergyList!.report[index]["title"]
-                          .toString(),
-                      detail: allergies.allergyList!.report[index]["detail"]
-                          .toString(),
-                      big: true,
-                    ),
-                    confirmDismiss: (val) {
-                      return showDialog(
-                          context: context,
-                          builder: (ctx) => DeleteDialog(
-                              text: "allergy",
-                              onDelete: () async {
-                                try {
-                                  await Provider.of<AllergiesProvider>(context,
-                                          listen: false)
-                                      .deleteAllergy(allergies
-                                          .allergyList!.report[index]["id"]);
-                                  Navigator.of(ctx).pop(true);
-                                } on ErrorResponse catch (error) {
-                                  if (error.toString() == "Unauthorize") {
-                                    Provider.of<AuthenticateProvider>(context,
-                                            listen: false)
-                                        .logout();
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => ErrorDialog(
-                                            error: error.toString()));
-                                  }
-                                }
-                              }));
-                    },
-                  ),
-                  separatorBuilder: (context, index) => CustomDivider(),
-                  itemCount: allergies.allergyList!.report.length,
-                )
-              : EmptyAllergy(),
-        ));
+    return Niku(Consumer<AllergiesProvider>(
+      builder: (ctx, allergies, _) => allergies.allergyList!.report.isNotEmpty
+          ? ListView.separated(
+              itemBuilder: (ctx, index) => Dismissible(
+                key: GlobalKey(
+                    debugLabel:
+                        allergies.allergyList!.report[index]["id"].toString()),
+                background: Niku(Icon(
+                  Iconly.delete,
+                  color: kNeutralWhite,
+                ))
+                    .align(Alignment.centerRight)
+                    .padding(EdgeInsets.symmetric(horizontal: kSizeM))
+                    .backgroundColor(kStateErrorBG),
+                direction: DismissDirection.endToStart,
+                child: DetailTile(
+                  title:
+                      allergies.allergyList!.report[index]["title"].toString(),
+                  detail:
+                      allergies.allergyList!.report[index]["detail"].toString(),
+                  big: true,
+                ),
+                confirmDismiss: (val) {
+                  return showDialog(
+                      context: context,
+                      builder: (ctx) => DeleteDialog(
+                          text: "allergy",
+                          onDelete: () async {
+                            try {
+                              await Provider.of<AllergiesProvider>(context,
+                                      listen: false)
+                                  .deleteAllergy(allergies
+                                      .allergyList!.report[index]["id"]);
+                              Navigator.of(ctx).pop(true);
+                            } on ErrorResponse catch (error) {
+                              if (error.toString() == "Unauthorize") {
+                                Provider.of<AuthenticateProvider>(context,
+                                        listen: false)
+                                    .logout();
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) =>
+                                        ErrorDialog(error: error.toString()));
+                              }
+                            }
+                          }));
+                },
+              ),
+              separatorBuilder: (context, index) => CustomDivider(),
+              itemCount: allergies.allergyList!.report.length,
+            )
+          : EmptyAllergy(),
+    )).padding(EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeXXS));
   }
 }

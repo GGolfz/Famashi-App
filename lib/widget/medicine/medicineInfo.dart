@@ -3,6 +3,7 @@ import 'package:famashi/screen/medicine/MedicineDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:famashi/config/style.dart';
 import 'package:famashi/widget/medicine/medicineImage.dart';
+import 'package:niku/widget/base.dart';
 
 class MedicineInfo extends StatelessWidget {
   final int medicineID;
@@ -18,11 +19,8 @@ class MedicineInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Container(
-        color: kNeutralWhite,
-        height: 260,
-        width: 149,
-        child: GestureDetector(
+      child: Niku(
+        GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(MedicineDetailScreen.routeName,
                 arguments: {"medicine_id": medicineID.toString()});
@@ -53,7 +51,7 @@ class MedicineInfo extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ).width(149).height(260).backgroundColor(kNeutralWhite),
     );
   }
 }

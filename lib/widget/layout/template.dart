@@ -2,6 +2,7 @@ import 'package:famashi/config/color.dart';
 import 'package:famashi/widget/layout/appbar.dart';
 import 'package:famashi/widget/layout/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/base.dart';
 
 class TemplateLayout extends StatelessWidget {
   final isHome;
@@ -38,7 +39,7 @@ class TemplateLayout extends StatelessWidget {
               splashColor: kPrimaryColor03,
               elevation: 0,
             )
-          : Container(),
+          : Niku(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }

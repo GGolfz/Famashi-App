@@ -25,19 +25,17 @@ class MedicationInfo extends StatelessWidget {
             builder: (ctx) => ErrorDialog(error: error.toString()));
       }
     }
-    return Container(
-        padding: EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeXXS),
-        child: Consumer<UsageProvider>(
-          builder: (ctx, usage, _) => usage.usageList!.isNotEmpty
-              ? ListView.separated(
-                  itemBuilder: (ctx, index) => DetailTile(
-                    title: usage.usageList![index].title,
-                    detail: usage.usageList![index].detail,
-                  ),
-                  separatorBuilder: (context, index) => CustomDivider(),
-                  itemCount: usage.usageList!.length,
-                )
-              : EmptyMedicationInfo(),
-        ));
+    return Niku(Consumer<UsageProvider>(
+      builder: (ctx, usage, _) => usage.usageList!.isNotEmpty
+          ? ListView.separated(
+              itemBuilder: (ctx, index) => DetailTile(
+                title: usage.usageList![index].title,
+                detail: usage.usageList![index].detail,
+              ),
+              separatorBuilder: (context, index) => CustomDivider(),
+              itemCount: usage.usageList!.length,
+            )
+          : EmptyMedicationInfo(),
+    )).padding(EdgeInsets.symmetric(horizontal: kSizeS, vertical: kSizeXXS));
   }
 }

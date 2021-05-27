@@ -12,15 +12,13 @@ class EmptyMedicationInfo extends StatelessWidget {
     return Niku(Center(
       child: NikuColumn([
         kSizedBoxVerticalS,
-        Container(
-          child: Image(image: AssetImage('assets/images/no-history.png')),
+        Niku(
+          Image(image: AssetImage('assets/images/no-history.png')),
         ),
         kSizedBoxVerticalS,
-        NikuText(
-                "Your medication haven’t been created.")
-            .style(kBody05.copyWith(color: kNeutralBlack)), 
+        NikuText("Your medication haven’t been created.")
+            .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-                     
       ]).crossCenter(),
     ));
   }

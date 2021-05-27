@@ -16,8 +16,7 @@ class TabList extends StatelessWidget {
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: SingleChildScrollView(
+    return Niku(SingleChildScrollView(
       controller: _controller,
       scrollDirection: Axis.horizontal,
       child: Row(

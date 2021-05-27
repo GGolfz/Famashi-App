@@ -12,23 +12,19 @@ class EmptyNotification extends StatelessWidget {
     return Niku(Center(
       child: NikuColumn([
         kSizedBoxVerticalS,
-        Container(
-          child: Image(image: AssetImage('assets/images/no-notification.png')),
+        Niku(
+          Image(image: AssetImage('assets/images/no-notification.png')),
         ),
         kSizedBoxVerticalS,
-        NikuText(
-                "Your notification haven’t been created")
-            .style(kBody05.copyWith(color: kNeutralBlack)), 
+        NikuText("Your notification haven’t been created")
+            .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-        NikuText(
-                "Please,  go to “My medication” to create")
-            .style(kBody05.copyWith(color: kNeutralBlack)), 
+        NikuText("Please,  go to “My medication” to create")
+            .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-        NikuText(
-                "your notification")
-            .style(kBody05.copyWith(color: kNeutralBlack)), 
+        NikuText("your notification")
+            .style(kBody05.copyWith(color: kNeutralBlack)),
         kSizedBoxVerticalXXS,
-                     
       ]).crossCenter(),
     ));
   }

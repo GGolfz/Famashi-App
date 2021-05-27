@@ -8,6 +8,7 @@ import 'package:famashi/widget/utils/customDivider.dart';
 import 'package:famashi/widget/utils/errorDialog.dart';
 import 'package:famashi/widget/utils/icon/Iconly.dart';
 import 'package:flutter/material.dart';
+import 'package:niku/widget/base.dart';
 import 'package:niku/widget/text.dart';
 import 'package:provider/provider.dart';
 
@@ -40,67 +41,57 @@ class FamashiDrawer extends StatelessWidget {
       }
     }
     return Drawer(
-        child: Container(
-            padding: EdgeInsets.symmetric(horizontal: kSizeS),
-            child: Column(children: [
-              kSizedBoxVerticalL,
-              Consumer<UserProvider>(
-                  builder: (ctx, user, _) => Container(
-                      margin: EdgeInsets.all(kSizeXS),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                              borderRadius: kBorderRadiusS,
-                              child: SizedBox(
-                                  width: kSizeL,
-                                  height: kSizeL,
-                                  child: Image.network(
-                                    user.user!.img,
-                                    fit: BoxFit.contain,
-                                  ))),
-                          kSizedBoxHorizontalS,
-                          NikuText(
-                                  "${user.user!.firstname} ${user.user!.lastname}")
-                              .style(kBody03Medium)
-                              .color(kAccentColor04)
-                        ],
-                      ))),
-              kSizedBoxVerticalS,
-              CustomDivider(),
-              kSizedBoxVerticalXS,
-              Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (ctx, index) {
-                        final item = drawerData[index];
-                        return ListTile(
-                            leading: Icon(
-                              item["icon"],
-                              color: kPrimaryColor02,
-                            ),
-                            title: NikuText(
-                              item["name"].toString(),
-                            ).style(kBody04Medium).color(kNeutral02),
-                            horizontalTitleGap: 0,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(item["route"].toString());
-                            });
-                      },
-                      itemCount: drawerData.length)),
-              ListTile(
-                  leading: Icon(Iconly.logout, color: kPrimaryColor02),
-                  title: NikuText("Log Out")
+        child: Niku(Column(children: [
+      kSizedBoxVerticalL,
+      Consumer<UserProvider>(
+          builder: (ctx, user, _) => Niku(Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: kBorderRadiusS,
+                      child: SizedBox(
+                          width: kSizeL,
+                          height: kSizeL,
+                          child: Image.network(
+                            user.user!.img,
+                            fit: BoxFit.contain,
+                          ))),
+                  kSizedBoxHorizontalS,
+                  NikuText("${user.user!.firstname} ${user.user!.lastname}")
                       .style(kBody03Medium)
-                      .color(kNeutral02),
-                  horizontalTitleGap: 0,
-                  onTap: () async {
-                    await Provider.of<AuthenticateProvider>(context,
-                            listen: false)
-                        .logout();
-                    Navigator.of(context).pushNamed('/');
-                  })
-            ])));
+                      .color(kAccentColor04)
+                ],
+              )).margin(EdgeInsets.all(kSizeXS))),
+      kSizedBoxVerticalS,
+      CustomDivider(),
+      kSizedBoxVerticalXS,
+      Niku(ListView.builder(
+              padding: EdgeInsets.zero,
+              itemBuilder: (ctx, index) {
+                final item = drawerData[index];
+                return ListTile(
+                    leading: Icon(
+                      item["icon"],
+                      color: kPrimaryColor02,
+                    ),
+                    title: NikuText(
+                      item["name"].toString(),
+                    ).style(kBody04Medium).color(kNeutral02),
+                    horizontalTitleGap: 0,
+                    onTap: () {
+                      Navigator.of(context).pushNamed(item["route"].toString());
+                    });
+              },
+              itemCount: drawerData.length))
+          .height(MediaQuery.of(context).size.height * 0.7),
+      ListTile(
+          leading: Icon(Iconly.logout, color: kPrimaryColor02),
+          title: NikuText("Log Out").style(kBody03Medium).color(kNeutral02),
+          horizontalTitleGap: 0,
+          onTap: () async {
+            await Provider.of<AuthenticateProvider>(context, listen: false)
+                .logout();
+            Navigator.of(context).pushNamed('/');
+          })
+    ])).padding(EdgeInsets.symmetric(horizontal: kSizeS)));
   }
 }

@@ -35,22 +35,20 @@ class ReminderInfo extends StatelessWidget {
     return Padding(
       key: Key(reminderID.toString()),
       padding: const EdgeInsets.all(12),
-      child: Container(
-        color: kNeutralWhite,
-        height: 260,
-        width: 149,
-        child: Column(
+      child: Niku(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             reminderID == selectedID
                 ? Stack(
                     children: [
-                      Container(
-                          foregroundDecoration: BoxDecoration(
-                            color: kNeutral06,
-                            backgroundBlendMode: BlendMode.saturation,
-                          ),
-                          child: MedicineImage(medicineImage: medicineImage)),
+                      Niku(MedicineImage(medicineImage: medicineImage))
+                          .animatedContainer(
+                              duration: Duration.zero,
+                              foregroundDecoration: BoxDecoration(
+                                color: kNeutral06,
+                                backgroundBlendMode: BlendMode.saturation,
+                              )),
                       Positioned.fill(
                           child: Niku(NikuColumn([
                         NikuText("Already used?")
@@ -115,7 +113,7 @@ class ReminderInfo extends StatelessWidget {
             )
           ],
         ),
-      ),
+      ).height(260).width(149).backgroundColor(kNeutralWhite),
     );
   }
 }

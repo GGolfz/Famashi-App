@@ -51,21 +51,20 @@ class InformationLeaflet extends StatelessWidget {
                         Niku(NikuText("Information Leaflet").style(
                             kBody03Semibold.copyWith(color: kNeutral02))),
                         kSizedBoxVerticalM,
-                        Container(
-                          width: 230.0,
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(uploadEndpoint +
-                                  '/medicine_leaflet/' +
-                                  leafletImage.toString()),
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            color: kNeutral04,
-                          ),
-                        )
+                        Niku()
+                            .width(230.0)
+                            .height(350.0)
+                            .boxDecoration(BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(uploadEndpoint +
+                                    '/medicine_leaflet/' +
+                                    leafletImage.toString()),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              color: kNeutral04,
+                            ))
                       ]),
                     ).height(500).width(300),
                   ),
