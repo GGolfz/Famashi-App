@@ -105,13 +105,7 @@ class _AuthFormState extends State<AuthForm> {
     ];
     return {
       AuthType.LogIn: [
-        [
-          ...baseForm,
-          kSizedBoxVerticalS,
-          NikuRow([
-            NikuText("Forget password?").style(kBody05).color(kNeutral03)
-          ]).mainEnd()
-        ]
+        [...baseForm, kSizedBoxVerticalS]
       ],
       AuthType.SignUp: [
         [
