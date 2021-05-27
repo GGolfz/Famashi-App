@@ -1,16 +1,17 @@
-# famashi
+# Famashi
 
-A new Flutter project.
+Medicine Taking Reminder Application
 
-## Getting Started
+## About This Project
 
-This project is a starting point for a Flutter application.
+Medicine Taking Reminder (Famashi) is an application that helps users about taking medicine. The users can add information about medicine such as type of medicine, dangerous level, initial amount, and when it should be taken. When the application has a medicine record, it will notify the user when medicine should be taken and also keep track of the number of medicines and notify when the medicine almost runs out.
 
-A few resources to get you started if this is your first Flutter project:
+This project is the part of CSC291 Integrated Project II, Computer Science Program, School of Information Technology, King Mongkut's University of Technology Thonburi
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Contributor
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<a href="https://github.com/GGolfz">Wisarut Kitticharoenphonngam (GGolfz)</a>
+
+<a href="https://github.com/coolkidneversleep">Kaewket Saelee (coolkidneversleep)</a>
+
+<a href="https://github.com/GelidGrapesGG">Kittiyaporn Takrudthieng (GelidGrapesGG)</a>
