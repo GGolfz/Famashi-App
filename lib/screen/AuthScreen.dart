@@ -23,7 +23,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final kBackgroundImage = Image.asset('assets/images/authenticate-bg.png');
+    final kBackgroundImage =
+        Image.asset('assets/images/authenticate-bg.png', fit: BoxFit.cover);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(

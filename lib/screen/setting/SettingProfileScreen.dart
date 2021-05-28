@@ -95,6 +95,7 @@ class SettingProfileScreen extends StatelessWidget {
                                   listen: false)
                               .updateProfile(_email.text, _firstname.text,
                                   _lastname.text, uploadedFile);
+                          Navigator.of(context).pop();
                         } on ErrorResponse catch (error) {
                           if (error.toString() == "Unauthorize") {
                             Provider.of<AuthenticateProvider>(context,

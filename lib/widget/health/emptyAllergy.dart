@@ -1,4 +1,3 @@
-import 'package:famashi/config/color.dart';
 import 'package:famashi/config/constant.dart';
 import 'package:famashi/config/style.dart';
 import 'package:flutter/material.dart';

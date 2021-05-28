@@ -166,6 +166,7 @@ class SettingNotificationScreen extends StatelessWidget {
                         "AFTER_EVENING": _afterEvening.text,
                         "BEDTIME": _bedtime.text,
                       });
+                      Navigator.of(context).pop();
                     } on ErrorResponse catch (error) {
                       if (error.toString() == "Unauthorize") {
                         Provider.of<AuthenticateProvider>(context,

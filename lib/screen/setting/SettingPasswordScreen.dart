@@ -69,6 +69,7 @@ class SettingPasswordScreen extends StatelessWidget {
         try {
           await Provider.of<UserProvider>(context, listen: false)
               .changePassword(currentPassword, newPassword);
+          Navigator.of(context).pop();
         } on ErrorResponse catch (error) {
           if (error.toString() == "Unauthorize") {
             Provider.of<AuthenticateProvider>(context, listen: false).logout();
@@ -84,6 +85,9 @@ class SettingPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _currentPassword.text = '';
+    _newPassword.text = '';
+    _confirmNewPassword.text = '';
     return TemplateLayout(
       child: Niku(Form(
               key: _formKey,

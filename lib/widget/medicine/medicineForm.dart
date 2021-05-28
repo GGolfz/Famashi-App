@@ -36,7 +36,7 @@ class _MedicineFormState extends State<MedicineForm> {
   var medicineImageDefault;
   var medicineImageFile;
 
-  ImagePicker picker = ImagePicker();
+  final ImagePicker picker = ImagePicker();
   List<String> list = [
     "Before morning",
     "After morning",
@@ -59,7 +59,7 @@ class _MedicineFormState extends State<MedicineForm> {
   void initState() {
     _medicineName.text = widget.medicine.medicineName.toString();
     _description.text = widget.medicine.description.toString();
-    _totalRecieved.text = widget.medicine.totalAmount.toString();
+    _totalRecieved.text = widget.medicine.remainAmount.toString();
     _dosagePerDose.text = widget.medicine.dosageAmount.toString();
     _medicineUnit.text = widget.medicine.medicineUnit.toString();
     myList = widget.medicine.reminder;
@@ -124,13 +124,14 @@ class _MedicineFormState extends State<MedicineForm> {
             hintText: 'description',
           ),
           kSizedBoxVerticalXS,
-          NikuText("Total recieved")
+          NikuText(
+                  "${widget.type == 'Edit' ? 'Remained amount' : 'Total recieved'}")
               .style(kBody04Medium)
               .color(kPrimaryColor05),
           kSizedBoxVerticalXS,
           CustomTextField(
             controller: _totalRecieved,
-            name: 'Total recieved',
+            name: "Total recieved",
             hintText: 'amount',
             inputType: TextInputType.number,
           ),
@@ -292,7 +293,7 @@ class _MedicineFormState extends State<MedicineForm> {
           ])).padding(EdgeInsets.only(top: 30, bottom: 20)),
           Niku(
             PrimaryButton(
-                text: "${widget.type}",
+                text: "${widget.type == "Edit" ? "Save" : "Add"}",
                 onPressed: () async {
                   var temp = myList.map((e) => formatTimeTypeToInt(e)).toList();
                   temp.sort();
@@ -330,8 +331,8 @@ class _MedicineFormState extends State<MedicineForm> {
                               widget.medicine.medicineId.toString(),
                               _medicineName.text,
                               _description.text,
+                              widget.medicine.totalAmount,
                               int.parse(_totalRecieved.text),
-                              widget.medicine.remainAmount,
                               int.parse(_dosagePerDose.text),
                               _medicineUnit.text,
                               reminder,
@@ -367,7 +368,7 @@ class _MedicineFormState extends State<MedicineForm> {
                   }
                   Navigator.of(context).pop();
                 }),
-          ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
+          ),
         ]).crossStart())
             .padding(EdgeInsets.all(kSizeM)));
   }

@@ -13,10 +13,12 @@ ThemeData _buildMainTheme() {
           colorScheme:
               baseTheme.colorScheme.copyWith(secondary: kAccentColor03)),
       scaffoldBackgroundColor: kNeutralWhite,
-      textTheme: baseTheme.textTheme.copyWith(
-        headline1: kBody01Semibold,
-        headline2: kBody02Semibold,
-      ),
+      textTheme: baseTheme.textTheme
+          .copyWith(
+            headline1: kBody01Semibold,
+            headline2: kBody02Semibold,
+          )
+          .apply(fontFamily: kMontserratFont),
       primaryIconTheme: baseTheme.iconTheme.copyWith(color: Colors.white),
       inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(), focusColor: kAccentColor04),
