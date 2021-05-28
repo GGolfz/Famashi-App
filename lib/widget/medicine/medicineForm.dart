@@ -36,7 +36,7 @@ class _MedicineFormState extends State<MedicineForm> {
   var medicineImageDefault;
   var medicineImageFile;
 
-  ImagePicker picker = ImagePicker();
+  final ImagePicker picker = ImagePicker();
   List<String> list = [
     "Before morning",
     "After morning",
@@ -124,14 +124,14 @@ class _MedicineFormState extends State<MedicineForm> {
             hintText: 'description',
           ),
           kSizedBoxVerticalXS,
-          NikuText("Total recieved")
+          NikuText(
+                  "${widget.type == 'Edit' ? 'Remained amount' : 'Total recieved'}")
               .style(kBody04Medium)
               .color(kPrimaryColor05),
           kSizedBoxVerticalXS,
           CustomTextField(
             controller: _totalRecieved,
-            name:
-                "${widget.type == 'Edit' ? 'Remained amount' : 'total recieved'}",
+            name: "Total recieved",
             hintText: 'amount',
             inputType: TextInputType.number,
           ),
@@ -331,7 +331,7 @@ class _MedicineFormState extends State<MedicineForm> {
                               widget.medicine.medicineId.toString(),
                               _medicineName.text,
                               _description.text,
-                              int.parse(_totalRecieved.text),
+                              widget.medicine.totalAmount,
                               int.parse(_totalRecieved.text),
                               int.parse(_dosagePerDose.text),
                               _medicineUnit.text,
