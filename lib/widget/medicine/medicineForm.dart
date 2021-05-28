@@ -59,7 +59,7 @@ class _MedicineFormState extends State<MedicineForm> {
   void initState() {
     _medicineName.text = widget.medicine.medicineName.toString();
     _description.text = widget.medicine.description.toString();
-    _totalRecieved.text = widget.medicine.totalAmount.toString();
+    _totalRecieved.text = widget.medicine.remainAmount.toString();
     _dosagePerDose.text = widget.medicine.dosageAmount.toString();
     _medicineUnit.text = widget.medicine.medicineUnit.toString();
     myList = widget.medicine.reminder;
@@ -368,7 +368,7 @@ class _MedicineFormState extends State<MedicineForm> {
                   }
                   Navigator.of(context).pop();
                 }),
-          ).padding(EdgeInsets.fromLTRB(40, 5, 40, 5)),
+          ),
         ]).crossStart())
             .padding(EdgeInsets.all(kSizeM)));
   }
