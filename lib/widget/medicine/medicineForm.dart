@@ -130,7 +130,8 @@ class _MedicineFormState extends State<MedicineForm> {
           kSizedBoxVerticalXS,
           CustomTextField(
             controller: _totalRecieved,
-            name: 'Total recieved',
+            name:
+                "${widget.type == 'Edit' ? 'Remained amount' : 'total recieved'}",
             hintText: 'amount',
             inputType: TextInputType.number,
           ),
@@ -292,7 +293,7 @@ class _MedicineFormState extends State<MedicineForm> {
           ])).padding(EdgeInsets.only(top: 30, bottom: 20)),
           Niku(
             PrimaryButton(
-                text: "${widget.type}",
+                text: "${widget.type == "Edit" ? "Save" : "Add"}",
                 onPressed: () async {
                   var temp = myList.map((e) => formatTimeTypeToInt(e)).toList();
                   temp.sort();
@@ -331,7 +332,7 @@ class _MedicineFormState extends State<MedicineForm> {
                               _medicineName.text,
                               _description.text,
                               int.parse(_totalRecieved.text),
-                              widget.medicine.remainAmount,
+                              int.parse(_totalRecieved.text),
                               int.parse(_dosagePerDose.text),
                               _medicineUnit.text,
                               reminder,
