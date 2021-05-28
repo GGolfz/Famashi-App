@@ -87,12 +87,10 @@ class MedicineDetail extends StatelessWidget {
             kSizedBoxVerticalXS,
             NikuText(reminder.join(',\n'))
                 .style(kBody05Medium.copyWith(color: kNeutral03)),
-            kSizedBoxVerticalM,
+            kSizedBoxVerticalS,
             if (leafletImage != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
-                child: Niku(InformationLeaflet(leafletImage: leafletImage)),
-              ),
+              InformationLeaflet(leafletImage: leafletImage),
+            kSizedBoxVerticalM,
           ],
         ).crossAxisAlignment(CrossAxisAlignment.stretch).mainStart(),
       )

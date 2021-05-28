@@ -9,11 +9,14 @@ class PrimaryButton extends StatelessWidget {
   final Function onPressed;
   final bool isLoading;
   final bool isDisabled;
-  PrimaryButton(
-      {required this.text,
-      required this.onPressed,
-      this.isLoading = false,
-      this.isDisabled = false,});
+  final bool isOutlined;
+  PrimaryButton({
+    required this.text,
+    required this.onPressed,
+    this.isLoading = false,
+    this.isDisabled = false,
+    this.isOutlined = false,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,7 +55,7 @@ class PrimaryButton extends StatelessWidget {
               )
             : NikuText(text)
                 .style(kBody03Medium)
-                .color(kNeutralWhite)
+                .color(isOutlined ? kPrimaryColor04 : kNeutralWhite)
                 .alignCenter(),
       ),
     );
@@ -60,8 +63,9 @@ class PrimaryButton extends StatelessWidget {
 
   BoxDecoration _buildBoxDecoration(BuildContext context) {
     return BoxDecoration(
-      color: kPrimaryColor04,
-      borderRadius: kBorderRadiusM,
-    );
+        color: isOutlined ? kNeutralWhite : kPrimaryColor04,
+        borderRadius: kBorderRadiusM,
+        border:
+            isOutlined ? Border.all(color: kPrimaryColor04, width: 1) : null);
   }
 }
